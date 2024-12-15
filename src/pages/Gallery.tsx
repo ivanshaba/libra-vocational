@@ -5,14 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { X } from "lucide-react"
 import { Dialog, DialogContent } from '@/components/ui/dialog'
-
-interface GalleryItem {
-  id: string
-  title: string
-  category: "events" | "facilities" | "training" | "competitions"
-  imageUrl: string
-  date: string
-}
+import { GalleryItem } from "@/types"
 
 export function Gallery() {
   const [category, setCategory] = useState<string>("all")

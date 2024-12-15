@@ -3,15 +3,7 @@ import { useInView } from "react-intersection-observer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
-
-interface Facility {
-  id: string
-  name: string
-  description: string
-  features: string[]
-  imageUrl: string
-  equipment: string[]
-}
+import { Facility } from "@/types"
 
 export function Facilities() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
@@ -78,7 +70,7 @@ export function Facilities() {
                   <div className="mt-4 space-y-2">
                     <h4 className="font-semibold">Key Features:</h4>
                     <ul className="space-y-2">
-                      {facility.features.map((feature) => (
+                      {facility.features.map((feature: string) => (
                         <li key={feature} className="flex items-center gap-2">
                           <CheckCircle2 className="h-4 w-4 text-primary" />
                           <span className="text-sm">{feature}</span>

@@ -16,6 +16,22 @@ export interface Coach {
     imageUrl: string;
     specialties: string[];
 }
+export interface GalleryItem {
+    id: string
+    title: string
+    category: "events" | "facilities" | "training" | "competitions"
+    imageUrl: string
+    date: string
+}
+
+export interface Facility {
+    id: string
+    name: string
+    description: string
+    features: string[]
+    imageUrl: string
+    equipment: string[]
+}
 
 export interface Program {
     id: string;
@@ -26,4 +42,24 @@ export interface Program {
     schedule: string;
     category: 'training' | 'camp' | 'clinic';
     imageUrl: string;
+}
+
+export interface RegistrationFormData {
+    // Personal Information
+    firstName: string
+    lastName: string
+    email: string
+    phone: string
+    dateOfBirth: string
+    // Program Selection
+    programId: string
+    startDate: string
+    // Emergency Contact
+    emergencyName: string
+    emergencyPhone: string
+    emergencyRelation: string
+    // Medical Information
+    medicalConditions: string
+    allergies: string
+    medications: string
 }
