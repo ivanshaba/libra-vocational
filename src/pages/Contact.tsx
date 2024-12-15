@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { ContactFormData } from "@/types"
+import { api } from '@/services/api'
 
 export function Contact() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -21,6 +22,8 @@ export function Contact() {
     e.preventDefault()
     // Here we'll add API integration later
     console.log("Form submitted:", formData)
+    const response = await api.submitContactForm(formData)
+    console.log("API response:", response)
   }
 
   const handleInputChange = (field: keyof ContactFormData) => (

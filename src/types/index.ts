@@ -6,6 +6,9 @@ export interface Post {
     videoUrl?: string;
     category: 'news' | 'events' | 'updates';
     createdAt: Date;
+    status: 'draft' | 'published';
+    publishedAt?: string;
+    updatedAt: string;
 }
 
 export interface Coach {
@@ -19,7 +22,7 @@ export interface Coach {
 export interface GalleryItem {
     id: string
     title: string
-    category: "events" | "facilities" | "training" | "competitions"
+    category: "events" | "facilities" | "training" | "competitions" | "all"
     imageUrl: string
     date: string
 }
@@ -52,6 +55,7 @@ export interface Program {
 }
 
 export interface RegistrationFormData {
+    id: string
     // Personal Information
     firstName: string
     lastName: string
@@ -69,4 +73,6 @@ export interface RegistrationFormData {
     medicalConditions: string
     allergies: string
     medications: string
+    // Status
+    status?: 'pending' | 'approved' | 'rejected'
 }

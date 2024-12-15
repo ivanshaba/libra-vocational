@@ -15,6 +15,10 @@ export function Programs() {
   const [category, setCategory] = useState<Program["category"] | "all">("all")
   const [search, setSearch] = useState("")
   const [ref, inView] = useInView({ triggerOnce: true })
+//   const { isLoading, error } = usePrograms()
+
+//   if (isLoading) return <div>Loading...</div>
+//   if (error) return <div>Error loading programs</div>
 
   const filteredPrograms = programs.filter((program) => {
     const matchesCategory = category === "all" || program.category === category

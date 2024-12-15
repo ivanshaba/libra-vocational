@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useLocation } from "react-router-dom"
+import { Lock } from "lucide-react"
 
-const navItems = [
+const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/programs", label: "Programs" },
   { href: "/coaches", label: "Coaches" },
   { href: "/facilities", label: "Facilities" },
-  { href: "/registration", label: "Registration" },
   { href: "/news", label: "News" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
@@ -16,38 +17,32 @@ const navItems = [
 ]
 
 export function MainNav() {
-  return (
-    <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mr-4 flex"
-      >
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="font-bold text-xl">Arena Sports</span>
-        </Link>
-      </motion.div>
+  const location = useLocation()
 
-      <ul className="flex items-center space-x-4 lg:space-x-6">
-        {navItems.map((item, index) => (
-          <motion.li
-            key={item.href}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <Link
-              to={item.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {item.label}
-            </Link>
-          </motion.li>
+  return (
+    <nav className="hidden gap-6 lg:flex justify-between w-full ">
+
+      {links.map((link) => (
+          <Link
+          key={link.href}
+          to={link.href}
+          className={cn(
+            "text-sm font-medium transition-colors hover:text-primary",
+            location.pathname === link.href
+              ? "text-primary"
+              : "text-muted-foreground"
+          )}
+        >
+          {link.label}
+          </Link>
         ))}
-      </ul>
+      {/* I want this link to be on the extreme right on large screens */}
+      <Link to="/admin/login">
+        <Button variant="ghost" size="sm" className="gap-2">
+          <Lock className="h-4 w-4" />
+          Admin
+        </Button>
+      </Link>
     </nav>
   )
 }

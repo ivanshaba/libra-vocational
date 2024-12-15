@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { api } from '@/services/api'
+import { toast, Toaster } from "sonner"
+import { RegistrationFormData } from '@/types'
 
 interface FormData {
   // Personal Information
@@ -69,10 +72,15 @@ export function Registration() {
     try {
       // Here we'll add API integration later
       console.log("Form submitted:", formData)
+      const response = await api.submitRegistration(formData as RegistrationFormData)
+      console.log("API response:", response)
+
       // Show success message or redirect
     } catch (error) {
       // Handle error
-      console.error("Error submitting form:", error)
+      toast.error("Error submitting form", {
+        description: "Please try again later" + JSON.stringify(error),
+      })
     }
   }
 
@@ -196,6 +204,7 @@ export function Registration() {
           </CardContent>
         </Card>
       </motion.div>
+      <Toaster />
     </div>
   )
 }
