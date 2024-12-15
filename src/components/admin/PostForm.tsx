@@ -26,6 +26,7 @@ export function PostForm({ post, onSuccess }: PostFormProps) {
         title: post?.title || '',
         content: post?.content || '',
         videoUrl: post?.videoUrl || '',
+        imageUrl: post?.imageUrl || '',
         category: post?.category || 'news',
     })
 
@@ -54,6 +55,7 @@ export function PostForm({ post, onSuccess }: PostFormProps) {
             formDataToSend.append('title', formData.title)
             formDataToSend.append('content', formData.content)
             formDataToSend.append('category', formData.category)
+            formDataToSend.append('imageUrl', formData.imageUrl)
             if (formData.videoUrl) {
                 formDataToSend.append('videoUrl', formData.videoUrl)
             }

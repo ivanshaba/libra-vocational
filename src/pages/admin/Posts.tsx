@@ -108,7 +108,7 @@ export function Posts() {
             <TableRow>
               <TableHead>Title</TableHead>
               <TableHead>Category</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Content</TableHead>
               <TableHead>Date</TableHead>
               <TableHead className="w-[100px]">Actions</TableHead>
             </TableRow>
@@ -118,13 +118,7 @@ export function Posts() {
               <TableRow key={post.id}>
                 <TableCell>{post.title}</TableCell>
                 <TableCell>{post.category}</TableCell>
-                <TableCell>
-                  <span className={`capitalize ${
-                    post.status === 'published' ? 'text-green-600' : 'text-yellow-600'
-                  }`}>
-                    {post.status}
-                  </span>
-                </TableCell>
+                <TableCell>{post.content}</TableCell>
                 <TableCell>
                   {new Date(post.publishedAt || post.updatedAt).toLocaleDateString()}
                 </TableCell>
