@@ -25,6 +25,7 @@ import { AdminLayout } from '@/components/layout/AdminLayout'
 import { Programs as ProgramsPage } from '@/pages/Programs'
 import { Facilities as FacilitiesPage } from '@/pages/Facilities'
 import { Coaches as CoachesPage } from '@/pages/Coaches'
+import { Toaster } from 'sonner'
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ export default function App() {
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <AppProvider>
+          <Toaster />
           <RouterProvider router={router} />
         </AppProvider>
         <ReactQueryDevtools initialIsOpen={false} />

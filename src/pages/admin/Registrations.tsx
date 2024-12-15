@@ -28,13 +28,14 @@ import { Search, Eye, Trash2 } from 'lucide-react'
 import { api } from '@/services/api'
 import { RegistrationFormData } from '@/types'
 import { RegistrationDetails } from '@/components/admin/RegistrationDetails'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function Registrations() {
     const [search, setSearch] = useState('')
     const [selectedRegistration, setSelectedRegistration] = useState<RegistrationFormData | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const { data: registrations = [], refetch } = useQuery({
+    const { data: registrations = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'registrations'],
         queryFn: api.getAdminRegistrations,
     })
@@ -65,6 +66,18 @@ export function Registrations() {
         } catch {
             toast.error('Failed to update registration status')
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="space-y-6">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+        )
     }
 
     return (

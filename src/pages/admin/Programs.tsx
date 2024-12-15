@@ -22,13 +22,14 @@ import { Plus, Pencil, Trash2, Search } from 'lucide-react'
 import { api } from '@/services/api'
 import { Program } from '@/types'
 import { ProgramForm } from '@/components/admin/ProgramForm'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function Programs() {
     const [search, setSearch] = useState('')
     const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const { data: programs = [], refetch } = useQuery({
+    const { data: programs = [], refetch,isLoading } = useQuery({
         queryKey: ['admin', 'programs'],
         queryFn: api.getAdminPrograms,
     })
@@ -48,6 +49,18 @@ export function Programs() {
         } catch {
             toast.error('Failed to delete program')
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="space-y-6">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+        )
     }
 
     return (

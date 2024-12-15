@@ -4,8 +4,8 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useAuth } from '@/contexts/auth-context'
 import { api } from '@/services/api'
+import { useAuth } from '@/hooks/useAuth'
 
 export function Login() {
   const navigate = useNavigate()
@@ -23,10 +23,10 @@ export function Login() {
     try {
       const response = await api.login(credentials)
       login(response.user, response.token)
-      toast.success('Login successful')
-      navigate('/admin/dashboard')
+      toast.success('Welcome back!')
+      navigate('/admin')
     } catch (error) {
-      toast.error('Invalid credentials')
+      toast.error('Invalid credentials' + JSON.stringify(error))
     } finally {
       setIsLoading(false)
     }

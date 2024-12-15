@@ -21,13 +21,14 @@ import { Plus, Pencil, Trash2, Search } from 'lucide-react'
 import { api } from '@/services/api'
 import { GalleryItem } from '@/types'
 import { GalleryForm } from '@/components/admin/GalleryForm'
+import { Skeleton } from '@/components/ui/skeleton'
 export function Gallery() {
     const [search, setSearch] = useState('')
     const [category, setCategory] = useState<GalleryItem['category']>('events')
     const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const { data: items = [], refetch } = useQuery({
+    const { data: items = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'gallery'],
         queryFn: api.getAdminGallery,
     })
@@ -48,6 +49,21 @@ export function Gallery() {
         } catch {
             toast.error('Failed to delete gallery item')
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+        )
     }
 
     return (

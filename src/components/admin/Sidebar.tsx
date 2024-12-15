@@ -1,18 +1,18 @@
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { useAuth } from '@/contexts/auth-context'
 import {
-    LayoutDashboard,
-    FileText,
-    Users,
-    Image,
-    Building2,
-    Dumbbell,
-    ClipboardList,
-    Mail,
-    LogOut,
+  LayoutDashboard,
+  FileText,
+  Users,
+  Image,
+  Building2,
+  Dumbbell,
+  ClipboardList,
+  Mail,
+  LogOut,
 } from 'lucide-react'
+import { useAuth } from '@/hooks/useAuth'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },

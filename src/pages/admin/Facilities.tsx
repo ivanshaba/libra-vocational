@@ -22,16 +22,19 @@ import { Plus, Pencil, Trash2, Search } from 'lucide-react'
 import { api } from '@/services/api'
 import { Facility } from '@/types'
 import { FacilityForm } from '@/components/admin/FacilityForm'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function Facilities() {
     const [search, setSearch] = useState('')
     const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const { data: facilities = [], refetch } = useQuery({
+    const { data: facilities = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'facilities'],
         queryFn: api.getAdminFacilities,
     })
+
+
 
     const filteredFacilities = facilities.filter(facility =>
         facility.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -49,6 +52,18 @@ export function Facilities() {
             console.error(_error)
             toast.error('Failed to delete facility')
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="space-y-6">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+        )
     }
 
     return (

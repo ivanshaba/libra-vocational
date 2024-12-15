@@ -1,110 +1,110 @@
 import { axiosInstance } from '@/lib/axios'
 import { Program, Coach, Post, ContactFormData, RegistrationFormData, Facility, GalleryItem } from '@/types'
-import { AdminPost, ContactSubmission } from '@/types/admin'
+import { AdminPost, AdminStats, ContactSubmission } from '@/types/admin'
 import { LoginCredentials, AuthResponse } from '@/types/auth'
 
 export const api = {
     // Programs
     getPrograms: () =>
-        axiosInstance.get<Program[]>( '/programs' ).then( res => res.data ),
+        axiosInstance.get<{ data: Program[] }>( '/programs' ).then( res => res.data.data ),
     getProgram: ( id: string ) =>
-        axiosInstance.get<Program>( `/programs/${id}` ).then( res => res.data ),
+        axiosInstance.get<{ data: Program }>( `/programs/${id}` ).then( res => res.data.data ),
 
     // Coaches
     getCoaches: () =>
-        axiosInstance.get<Coach[]>( '/coaches' ).then( res => res.data ),
+        axiosInstance.get<{ data: Coach[] }>( '/coaches' ).then( res => res.data.data ),
     getCoach: ( id: string ) =>
-        axiosInstance.get<Coach>( `/coaches/${id}` ).then( res => res.data ),
+        axiosInstance.get<{ data: Coach }>( `/coaches/${id}` ).then( res => res.data.data ),
 
     // News/Posts
     getPosts: () =>
-        axiosInstance.get<Post[]>( '/posts' ).then( res => res.data ),
+        axiosInstance.get<{ data: Post[] }>( '/posts' ).then( res => res.data.data ),
     getPost: ( id: string ) =>
-        axiosInstance.get<Post>( `/posts/${id}` ).then( res => res.data ),
+        axiosInstance.get<{ data: Post }>( `/posts/${id}` ).then( res => res.data.data ),
 
     // Forms
     submitContactForm: ( data: ContactFormData ) =>
-        axiosInstance.post( '/contact', data ).then( res => res.data ),
+        axiosInstance.post( '/contact', data ).then( res => res.data.data ),
     submitRegistration: ( data: RegistrationFormData ) =>
-        axiosInstance.post( '/registration', data ).then( res => res.data ),
+        axiosInstance.post( '/registration', data ).then( res => res.data.data ),
 
     // Auth
     login: ( credentials: LoginCredentials ) =>
-        axiosInstance.post<AuthResponse>( '/auth/login', credentials ).then( res => res.data ),
+        axiosInstance.post<AuthResponse>( '/admin/login', credentials ).then( res => res.data.data ),
 
     // Protected endpoints
     getRegistrations: () =>
-        axiosInstance.get( '/admin/registrations' ).then( res => res.data ),
+        axiosInstance.get( '/registrations' ).then( res => res.data.data ),
     getContactSubmissions: () =>
-        axiosInstance.get( '/admin/contact-submissions' ).then( res => res.data ),
+        axiosInstance.get( '/contact-submissions' ).then( res => res.data.data ),
 
     // Add to existing api object
     getAdminStats: () =>
-        axiosInstance.get( '/admin/stats' ).then( res => res.data ),
+        axiosInstance.get<AdminStats>( '/stats' ).then( res => res.data.data ),
 
     // Add these to the existing api object
     getAdminPosts: () =>
-        axiosInstance.get<AdminPost[]>( '/admin/posts' ).then( res => res.data ),
-    createPost: ( data: Partial<AdminPost> ) =>
-        axiosInstance.post<AdminPost>( '/admin/posts', data ).then( res => res.data ),
-    updatePost: ( id: string, data: Partial<AdminPost> ) =>
-        axiosInstance.put<AdminPost>( `/admin/posts/${id}`, data ).then( res => res.data ),
+        axiosInstance.get<{ data: AdminPost[] }>( '/posts' ).then( res => res.data.data ),
+    createPost: ( formData: FormData ) =>
+        axiosInstance.post<{ data: AdminPost }>( '/posts', formData ).then( res => res.data.data ),
+    updatePost: ( id: string, formData: FormData ) =>
+        axiosInstance.put<{ data: AdminPost }>( `/posts/${id}`, formData ).then( res => res.data.data ),
     deletePost: ( id: string ) =>
-        axiosInstance.delete( `/admin/posts/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/posts/${id}` ),
 
     // Add to the existing api object
     getAdminCoaches: () =>
-        axiosInstance.get<Coach[]>( '/admin/coaches' ).then( res => res.data ),
+        axiosInstance.get<{ data: Coach[] }>( '/coaches' ).then( res => res.data.data ),
     createCoach: ( data: Partial<Coach> ) =>
-        axiosInstance.post<Coach>( '/admin/coaches', data ).then( res => res.data ),
+        axiosInstance.post<{ data: Coach }>( '/coaches', data ).then( res => res.data.data ),
     updateCoach: ( id: string, data: Partial<Coach> ) =>
-        axiosInstance.put<Coach>( `/admin/coaches/${id}`, data ).then( res => res.data ),
+        axiosInstance.put<{ data: Coach }>( `/coaches/${id}`, data ).then( res => res.data.data ),
     deleteCoach: ( id: string ) =>
-        axiosInstance.delete( `/admin/coaches/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/coaches/${id}` ).then( res => res.data.data ),
 
     // Add to the existing api object
     getAdminFacilities: () =>
-        axiosInstance.get<Facility[]>( '/admin/facilities' ).then( res => res.data ),
+        axiosInstance.get<{ data: Facility[] }>( '/facilities' ).then( res => res.data.data ),
     createFacility: ( data: Partial<Facility> ) =>
-        axiosInstance.post<Facility>( '/admin/facilities', data ).then( res => res.data ),
+        axiosInstance.post<{ data: Facility }>( '/facilities', data ).then( res => res.data.data ),
     updateFacility: ( id: string, data: Partial<Facility> ) =>
-        axiosInstance.put<Facility>( `/admin/facilities/${id}`, data ).then( res => res.data ),
+        axiosInstance.put<{ data: Facility }>( `/facilities/${id}`, data ).then( res => res.data.data ),
     deleteFacility: ( id: string ) =>
-        axiosInstance.delete( `/admin/facilities/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/facilities/${id}` ).then( res => res.data.data ),
 
     // Add to the existing api object
     getAdminPrograms: () =>
-        axiosInstance.get<Program[]>( '/admin/programs' ).then( res => res.data ),
+        axiosInstance.get<{ data: Program[] }>( '/programs' ).then( res => res.data.data ),
     createProgram: ( data: Partial<Program> ) =>
-        axiosInstance.post<Program>( '/admin/programs', data ).then( res => res.data ),
+        axiosInstance.post<{ data: Program }>( '/programs', data ).then( res => res.data.data ),
     updateProgram: ( id: string, data: Partial<Program> ) =>
-        axiosInstance.put<Program>( `/admin/programs/${id}`, data ).then( res => res.data ),
+        axiosInstance.put<{ data: Program }>( `/programs/${id}`, data ).then( res => res.data.data ),
     deleteProgram: ( id: string ) =>
-        axiosInstance.delete( `/admin/programs/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/programs/${id}` ).then( res => res.data.data ),
 
     // Add to the existing api object
     getAdminGallery: () =>
-        axiosInstance.get<GalleryItem[]>( '/admin/gallery' ).then( res => res.data ),
+        axiosInstance.get<{ data: GalleryItem[] }>( '/gallery' ).then( res => res.data.data ),
     createGalleryItem: ( data: Partial<GalleryItem> ) =>
-        axiosInstance.post<GalleryItem>( '/admin/gallery', data ).then( res => res.data ),
+        axiosInstance.post<{ data: GalleryItem }>( '/gallery', data ).then( res => res.data.data ),
     updateGalleryItem: ( id: string, data: Partial<GalleryItem> ) =>
-        axiosInstance.put<GalleryItem>( `/admin/gallery/${id}`, data ).then( res => res.data ),
+        axiosInstance.put<{ data: GalleryItem }>( `/gallery/${id}`, data ).then( res => res.data.data ),
     deleteGalleryItem: ( id: string ) =>
-        axiosInstance.delete( `/admin/gallery/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/gallery/${id}` ).then( res => res.data.data ),
 
     // Add to the existing api object
     getAdminRegistrations: () =>
-        axiosInstance.get<RegistrationFormData[]>( '/admin/registrations' ).then( res => res.data ),
+        axiosInstance.get<{ data: RegistrationFormData[] }>( '/registrations' ).then( res => res.data.data ),
     updateRegistrationStatus: ( id: string, status: 'pending' | 'approved' | 'rejected' ) =>
-        axiosInstance.put( `/admin/registrations/${id}/status`, { status } ).then( res => res.data ),
+        axiosInstance.put( `/registrations/${id}/status`, { status } ).then( res => res.data.data ),
     deleteRegistration: ( id: string ) =>
-        axiosInstance.delete( `/admin/registrations/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/registrations/${id}` ).then( res => res.data.data ),
 
     // Add to the existing api object
     getAdminContactSubmissions: () =>
-        axiosInstance.get<ContactSubmission[]>( '/admin/contact-submissions' ).then( res => res.data ),
+        axiosInstance.get<{ data: ContactSubmission[] }>( '/contact-submissions' ).then( res => res.data.data ),
     updateContactStatus: ( id: string, status: ContactSubmission['status'] ) =>
-        axiosInstance.put( `/admin/contact-submissions/${id}/status`, { status } ).then( res => res.data ),
+        axiosInstance.put( `/contact-submissions/${id}/status`, { status } ).then( res => res.data.data ),
     deleteContactSubmission: ( id: string ) =>
-        axiosInstance.delete( `/admin/contact-submissions/${id}` ).then( res => res.data ),
+        axiosInstance.delete( `/contact-submissions/${id}` ).then( res => res.data.data ),
 }

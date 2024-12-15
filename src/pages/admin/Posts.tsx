@@ -4,31 +4,32 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog'
 import { Plus, Pencil, Trash2, Search } from 'lucide-react'
 import { api } from '@/services/api'
 import { AdminPost } from '@/types/admin'
 import { PostForm } from '@/components/admin/PostForm'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function Posts() {
   const [search, setSearch] = useState('')
   const [selectedPost, setSelectedPost] = useState<AdminPost | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const { data: posts = [], refetch } = useQuery({
+  const { data: posts = [], refetch, isLoading } = useQuery({
     queryKey: ['admin', 'posts'],
     queryFn: api.getAdminPosts,
   })
@@ -49,6 +50,18 @@ export function Posts() {
       console.error(_error)
       toast.error('Failed to delete post')
     }
+  }
+
+  if (isLoading) {
+     return (
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+    )
   }
 
   return (

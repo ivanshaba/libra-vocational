@@ -1,8 +1,15 @@
 export interface AuthUser {
   id: string
+  createdAt: string
+  updatedAt: string
+  deletedAt: string | null,
+  createdBy: string | null,
+  updatedBy: string | null,
+  version: number,
+  isDeleted: false,
   email: string
-  name: string
-  role: 'admin'
+  password: string
+  roles: string[]
 }
 
 export interface LoginCredentials {
@@ -11,6 +18,9 @@ export interface LoginCredentials {
 }
 
 export interface AuthResponse {
-  user: AuthUser
-  token: string
+  success: boolean;
+  data: {
+    token: string
+    user: AuthUser
+  }
 }

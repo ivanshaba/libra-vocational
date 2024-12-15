@@ -2,52 +2,72 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/services/api'
 import {
-    FileText,
-    Users,
-    Image,
-    Building2,
-    Dumbbell,
-    ClipboardList,
+  FileText,
+  Users,
+  Image,
+  Building2,
+  Dumbbell,
+  ClipboardList,
 } from 'lucide-react'
 import { AdminStats } from '@/types/admin'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function Dashboard() {
-  const { data: stats = defaultStats } = useQuery({
+  const { data: stats, isLoading } = useQuery({
     queryKey: ['admin', 'stats'],
     queryFn: api.getAdminStats,
   })
+
+  // Use loading skeletons
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
+        </div>
+      </div>
+    )
+  }
+
+  if (!stats) {
+    return <div>No stats found</div>
+  }
 
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <StatsCard
           title="Posts"
-          value={stats.posts}
+          value={stats?.counts.posts || 0}
           icon={<FileText className="h-6 w-6" />}
         />
         <StatsCard
           title="Coaches"
-          value={stats.coaches}
+          value={stats?.counts.coaches || 0}
           icon={<Users className="h-6 w-6" />}
         />
         <StatsCard
           title="Gallery Items"
-          value={stats.galleryItems}
+          value={stats?.counts.galleryItems || 0}
           icon={<Image className="h-6 w-6" />}
         />
         <StatsCard
           title="Facilities"
-          value={stats.facilities}
+          value={stats?.counts.facilities || 0}
           icon={<Building2 className="h-6 w-6" />}
         />
         <StatsCard
           title="Programs"
-          value={stats.programs}
+          value={stats?.counts.programs || 0}
           icon={<Dumbbell className="h-6 w-6" />}
         />
         <StatsCard
           title="Registrations"
-          value={stats.registrations}
+          value={stats?.counts.registrations || 0}
           icon={<ClipboardList className="h-6 w-6" />}
         />
       </div>
@@ -59,7 +79,7 @@ export function Dashboard() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {stats.recentActivity.map((activity: AdminStats['recentActivity'][0]) => (
+              {stats?.recentActivities.map((activity: AdminStats['data']['recentActivities'][0]) => (
               <div
                 key={activity.id}
                 className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
@@ -98,14 +118,4 @@ function StatsCard({
       </CardContent>
     </Card>
   )
-}
-
-const defaultStats = {
-  posts: 0,
-  coaches: 0,
-  galleryItems: 0,
-  facilities: 0,
-  programs: 0,
-  registrations: 0,
-  recentActivity: [],
 }
