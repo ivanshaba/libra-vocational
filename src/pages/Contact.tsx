@@ -5,13 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
-
-interface ContactFormData {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+import { ContactFormData } from "@/types"
 
 export function Contact() {
   const [formData, setFormData] = useState<ContactFormData>({
