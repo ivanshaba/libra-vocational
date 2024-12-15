@@ -269,24 +269,24 @@ const featuredPrograms: Pick<Program, 'id' | 'name' | 'description' | 'duration'
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Edward Nsamba",
     role: "Professional Athlete",
     content: "The coaching and facilities at Arena Sports Academy are world-class. My performance has improved significantly since joining.",
     rating: 5,
-    avatar: "/images/testimonials/sarah.jpg",
+    avatar: "/images/testimonials/Edward-Nsamba.jpg",
   },
   {
-    name: "Mike Chen",
+    name: "Edward Nsamba",
     role: "Youth Athlete",
     content: "The youth program helped me develop not just as an athlete, but also as a person. The coaches are amazing!",
     rating: 5,
-    avatar: "/images/testimonials/mike.jpg",
+    avatar: "/images/testimonials/Edward-Nsamba.jpg",
   },
   {
-    name: "Emily Rodriguez",
+    name: "Edward Nsamba",
     role: "College Athlete",
     content: "Thanks to Arena Sports, I secured a college scholarship. The training program prepared me perfectly.",
     rating: 5,
-    avatar: "/images/testimonials/emily.jpg",
+    avatar: "/images/testimonials/Edward-Nsamba.jpg",
   },
 ]
