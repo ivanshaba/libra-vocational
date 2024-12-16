@@ -6,7 +6,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 export function AdminLayout() {
   const { user, isLoading } = useAuth()
 
-  // Show loading state using skeletons
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -15,7 +14,6 @@ export function AdminLayout() {
     )
   }
 
-  // Redirect to login if not authenticated
   if (!user) {
     return <Navigate to="/admin/login" replace />
   }
@@ -23,9 +21,9 @@ export function AdminLayout() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex-1 overflow-auto p-4">
+      <main className="flex-1 p-6 lg:ml-16 xl:ml-64 transition-all duration-300">
         <Outlet />
-      </div>
+      </main>
     </div>
   )
 }
