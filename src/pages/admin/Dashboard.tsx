@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { AdminStats } from '@/types/admin'
 import { Skeleton } from '@/components/ui/skeleton'
+import { format } from "date-fns"
 
 export function Dashboard() {
   const { data: stats, isLoading } = useQuery({
@@ -79,18 +80,32 @@ export function Dashboard() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-              {stats?.recentActivities.map((activity: AdminStats['data']['recentActivities'][0]) => (
-              <div
-                key={activity.id}
-                className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+            {stats?.recentActivities.map(
+              (activity: AdminStats['data']['recentActivities'][0]) => (
+                <div
+                  key={activity.id}
+                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
               >
-                <div>
                   <p className="font-medium">{activity.description}</p>
-                  <p className="text-sm text-muted-foreground">{activity.date}</p>
-                </div>
+                  <p className="text-sm text-muted-foreground">
+                    {format(activity.createdAt, 'MMM d, yyyy h:mm a')}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.user?.email.split('@')[0] || 'System'}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.ipAddress}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.userAgent}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {activity.entityType} {activity.entityId}
+                  </p>
                 <span className="text-sm">{activity.type}</span>
               </div>
-            ))}
+              )
+            )}
           </div>
         </CardContent>
       </Card>

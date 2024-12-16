@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Post } from '@/types'
 
 import { ContactFormData } from '@/types'
+import { AuthUser } from '@/types/auth'
 
 export interface AdminStats {
     success: boolean,
@@ -16,9 +18,24 @@ export interface AdminStats {
         },
         recentActivities: {
             id: string,
+            createdAt: string,
+            updatedAt: string,
+            deletedAt: string | null,
+            createdBy: string | null,
+            updatedBy: string | null,
+            deletedBy: string | null,
+            version: number,
+            isDeleted: boolean,
             type: string,
             description: string,
-            date: string
+            entityType: string,
+            entityId: string | null,
+            oldValues: Record<string, any> | null,
+            newValues: Record<string, any> | null,
+            metadata: Record<string, any> | null,
+            ipAddress: string,
+            userAgent: string,
+            user: AuthUser | null
         }[]
     }
 }
