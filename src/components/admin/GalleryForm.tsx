@@ -9,13 +9,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { GalleryItem } from '@/types'
+import { GalleryCategory, GalleryItemResponseDto } from '@/types/dtos'
 import { api } from '@/services/api'
 import { useImageUpload } from '@/hooks/useImageUpload'
 import { GalleryItemCreateDto } from '@/types/dtos'
 
 interface GalleryFormProps {
-    item?: GalleryItem | null
+    item?: GalleryItemResponseDto | null
     onSuccess: () => void
 }
 
@@ -73,7 +73,7 @@ export function GalleryForm({ item, onSuccess }: GalleryFormProps) {
                 <label className="text-sm font-medium">Category</label>
                 <Select
                     value={formData.category}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as GalleryItem['category'] }))}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as GalleryCategory }))}
                 >
                     <SelectTrigger>
                         <SelectValue />

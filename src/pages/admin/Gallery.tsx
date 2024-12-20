@@ -19,13 +19,14 @@ import {
 } from '@/components/ui/dialog'
 import { Plus, Pencil, Trash2, Search } from 'lucide-react'
 import { api } from '@/services/api'
-import { GalleryItem } from '@/types'
+import { GalleryCategory, GalleryItemResponseDto } from '@/types/dtos'
 import { GalleryForm } from '@/components/admin/GalleryForm'
 import { Skeleton } from '@/components/ui/skeleton'
+
 export function Gallery() {
     const [search, setSearch] = useState('')
-    const [category, setCategory] = useState<GalleryItem['category']>('events')
-    const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
+    const [category, setCategory] = useState<GalleryCategory>(GalleryCategory.Events)
+    const [selectedItem, setSelectedItem] = useState<GalleryItemResponseDto | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const { data: items = [], refetch, isLoading } = useQuery({
@@ -39,11 +40,11 @@ export function Gallery() {
 
     const filteredItems = items.filter(item => {
         const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase())
-        const matchesCategory = category === 'all' || item.category === category
+            const matchesCategory = category === GalleryCategory.Events || item.category === category
         return matchesSearch && matchesCategory
     })
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this item?')) return
 
         try {
@@ -85,7 +86,7 @@ export function Gallery() {
                     </div>
                     <Select
                         value={category}
-                        onValueChange={(value) => setCategory(value as GalleryItem['category'])}
+                        onValueChange={(value) => setCategory(value as GalleryCategory)}
                     >
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Category" />

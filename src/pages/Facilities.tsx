@@ -126,7 +126,7 @@ export function Facilities() {
 
 const facilities: Facility[] = [
   {
-    id: "1",
+      id: 1,
     name: "Indoor Training Arena",
     description: "A climate-controlled environment for year-round training with specialized zones for different sports.",
     features: [
@@ -143,7 +143,7 @@ const facilities: Facility[] = [
     ],
   },
   {
-    id: "2",
+    id: 2,
     name: "Performance Center",
     description: "State-of-the-art facility dedicated to strength and conditioning training.",
     features: [
@@ -160,7 +160,7 @@ const facilities: Facility[] = [
     ],
   },
   {
-    id: "3",
+    id: 3,
     name: "Aquatic Center",
     description: "Professional swimming facility for training and recovery.",
     features: [

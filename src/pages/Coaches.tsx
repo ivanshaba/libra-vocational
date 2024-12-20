@@ -68,7 +68,7 @@ export function Coaches() {
 
 const coaches: (Coach & { imageUrl: string })[] = [
   {
-    id: "1",
+    id: 1,
     name: "John Smith",
     role: "Head Performance Coach",
     bio: "Former professional athlete with over 15 years of coaching experience. Specializes in strength and conditioning for elite athletes.",
@@ -76,7 +76,7 @@ const coaches: (Coach & { imageUrl: string })[] = [
     specialties: ["Strength Training", "Performance Analysis", "Elite Coaching"],
   },
   {
-    id: "2",
+    id: 2,
     name: "Maria Rodriguez",
     role: "Youth Development Coach",
     bio: "Certified youth sports specialist with a passion for developing young athletes. Focus on fundamental skills and character building.",
@@ -84,7 +84,7 @@ const coaches: (Coach & { imageUrl: string })[] = [
     specialties: ["Youth Development", "Skill Building", "Team Sports"],
   },
   {
-    id: "3",
+    id: 3,
     name: "David Chen",
     role: "Speed & Agility Specialist",
     bio: "Track and field background with expertise in developing speed, agility, and explosive power in athletes.",
