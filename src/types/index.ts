@@ -1,5 +1,7 @@
+import { ProgramCategory } from '@/types/dtos';
+
 export interface Post {
-    id: string;
+    id: number;
     title: string;
     content: string;
     imageUrl?: string;
@@ -12,7 +14,7 @@ export interface Post {
 }
 
 export interface Coach {
-    id: string;
+    id: number;
     name: string;
     role: string;
     bio: string;
@@ -28,7 +30,7 @@ export interface GalleryItem {
 }
 
 export interface Facility {
-    id: string
+    id: number
     name: string
     description: string
     features: string[]
@@ -44,14 +46,18 @@ export interface ContactFormData {
 }
 
 export interface Program {
+    createdAt: string;
+    updatedAt: string;
     id: string;
     name: string;
     description: string;
     duration: string;
     price: number;
     schedule: string;
-    category: 'training' | 'camp' | 'clinic';
+    category: ProgramCategory;
     imageUrl: string;
+    isActive: boolean;
+    maxParticipants: number;
 }
 
 export interface RegistrationFormData {

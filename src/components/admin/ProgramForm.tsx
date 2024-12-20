@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select'
 import { Program } from '@/types'
 import { api } from '@/services/api'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface ProgramFormProps {
     program?: Program | null
@@ -20,6 +21,7 @@ interface ProgramFormProps {
 
 export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
     const [isLoading, setIsLoading] = useState(false)
+    const { isUploading, handleImageUpload } = useImageUpload()
     const [formData, setFormData] = useState({
         name: program?.name || '',
         description: program?.description || '',
@@ -41,10 +43,10 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
             }
 
             if (program) {
-                await api.updateProgram(program.id, data)
+                await api.updateProgram(program.id, data as Program)
                 toast.success('Program updated successfully')
             } else {
-                await api.createProgram(data)
+                await api.createProgram(data as Program)
                 toast.success('Program created successfully')
             }
             onSuccess()
@@ -53,6 +55,15 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    const onImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        await handleImageUpload(file, (url) => {
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        })
     }
 
     return (
@@ -124,11 +135,19 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
                 </div>
             </div>
             <div>
-                <label className="text-sm font-medium">Image URL</label>
+                <label className="text-sm font-medium">Image</label>
+                <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={onImageUpload}
+                    disabled={isUploading}
+                    className="mb-2"
+                />
                 <Input
                     type="url"
                     value={formData.imageUrl}
                     onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+                    placeholder="Or enter image URL directly"
                     required
                 />
                 {formData.imageUrl && (
@@ -142,7 +161,7 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
                 )}
             </div>
             <div className="flex justify-end gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || isUploading}>
                     {isLoading ? 'Saving...' : program ? 'Update Program' : 'Create Program'}
                 </Button>
             </div>

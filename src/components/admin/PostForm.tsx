@@ -1,73 +1,54 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from '@/components/ui/select'
-import { AdminPost } from '@/types/admin'
 import { api } from '@/services/api'
+import { PostCreateDto, PostResponseDto, PostCategory } from '@/types/dtos'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface PostFormProps {
-    post?: AdminPost | null
+    post?: PostResponseDto | null
     onSuccess: () => void
 }
 
 export function PostForm({ post, onSuccess }: PostFormProps) {
     const [isLoading, setIsLoading] = useState(false)
-    const [imageFile, setImageFile] = useState<File | null>(null)
-    const [imagePreview, setImagePreview] = useState<string>('')
-    const [formData, setFormData] = useState({
+    const { isUploading, handleImageUpload } = useImageUpload()
+    const [formData, setFormData] = useState<Partial<PostCreateDto>>({
         title: post?.title || '',
         content: post?.content || '',
         videoUrl: post?.videoUrl || '',
         imageUrl: post?.imageUrl || '',
-        category: post?.category || 'news',
+            category: post?.category as PostCategory || 'news'
     })
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
-        if (file) {
-            setImageFile(file)
-            setImagePreview(URL.createObjectURL(file))
-        }
-    }
+        if (!file) return
 
-    useEffect(() => {
-        return () => {
-            if (imagePreview && imagePreview.startsWith('blob:')) {
-                URL.revokeObjectURL(imagePreview)
-            }
-        }
-    }, [imagePreview])
+        await handleImageUpload(file, (url) => {
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        })
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
 
         try {
-            const formDataToSend = new FormData()
-            formDataToSend.append('title', formData.title)
-            formDataToSend.append('content', formData.content)
-            formDataToSend.append('category', formData.category)
-            formDataToSend.append('imageUrl', formData.imageUrl)
-            if (formData.videoUrl) {
-                formDataToSend.append('videoUrl', formData.videoUrl)
-            }
-            if (imageFile) {
-                formDataToSend.append('image', imageFile)
-            }
-
             if (post) {
-                await api.updatePost(post.id, formDataToSend)
+                await api.updatePost(post.id, formData)
                 toast.success('Post updated successfully')
             } else {
-                await api.createPost(formDataToSend)
+                await api.createPost(formData as PostCreateDto)
                 toast.success('Post created successfully')
             }
             onSuccess()
@@ -102,7 +83,7 @@ export function PostForm({ post, onSuccess }: PostFormProps) {
                 <label className="text-sm font-medium">Category</label>
                 <Select
                     value={formData.category}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as "news" | "events" | "updates" }))}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as PostCategory }))}
                 >
                     <SelectTrigger>
                         <SelectValue />
@@ -127,16 +108,14 @@ export function PostForm({ post, onSuccess }: PostFormProps) {
                 <Input
                     type="file"
                     accept="image/*"
-                    onChange={handleImageChange}
+                    onChange={onImageUpload}
+                    disabled={isUploading}
                     className="mb-2"
                 />
-                {(imagePreview || post?.imageUrl) && (
+                {formData.imageUrl && (
                     <div className="mt-2">
                         <img
-                            src={imagePreview.startsWith('blob:')
-                                ? imagePreview
-                                : `${import.meta.env.VITE_API_URI}/uploads${post?.imageUrl}`
-                            }
+                            src={formData.imageUrl}
                             alt="Preview"
                             className="h-48 w-full rounded-lg object-cover"
                         />
@@ -144,7 +123,7 @@ export function PostForm({ post, onSuccess }: PostFormProps) {
                 )}
             </div>
             <div className="flex justify-end gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || isUploading}>
                     {isLoading ? 'Saving...' : post ? 'Update Post' : 'Create Post'}
                 </Button>
             </div>

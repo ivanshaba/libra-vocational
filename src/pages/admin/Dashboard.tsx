@@ -9,14 +9,14 @@ import {
   Dumbbell,
   ClipboardList,
 } from 'lucide-react'
-import { AdminStats } from '@/types/admin'
 import { Skeleton } from '@/components/ui/skeleton'
 import { format } from "date-fns"
+import { Stats } from '@/types/admin'
 
 export function Dashboard() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ['admin', 'stats'],
-    queryFn: api.getAdminStats,
+    queryFn: api.getStats,
   })
 
   // Use loading skeletons
@@ -81,7 +81,7 @@ export function Dashboard() {
         <CardContent>
           <div className="space-y-4">
             {stats?.recentActivities.map(
-              (activity: AdminStats['data']['recentActivities'][0]) => (
+              (activity: Stats['data']['recentActivities'][0]) => (
                 <div
                   key={activity.id}
                   className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"

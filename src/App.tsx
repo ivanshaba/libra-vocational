@@ -17,7 +17,6 @@ import { Programs as AdminPrograms } from '@/pages/admin/Programs'
 import { Registrations as AdminRegistrations } from '@/pages/admin/Registrations'
 import { Coaches as AdminCoaches } from '@/pages/admin/Coaches'
 import { Facilities as AdminFacilities } from '@/pages/admin/Facilities'
-import { ContactSubmissions as AdminContactSubmissions } from '@/pages/admin/ContactSubmissions'
 import { Gallery as AdminGallery } from '@/pages/admin/Gallery'
 import { Login } from '@/pages/admin/Login'
 import { AuthProvider } from '@/contexts/auth-context'
@@ -59,7 +58,6 @@ const router = createBrowserRouter([
       { path: "coaches", element: <AdminCoaches /> },
       { path: "facilities", element: <AdminFacilities /> },
       { path: "gallery", element: <AdminGallery /> },
-      { path: "contact", element: <AdminContactSubmissions /> },
     ],
   },
 ])

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -17,28 +17,25 @@ import {
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
 import { Search, Eye, Trash2 } from 'lucide-react'
 import { api } from '@/services/api'
-import { RegistrationFormData } from '@/types'
 import { RegistrationDetails } from '@/components/admin/RegistrationDetails'
 import { Skeleton } from '@/components/ui/skeleton'
+import { RegistrationResponseDto } from '@/types/dtos'
 
 export function Registrations() {
     const [search, setSearch] = useState('')
-    const [selectedRegistration, setSelectedRegistration] = useState<RegistrationFormData | null>(null)
+    const [selectedRegistration, setSelectedRegistration] = useState<RegistrationResponseDto | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const { data: registrations = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'registrations'],
-        queryFn: api.getAdminRegistrations,
+        queryFn: api.getRegistrations,
     })
+
+    useEffect(() => {
+        refetch()
+    }, [refetch])
 
     const filteredRegistrations = registrations.filter(registration =>
         registration.firstName.toLowerCase().includes(search.toLowerCase()) ||
@@ -46,7 +43,7 @@ export function Registrations() {
         registration.email.toLowerCase().includes(search.toLowerCase())
     )
 
-    const handleDelete = async (id: string) => {
+        const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this registration?')) return
 
         try {
@@ -58,15 +55,7 @@ export function Registrations() {
         }
     }
 
-    const handleStatusChange = async (id: string, status: 'pending' | 'approved' | 'rejected') => {
-        try {
-            await api.updateRegistrationStatus(id, status)
-            toast.success('Registration status updated successfully')
-            refetch()
-        } catch {
-            toast.error('Failed to update registration status')
-        }
-    }
+
 
     if (isLoading) {
         return (
@@ -102,9 +91,15 @@ export function Registrations() {
                         <TableRow>
                             <TableHead>Name</TableHead>
                             <TableHead>Email</TableHead>
-                            <TableHead>Program</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead>Date</TableHead>
+                            <TableHead>Phone</TableHead>
+                            <TableHead>DOB</TableHead>
+                            <TableHead>Start Date</TableHead>
+                            <TableHead>Emergency Person</TableHead>
+                            <TableHead>Emergency Phone</TableHead>
+                            <TableHead>Relationship</TableHead>
+                            <TableHead>Medical Conditions</TableHead>
+                            <TableHead>Allergies</TableHead>
+                            <TableHead>Medications</TableHead>
                             <TableHead className="w-[100px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -115,28 +110,15 @@ export function Registrations() {
                                     {registration.firstName} {registration.lastName}
                                 </TableCell>
                                 <TableCell>{registration.email}</TableCell>
-                                <TableCell>{registration.programId}</TableCell>
-                                <TableCell>
-                                    <Select
-                                        value={registration.status || 'pending'}
-                                        onValueChange={(value) =>
-                                            handleStatusChange(
-                                                registration.id,
-                                                value as 'pending' | 'approved' | 'rejected'
-                                            )
-                                        }
-                                    >
-                                        <SelectTrigger className="w-[120px]">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="pending">Pending</SelectItem>
-                                            <SelectItem value="approved">Approved</SelectItem>
-                                            <SelectItem value="rejected">Rejected</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </TableCell>
+                                <TableCell>{registration.phone}</TableCell>
+                                <TableCell>{new Date(registration.dateOfBirth).toLocaleDateString()}</TableCell>
                                 <TableCell>{new Date(registration.startDate).toLocaleDateString()}</TableCell>
+                                <TableCell>{registration.emergencyName}</TableCell>
+                                <TableCell>{registration.emergencyPhone}</TableCell>
+                                <TableCell>{registration.emergencyRelation}</TableCell>
+                                <TableCell>{registration.medicalConditions}</TableCell>
+                                <TableCell>{registration.allergies}</TableCell>
+                                <TableCell>{registration.medications}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center gap-2">
                                         <Button

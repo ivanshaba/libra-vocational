@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -30,8 +30,12 @@ export function Gallery() {
 
     const { data: items = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'gallery'],
-        queryFn: api.getAdminGallery,
+        queryFn: api.getGallery,
     })
+
+    useEffect(() => {
+        refetch()
+    }, [refetch])
 
     const filteredItems = items.filter(item => {
         const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase())

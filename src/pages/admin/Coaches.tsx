@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -18,20 +18,24 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
-import { Plus, Pencil, Trash2, Search } from 'lucide-react'
+import { Plus, Pencil, Trash2, Search, ImageIcon } from 'lucide-react'
 import { api } from '@/services/api'
-import { Coach } from '@/types'
 import { CoachForm } from '@/components/admin/CoachForm'
+import { CoachResponseDto } from '@/types/dtos'
 
 export function Coaches() {
     const [search, setSearch] = useState('')
-    const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null)
+    const [selectedCoach, setSelectedCoach] = useState<CoachResponseDto | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const { data: coaches = [], refetch } = useQuery({
         queryKey: ['admin', 'coaches'],
-        queryFn: api.getAdminCoaches,
+        queryFn: api.getCoaches,
     })
+
+    useEffect(() => {
+        refetch()
+    }, [refetch])
 
     const filteredCoaches = coaches.filter(coach =>
         coach.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -39,7 +43,7 @@ export function Coaches() {
         coach.bio.toLowerCase().includes(search.toLowerCase())
     )
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this coach?')) return
 
         try {
@@ -94,15 +98,26 @@ export function Coaches() {
                 <Table>
                     <TableHeader>
                         <TableRow>
+                            <TableHead>Image</TableHead>
                             <TableHead>Name</TableHead>
                             <TableHead>Role</TableHead>
                             <TableHead>Specialties</TableHead>
+                            <TableHead>Image</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead>Updated At</TableHead>
                             <TableHead className="w-[100px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {filteredCoaches.map((coach) => (
                             <TableRow key={coach.id}>
+                                <TableCell>
+                                    <img
+                                        src={coach.imageUrl}
+                                        alt={coach.name}
+                                        className="h-10 w-10 rounded-full"
+                                    />
+                                </TableCell>
                                 <TableCell className="font-medium">{coach.name}</TableCell>
                                 <TableCell>{coach.role}</TableCell>
                                 <TableCell>
@@ -116,6 +131,17 @@ export function Coaches() {
                                             </span>
                                         ))}
                                     </div>
+                                </TableCell>
+                                <TableCell>
+                                    {coach.imageUrl ? <Button variant="outline" size="icon" onClick={() => window.open( coach.imageUrl, '_blank' )}>
+                                        <ImageIcon className="h-4 w-4" />
+                                    </Button> : 'No Image'}
+                                </TableCell>
+                                <TableCell>
+                                    {new Date( coach.createdAt ).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>
+                                    {new Date( coach.updatedAt ).toLocaleDateString()}
                                 </TableCell>
                                 <TableCell>
                                     <div className="flex items-center gap-2">

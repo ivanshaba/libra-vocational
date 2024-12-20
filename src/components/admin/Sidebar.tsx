@@ -8,9 +8,7 @@ import {
   Image,
   Building2,
   Dumbbell,
-  ClipboardList,
-  Mail,
-  LogOut,
+  ClipboardList, LogOut,
   Menu,
   X
 } from 'lucide-react'
@@ -25,7 +23,6 @@ const navItems = [
   { href: '/admin/facilities', label: 'Facilities', icon: <Building2 className="h-4 w-4" /> },
   { href: '/admin/programs', label: 'Programs', icon: <Dumbbell className="h-4 w-4" /> },
   { href: '/admin/registrations', label: 'Registrations', icon: <ClipboardList className="h-4 w-4" /> },
-  { href: '/admin/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
 ]
 
 export function Sidebar() {

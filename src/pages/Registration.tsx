@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,6 +8,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { api } from '@/services/api'
 import { toast, Toaster } from "sonner"
 import { RegistrationFormData } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface FormData {
   // Personal Information
@@ -276,6 +278,16 @@ function ProgramSelection({
   onChange: (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => void
   onSelectChange: (field: keyof FormData) => (value: string) => void
 }) {
+  const { data: programs = [], refetch,isLoading } = useQuery({
+        queryKey: ['admin', 'programs'],
+        queryFn: api.getPrograms,
+    })
+    useEffect(() => {
+        refetch()
+    }, [refetch])
+
+    if (isLoading) return <Skeleton className="h-48 w-full" />
+
   return (
     <div className="space-y-4">
       <div>
@@ -384,7 +396,7 @@ function MedicalInformation({
 }
 
 function ReviewSubmit({ formData }: { formData: FormData }) {
-  return (
+   return (
     <div className="space-y-6">
       <div>
         <h3 className="font-semibold">Personal Information</h3>
@@ -398,7 +410,7 @@ function ReviewSubmit({ formData }: { formData: FormData }) {
       <div>
         <h3 className="font-semibold">Program Selection</h3>
         <div className="mt-2 space-y-2">
-          <p>Program: {programs.find(p => p.id === formData.programId)?.name}</p>
+          {/* <p>Program: {programs.find(p => p.id === formData.programId)?.name}</p> */}
           <p>Start Date: {formData.startDate}</p>
         </div>
       </div>
@@ -421,11 +433,3 @@ function ReviewSubmit({ formData }: { formData: FormData }) {
     </div>
   )
 }
-
-const programs = [
-  { id: "1", name: "Elite Performance Training" },
-  { id: "2", name: "Youth Development Program" },
-  { id: "3", name: "Summer Sports Camp" },
-  { id: "4", name: "Speed & Agility Clinic" },
-  { id: "5", name: "Strength Training Program" },
-]

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -18,22 +18,25 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
-import { Plus, Pencil, Trash2, Search } from 'lucide-react'
+import { Plus, Pencil, Trash2, Search, ImageIcon } from 'lucide-react'
 import { api } from '@/services/api'
-import { Facility } from '@/types'
+import { FacilityResponseDto } from '@/types/dtos'
 import { FacilityForm } from '@/components/admin/FacilityForm'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function Facilities() {
     const [search, setSearch] = useState('')
-    const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null)
+    const [selectedFacility, setSelectedFacility] = useState<FacilityResponseDto | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const { data: facilities = [], refetch, isLoading } = useQuery({
         queryKey: ['admin', 'facilities'],
-        queryFn: api.getAdminFacilities,
+        queryFn: api.getFacilities,
     })
 
+    useEffect(() => {
+        refetch()
+    }, [refetch])
 
 
     const filteredFacilities = facilities.filter(facility =>
@@ -41,7 +44,7 @@ export function Facilities() {
         facility.description.toLowerCase().includes(search.toLowerCase())
     )
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this facility?')) return
 
         try {
@@ -108,16 +111,27 @@ export function Facilities() {
                 <Table>
                     <TableHeader>
                         <TableRow>
+                            <TableHead>Image</TableHead>
                             <TableHead>Name</TableHead>
                             <TableHead>Description</TableHead>
                             <TableHead>Features</TableHead>
                             <TableHead>Equipment</TableHead>
+                            <TableHead>Image</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead>Updated At</TableHead>
                             <TableHead className="w-[100px]">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {filteredFacilities.map((facility) => (
                             <TableRow key={facility.id}>
+                                    <TableCell>
+                                    <img
+                                        src={facility.imageUrl}
+                                        alt={facility.name}
+                                        className="h-10 w-10 rounded-full"
+                                    />
+                                </TableCell>
                                 <TableCell className="font-medium">{facility.name}</TableCell>
                                 <TableCell className="max-w-xs truncate">
                                     {facility.description}
@@ -145,6 +159,17 @@ export function Facilities() {
                                             </span>
                                         ))}
                                     </div>
+                                </TableCell>
+                                <TableCell>
+                                    {facility.imageUrl ? <Button variant="outline" size="icon" onClick={() => window.open( facility.imageUrl, '_blank' )}>
+                                        <ImageIcon className="h-4 w-4" />
+                                    </Button> : 'No Image'}
+                                </TableCell>
+                                <TableCell>
+                                    {new Date( facility.createdAt ).toLocaleDateString()}
+                                </TableCell>
+                                <TableCell>
+                                    {new Date( facility.updatedAt ).toLocaleDateString()}
                                 </TableCell>
                                 <TableCell>
                                     <div className="flex items-center gap-2">

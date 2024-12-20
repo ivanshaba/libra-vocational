@@ -1,6 +1,6 @@
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query'
 import { api } from '@/services/api'
-import { Program, Coach, Post, ContactFormData, RegistrationFormData } from '@/types'
+import { Program, Coach, ContactFormData, RegistrationFormData } from '@/types'
 
 // Programs
 export const usePrograms = ( options?: UseQueryOptions<Program[]> ) => {
@@ -44,23 +44,6 @@ export const useRegistration = (
 ) => {
     return useMutation( {
         mutationFn: api.submitRegistration,
-        ...options,
-    } )
-}
-
-// Posts/News
-export const usePosts = ( options?: UseQueryOptions<Post[]> ) => {
-    return useQuery( {
-        queryKey: ['posts'],
-        queryFn: api.getPosts,
-        ...options,
-    } )
-}
-
-export const usePost = ( id: string, options?: UseQueryOptions<Post> ) => {
-    return useQuery( {
-        queryKey: ['posts', id],
-        queryFn: () => api.getPost( id ),
         ...options,
     } )
 }

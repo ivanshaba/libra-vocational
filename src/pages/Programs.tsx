@@ -2,14 +2,15 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Program } from "@/types"
+import { ProgramCategory } from '@/types/dtos'
 
 export function Programs() {
   const [category, setCategory] = useState<Program["category"] | "all">("all")
@@ -98,7 +99,7 @@ export function Programs() {
                 </p>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-lg font-bold">
-                    ${program.price}
+                    {/* {program.price} */}
                   </span>
                   <button className="text-sm font-medium text-primary hover:underline">
                     Learn More
@@ -119,7 +120,7 @@ export function Programs() {
   )
 }
 
-const programs: (Program & { imageUrl: string })[] = [
+const programs: Program[] = [
   {
     id: "1",
     name: "Elite Performance Training",
@@ -127,8 +128,8 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "12 weeks",
     price: 999,
     schedule: "Mon, Wed, Fri 6:00 AM - 8:00 AM",
-    category: "training",
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
+    category: ProgramCategory.Training,
   },
   {
     id: "2",
@@ -137,7 +138,7 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "16 weeks",
     price: 799,
     schedule: "Tue, Thu 4:00 PM - 6:00 PM",
-    category: "training",
+    category: ProgramCategory.Training,
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
   },
   {
@@ -147,7 +148,7 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "4 weeks",
     price: 1299,
     schedule: "Mon-Fri 9:00 AM - 3:00 PM",
-    category: "camp",
+    category: ProgramCategory.Camp,
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
   },
   {
@@ -157,7 +158,7 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "6 weeks",
     price: 599,
     schedule: "Sat 10:00 AM - 12:00 PM",
-    category: "clinic",
+    category: ProgramCategory.Clinic,
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
   },
   {
@@ -167,7 +168,7 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "8 weeks",
     price: 899,
     schedule: "Mon, Wed, Fri 5:00 PM - 7:00 PM",
-    category: "training",
+    category: ProgramCategory.Training,
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
   },
   {
@@ -177,7 +178,7 @@ const programs: (Program & { imageUrl: string })[] = [
     duration: "4 weeks",
     price: 299,
     schedule: "Thu 7:00 PM - 8:30 PM",
-    category: "clinic",
+      category: ProgramCategory.Clinic,
     imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
   },
 ]

@@ -3,16 +3,18 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Facility } from '@/types'
 import { api } from '@/services/api'
+import { useImageUpload } from '@/hooks/useImageUpload'
+import { FacilityResponseDto } from '@/types/dtos'
 
 interface FacilityFormProps {
-    facility?: Facility | null
+    facility?: FacilityResponseDto | null
     onSuccess: () => void
 }
 
 export function FacilityForm({ facility, onSuccess }: FacilityFormProps) {
     const [isLoading, setIsLoading] = useState(false)
+    const { isUploading, handleImageUpload } = useImageUpload()
     const [formData, setFormData] = useState({
         name: facility?.name || '',
         description: facility?.description || '',
@@ -45,6 +47,15 @@ export function FacilityForm({ facility, onSuccess }: FacilityFormProps) {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    const onImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        await handleImageUpload(file, (url) => {
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        })
     }
 
     return (
@@ -87,11 +98,19 @@ export function FacilityForm({ facility, onSuccess }: FacilityFormProps) {
                 />
             </div>
             <div>
-                <label className="text-sm font-medium">Image URL</label>
+                <label className="text-sm font-medium">Image</label>
+                <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={onImageUpload}
+                    disabled={isUploading}
+                    className="mb-2"
+                />
                 <Input
                     type="url"
                     value={formData.imageUrl}
                     onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+                    placeholder="Or enter image URL directly"
                     required
                 />
                 {formData.imageUrl && (
@@ -105,7 +124,7 @@ export function FacilityForm({ facility, onSuccess }: FacilityFormProps) {
                 )}
             </div>
             <div className="flex justify-end gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || isUploading}>
                     {isLoading ? 'Saving...' : facility ? 'Update Facility' : 'Create Facility'}
                 </Button>
             </div>

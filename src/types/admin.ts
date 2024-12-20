@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Post } from '@/types'
 
-import { ContactFormData } from '@/types'
 import { AuthUser } from '@/types/auth'
 
-export interface AdminStats {
+export interface Stats {
     success: boolean,
     data: {
         counts: {
@@ -38,16 +36,4 @@ export interface AdminStats {
             user: AuthUser | null
         }[]
     }
-}
-
-export interface AdminPost extends Post {
-    status: 'draft' | 'published'
-    publishedAt?: string
-    updatedAt: string
-}
-
-export interface ContactSubmission extends ContactFormData {
-    id: string
-    createdAt: string
-    status: 'new' | 'read' | 'archived'
 }

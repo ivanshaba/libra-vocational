@@ -1,7 +1,6 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Coach } from "@/types"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function Coaches() {
@@ -57,9 +56,6 @@ export function Coaches() {
                       ))}
                     </div>
                   </div>
-                  <Button className="mt-6 w-full" variant="outline">
-                    View Profile
-                  </Button>
                 </CardContent>
               </Card>
             </motion.div>

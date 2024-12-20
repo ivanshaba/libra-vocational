@@ -3,16 +3,18 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Coach } from '@/types'
+import { CoachResponseDto } from '@/types/dtos'
 import { api } from '@/services/api'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface CoachFormProps {
-    coach?: Coach | null
+    coach?: CoachResponseDto | null
     onSuccess: () => void
 }
 
 export function CoachForm({ coach, onSuccess }: CoachFormProps) {
     const [isLoading, setIsLoading] = useState(false)
+    const { isUploading, handleImageUpload } = useImageUpload()
     const [formData, setFormData] = useState({
         name: coach?.name || '',
         role: coach?.role || '',
@@ -20,6 +22,15 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
         specialties: coach?.specialties.join(', ') || '',
         imageUrl: coach?.imageUrl || '',
     })
+
+    const onImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        await handleImageUpload(file, (url) => {
+            setFormData(prev => ({ ...prev, imageUrl: url }))
+        })
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -39,8 +50,8 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                 toast.success('Coach created successfully')
             }
             onSuccess()
-        } catch (_error) {
-            console.error(_error)
+        } catch (error) {
+            console.error(error)
             toast.error('Failed to save coach')
         } finally {
             setIsLoading(false)
@@ -55,6 +66,7 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     required
+                    placeholder="Enter the coach's name"
                 />
             </div>
             <div>
@@ -63,6 +75,7 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                     value={formData.role}
                     onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value }))}
                     required
+                    placeholder="Enter the coach's role"
                 />
             </div>
             <div>
@@ -72,6 +85,7 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                     onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
                     required
                     className="h-32"
+                    placeholder="Enter the coach's bio"
                 />
             </div>
             <div>
@@ -84,12 +98,14 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                 />
             </div>
             <div>
-                <label className="text-sm font-medium">Image URL</label>
+                <label className="text-sm font-medium">Profile Image</label>
                 <Input
-                    type="url"
-                    value={formData.imageUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
-                    required
+                    type="file"
+                    accept="image/*"
+                    onChange={onImageUpload}
+                    disabled={isUploading}
+                    className="mb-2"
+                    placeholder="Upload a profile image"
                 />
                 {formData.imageUrl && (
                     <div className="mt-2">
@@ -102,7 +118,7 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
                 )}
             </div>
             <div className="flex justify-end gap-4">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading || isUploading}>
                     {isLoading ? 'Saving...' : coach ? 'Update Coach' : 'Create Coach'}
                 </Button>
             </div>

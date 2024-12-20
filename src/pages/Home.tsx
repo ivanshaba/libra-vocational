@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star } from "lucide-react"
 import { Program } from "@/types"
+import { useNavigate } from 'react-router-dom'
 
 export function Home() {
   const [heroRef, heroInView] = useInView({
@@ -25,6 +26,8 @@ export function Home() {
     threshold: 0.1,
   })
 
+  const navigate = useNavigate()
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -45,11 +48,11 @@ export function Home() {
             Unlock your athletic potential with world-class coaching and state-of-the-art facilities
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Button size="lg" className="gap-2">
+            <Button onClick={() => navigate('/programs')} size="lg" className="gap-2">
               Explore Programs
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline">
+            <Button onClick={() => navigate('/about')} size="lg" variant="outline">
               Learn More
             </Button>
           </div>

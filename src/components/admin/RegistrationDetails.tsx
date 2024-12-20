@@ -1,19 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { RegistrationFormData } from '@/types'
+import { RegistrationResponseDto } from '@/types/dtos'
 
 interface RegistrationDetailsProps {
-    registration: RegistrationFormData
+    registration: RegistrationResponseDto
 }
 
 export function RegistrationDetails({ registration }: RegistrationDetailsProps) {
     return (
-        <div className="space-y-6">
+        <div className="space-y-1"> {/* Reduced space between cards */}
             {/* Personal Information */}
             <Card>
                 <CardHeader>
                     <CardTitle>Personal Information</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2">
+                <CardContent className="grid gap-0 sm:grid-cols-3"> {/* Changed to 3 columns */}
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">First Name</label>
                         <p className="mt-1">{registration.firstName}</p>
@@ -42,7 +42,7 @@ export function RegistrationDetails({ registration }: RegistrationDetailsProps) 
                 <CardHeader>
                     <CardTitle>Program Details</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2">
+                <CardContent className="grid gap-0 sm:grid-cols-3"> {/* Changed to 3 columns */}
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">Program</label>
                         <p className="mt-1">{registration.programId}</p>
@@ -59,7 +59,7 @@ export function RegistrationDetails({ registration }: RegistrationDetailsProps) 
                 <CardHeader>
                     <CardTitle>Emergency Contact</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2">
+                <CardContent className="grid gap-0 sm:grid-cols-3"> {/* Changed to 3 columns */}
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">Name</label>
                         <p className="mt-1">{registration.emergencyName}</p>
@@ -80,7 +80,7 @@ export function RegistrationDetails({ registration }: RegistrationDetailsProps) 
                 <CardHeader>
                     <CardTitle>Medical Information</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-1 sm:grid sm:grid-cols-3"> {/* Changed to 3 columns */}
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">Medical Conditions</label>
                         <p className="mt-1 whitespace-pre-wrap">
