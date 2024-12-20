@@ -22,11 +22,11 @@ import { Plus, Pencil, Trash2, Search, ImageIcon } from 'lucide-react'
 import { api } from '@/services/api'
 import { ProgramForm } from '@/components/admin/ProgramForm'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Program } from '@/types'
+import { ProgramResponseDto } from '@/types/dtos'
 
 export function Programs() {
     const [search, setSearch] = useState('')
-    const [selectedProgram, setSelectedProgram] = useState<Program | null>(null)
+    const [selectedProgram, setSelectedProgram] = useState<ProgramResponseDto | null>(null)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const { data: programs = [], refetch,isLoading } = useQuery({
@@ -43,9 +43,7 @@ export function Programs() {
             program.description.toLowerCase().includes(search.toLowerCase())
     )
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this program?')) return
-
+    const handleDelete = async (id: number) => {
         try {
             await api.deleteProgram(id)
             toast.success('Program deleted successfully')

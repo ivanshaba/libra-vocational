@@ -44,8 +44,6 @@ export function Registrations() {
     )
 
         const handleDelete = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this registration?')) return
-
         try {
             await api.deleteRegistration(id)
             toast.success('Registration deleted successfully')

@@ -44,7 +44,6 @@ export function Coaches() {
     )
 
     const handleDelete = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this coach?')) return
 
         try {
             await api.deleteCoach(id)

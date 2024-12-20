@@ -1,9 +1,10 @@
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query'
 import { api } from '@/services/api'
-import { Program, Coach, ContactFormData, RegistrationFormData } from '@/types'
+import { ContactFormData, RegistrationFormData } from '@/types'
+import { CoachResponseDto, ProgramResponseDto } from '@/types/dtos'
 
 // Programs
-export const usePrograms = ( options?: UseQueryOptions<Program[]> ) => {
+export const usePrograms = ( options?: UseQueryOptions<ProgramResponseDto[]> ) => {
     return useQuery( {
         queryKey: ['programs'],
         queryFn: api.getPrograms,
@@ -11,7 +12,7 @@ export const usePrograms = ( options?: UseQueryOptions<Program[]> ) => {
     } )
 }
 
-export const useProgram = ( id: string, options?: UseQueryOptions<Program> ) => {
+export const useProgram = ( id: number, options?: UseQueryOptions<ProgramResponseDto> ) => {
     return useQuery( {
         queryKey: ['programs', id],
         queryFn: () => api.getProgram( id ),
@@ -20,7 +21,7 @@ export const useProgram = ( id: string, options?: UseQueryOptions<Program> ) => 
 }
 
 // Coaches
-export const useCoaches = ( options?: UseQueryOptions<Coach[]> ) => {
+export const useCoaches = ( options?: UseQueryOptions<CoachResponseDto[]> ) => {
     return useQuery( {
         queryKey: ['coaches'],
         queryFn: api.getCoaches,

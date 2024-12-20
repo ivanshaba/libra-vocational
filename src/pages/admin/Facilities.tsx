@@ -45,7 +45,6 @@ export function Facilities() {
     )
 
     const handleDelete = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this facility?')) return
 
         try {
             await api.deleteFacility(id)

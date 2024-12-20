@@ -10,12 +10,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { Program } from '@/types'
+import { ProgramCategory, ProgramCreateDto, ProgramResponseDto, ProgramUpdateDto } from '@/types/dtos'
 import { api } from '@/services/api'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 interface ProgramFormProps {
-    program?: Program | null
+    program?: ProgramResponseDto | null
     onSuccess: () => void
 }
 
@@ -43,10 +43,10 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
             }
 
             if (program) {
-                await api.updateProgram(program.id, data as Program)
+                await api.updateProgram(program.id, data as ProgramUpdateDto)
                 toast.success('Program updated successfully')
             } else {
-                await api.createProgram(data as Program)
+                await api.createProgram(data as ProgramCreateDto)
                 toast.success('Program created successfully')
             }
             onSuccess()
@@ -90,7 +90,7 @@ export function ProgramForm({ program, onSuccess }: ProgramFormProps) {
                     <label className="text-sm font-medium">Category</label>
                     <Select
                         value={formData.category}
-                        onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as Program['category'] }))}
+                        onValueChange={(value) => setFormData(prev => ({ ...prev, category: value as ProgramCategory }))}
                     >
                         <SelectTrigger>
                             <SelectValue />

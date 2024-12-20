@@ -1,20 +1,20 @@
 import { axiosInstance } from '@/lib/axios'
-import { Program, RegistrationFormData } from '@/types'
+import { RegistrationFormData } from '@/types'
 import { Stats } from '@/types/admin'
 import { LoginCredentials, AuthResponse } from '@/types/auth'
-import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto } from '@/types/dtos'
+import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto, ProgramCreateDto, ProgramResponseDto } from '@/types/dtos'
 
 export const api = {
     // Programs
     getPrograms: () =>
-        axiosInstance.get<{ data: Program[] }>( '/programs' ).then( res => res.data.data ),
-    getProgram: ( id: string ) =>
-        axiosInstance.get<{ data: Program }>( `/programs/${id}` ).then( res => res.data.data ),
-    createProgram: ( data: Partial<Program> ) =>
-        axiosInstance.post<{ data: Program }>( '/programs', data ).then( res => res.data.data ),
-    updateProgram: ( id: string, data: Partial<Program> ) =>
-        axiosInstance.put<{ data: Program }>( `/programs/${id}`, data ).then( res => res.data.data ),
-    deleteProgram: ( id: string ) =>
+        axiosInstance.get<{ data: ProgramResponseDto[] }>( '/programs' ).then( res => res.data.data ),
+    getProgram: ( id: number ) =>
+        axiosInstance.get<{ data: ProgramResponseDto }>( `/programs/${id}` ).then( res => res.data.data ),
+    createProgram: ( data: Partial<ProgramCreateDto> ) =>
+        axiosInstance.post<{ data: ProgramResponseDto }>( '/programs', data ).then( res => res.data.data ),
+    updateProgram: ( id: number, data: Partial<ProgramCreateDto> ) =>
+        axiosInstance.put<{ data: ProgramResponseDto }>( `/programs/${id}`, data ).then( res => res.data.data ),
+    deleteProgram: ( id: number ) =>
         axiosInstance.delete( `/programs/${id}` ).then( res => res.data.data ),
 
     // Coaches

@@ -114,6 +114,9 @@ export interface ProgramResponseDto {
     category: ProgramCategory;
     imageUrl: string;
     isActive: boolean;
+    maxParticipants: number;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface ProgramCreateDto {
@@ -123,7 +126,9 @@ export interface ProgramCreateDto {
     price: number;
     schedule: string;
     category: ProgramCategory;
-    imageUrl: string
+    imageUrl: string;
+    isActive: boolean;
+    maxParticipants: number;
 }
 
 export interface ProgramUpdateDto {
@@ -133,8 +138,11 @@ export interface ProgramUpdateDto {
     price?: number;
     schedule?: string;
     category?: ProgramCategory;
-    imageUrl: string
+    imageUrl: string;
     isActive?: boolean;
+    maxParticipants?: number;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface RegistrationResponseDto {

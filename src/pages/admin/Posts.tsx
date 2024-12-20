@@ -45,7 +45,6 @@ export function Posts() {
   )
 
   const handleDelete = async ( id: number ) => {
-    if ( !confirm( 'Are you sure you want to delete this post?' ) ) return
 
     try {
       await api.deletePost( id )

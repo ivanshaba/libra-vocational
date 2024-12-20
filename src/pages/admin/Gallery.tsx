@@ -45,8 +45,6 @@ export function Gallery() {
     })
 
     const handleDelete = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this item?')) return
-
         try {
             await api.deleteGalleryItem(id)
             toast.success('Gallery item deleted successfully')

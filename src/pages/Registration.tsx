@@ -301,7 +301,7 @@ function ProgramSelection({
           </SelectTrigger>
           <SelectContent>
             {programs.map((program) => (
-              <SelectItem key={program.id} value={program.id}>
+              <SelectItem key={program.id} value={program.id.toString()}>
                 {program.name}
               </SelectItem>
             ))}
