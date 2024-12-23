@@ -40,7 +40,14 @@ export function Registrations() {
     const filteredRegistrations = registrations.filter(registration =>
         registration.firstName.toLowerCase().includes(search.toLowerCase()) ||
         registration.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        registration.email.toLowerCase().includes(search.toLowerCase())
+        registration.email.toLowerCase().includes(search.toLowerCase()) ||
+        registration.phone.toLowerCase().includes(search.toLowerCase()) ||
+        registration.emergencyName.toLowerCase().includes(search.toLowerCase()) ||
+        registration.emergencyPhone.toLowerCase().includes(search.toLowerCase()) ||
+        registration.emergencyRelation.toLowerCase().includes(search.toLowerCase()) ||
+        registration.medicalConditions.toLowerCase().includes(search.toLowerCase()) ||
+        registration.allergies.toLowerCase().includes(search.toLowerCase()) ||
+        registration.medications.toLowerCase().includes(search.toLowerCase())
     )
 
         const handleDelete = async (id: number) => {

@@ -147,7 +147,6 @@ export interface ProgramUpdateDto {
 
 export interface RegistrationResponseDto {
     id: number;
-    programId: number;
     createdAt: string;
     updatedAt: string;
     deletedAt: string | null;
@@ -168,6 +167,7 @@ export interface RegistrationResponseDto {
     medicalConditions: string;
     allergies: string;
     medications: string;
+    program: ProgramResponseDto | null;
 }
 
 export interface RegistrationCreateDto {

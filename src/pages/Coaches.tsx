@@ -1,94 +1,220 @@
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Coach } from "@/types"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function Coaches() {
-  const [ref, inView] = useInView({ triggerOnce: true })
+	const [ref, inView] = useInView({ triggerOnce: true });
 
-  return (
-    <div className="container py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl font-bold">Our Coaching Staff</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Meet our team of experienced coaches dedicated to helping you achieve your athletic goals.
-        </p>
+	return (
+		<div className="container py-12">
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.8 }}
+			>
+				<h1 className="text-4xl font-bold">Our Coaching Staff</h1>
+				<p className="mt-4 text-lg text-muted-foreground">
+					Meet our team of experienced coaches dedicated to developing the next generation
+					of football talent.
+				</p>
 
-        <div
-          ref={ref}
-          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {coaches.map((coach, index) => (
-            <motion.div
-              key={coach.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-            >
-              <Card className="overflow-hidden">
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <img
-                    src={coach.imageUrl}
-                    alt={coach.name}
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle>{coach.name}</CardTitle>
-                  <CardDescription>{coach.role}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{coach.bio}</p>
-                  <div className="mt-4">
-                    <h4 className="text-sm font-semibold">Specialties:</h4>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {coach.specialties.map((specialty) => (
-                        <span
-                          key={specialty}
-                          className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  )
+				{/* Board of Management */}
+				<div className="mt-16">
+					<h2 className="text-3xl font-bold mb-8">Board of Management</h2>
+					<div ref={ref} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={inView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.8 }}
+						>
+							<Card className="overflow-hidden">
+								<div className="aspect-[4/3] w-full overflow-hidden">
+									<img
+										src="/images/coaches/Edward-Nsamba.jpg"
+										alt="Fatuma Luwede Kayondo"
+										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+									/>
+								</div>
+								<CardHeader>
+									<CardTitle>Fatuma Luwede Kayondo</CardTitle>
+									<CardDescription>Head Coach, Girls Football</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p className="text-sm text-muted-foreground">
+										Former She Cranes Player with extensive experience in
+										women's football development.
+									</p>
+									<div className="mt-4">
+										<h4 className="text-sm font-semibold">Specialties:</h4>
+										<div className="mt-2 flex flex-wrap gap-2">
+											{[
+												"Women's Football",
+												"Youth Development",
+												"Team Management",
+											].map((specialty) => (
+												<span
+													key={specialty}
+													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
+												>
+													{specialty}
+												</span>
+											))}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={inView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.8, delay: 0.1 }}
+						>
+							<Card className="overflow-hidden">
+								<div className="aspect-[4/3] w-full overflow-hidden">
+									<img
+										src="/images/coaches/Edward-Nsamba.jpg"
+										alt="Ronald Nsambu"
+										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+									/>
+								</div>
+								<CardHeader>
+									<CardTitle>Ronald Nsambu</CardTitle>
+									<CardDescription>
+										Vice Chairman & Technical Director
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p className="text-sm text-muted-foreground">
+										Experienced technical director with a focus on player
+										development and tactical analysis.
+									</p>
+									<div className="mt-4">
+										<h4 className="text-sm font-semibold">Specialties:</h4>
+										<div className="mt-2 flex flex-wrap gap-2">
+											{[
+												"Technical Development",
+												"Strategic Planning",
+												"Performance Analysis",
+											].map((specialty) => (
+												<span
+													key={specialty}
+													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
+												>
+													{specialty}
+												</span>
+											))}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={inView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.8, delay: 0.2 }}
+						>
+							<Card className="overflow-hidden">
+								<div className="aspect-[4/3] w-full overflow-hidden">
+									<img
+										src="/images/coaches/Edward-Nsamba.jpg"
+										alt="Nyanzi Henry"
+										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+									/>
+								</div>
+								<CardHeader>
+									<CardTitle>Nyanzi Henry</CardTitle>
+									<CardDescription>Manager & FUFA Liaison</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p className="text-sm text-muted-foreground">
+										Former soccer player now working with FUFA to develop
+										grassroots football.
+									</p>
+									<div className="mt-4">
+										<h4 className="text-sm font-semibold">Specialties:</h4>
+										<div className="mt-2 flex flex-wrap gap-2">
+											{[
+												"Sports Administration",
+												"Youth Development",
+												"Football Operations",
+											].map((specialty) => (
+												<span
+													key={specialty}
+													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
+												>
+													{specialty}
+												</span>
+											))}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</motion.div>
+					</div>
+				</div>
+
+				{/* Support Staff */}
+				<div className="mt-16">
+					<h2 className="text-3xl font-bold mb-8">Support Staff</h2>
+					<div className="grid gap-6 sm:grid-cols-2">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={inView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.8, delay: 0.3 }}
+						>
+							<Card className="overflow-hidden">
+								<div className="aspect-[4/3] w-full overflow-hidden">
+									<img
+										src="/images/coaches/Edward-Nsamba.jpg"
+										alt="Mirembe Victoria Nsamba"
+										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+									/>
+								</div>
+								<CardHeader>
+									<CardTitle>Mirembe Victoria Nsamba</CardTitle>
+									<CardDescription>Executive Secretary</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p className="text-sm text-muted-foreground">
+										Manages administrative operations and coordinates team
+										activities.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={inView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.8, delay: 0.4 }}
+						>
+							<Card className="overflow-hidden">
+								<div className="aspect-[4/3] w-full overflow-hidden">
+									<img
+										src="/images/coaches/Edward-Nsamba.jpg"
+										alt="Paddy Ntege"
+										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+									/>
+								</div>
+								<CardHeader>
+									<CardTitle>Paddy Ntege</CardTitle>
+									<CardDescription>
+										Head of Charity and Social Welfare
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p className="text-sm text-muted-foreground">
+										Leads community outreach programs and social development
+										initiatives.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+					</div>
+				</div>
+			</motion.div>
+		</div>
+	);
 }
-
-const coaches: (Coach & { imageUrl: string })[] = [
-  {
-    id: 1,
-    name: "John Smith",
-    role: "Head Performance Coach",
-    bio: "Former professional athlete with over 15 years of coaching experience. Specializes in strength and conditioning for elite athletes.",
-    imageUrl: "/images/coaches/Edward-Nsamba.jpg",
-    specialties: ["Strength Training", "Performance Analysis", "Elite Coaching"],
-  },
-  {
-    id: 2,
-    name: "Maria Rodriguez",
-    role: "Youth Development Coach",
-    bio: "Certified youth sports specialist with a passion for developing young athletes. Focus on fundamental skills and character building.",
-    imageUrl: "/images/coaches/Edward-Nsamba.jpg",
-    specialties: ["Youth Development", "Skill Building", "Team Sports"],
-  },
-  {
-    id: 3,
-    name: "David Chen",
-    role: "Speed & Agility Specialist",
-    bio: "Track and field background with expertise in developing speed, agility, and explosive power in athletes.",
-    imageUrl: "/images/coaches/Edward-Nsamba.jpg",
-    specialties: ["Speed Training", "Agility", "Plyometrics"],
-  },
-]

@@ -3,6 +3,7 @@ import { RegistrationFormData } from '@/types'
 import { Stats } from '@/types/admin'
 import { LoginCredentials, AuthResponse } from '@/types/auth'
 import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto, ProgramCreateDto, ProgramResponseDto } from '@/types/dtos'
+import { ContactFormData } from "@/types"
 
 export const api = {
     // Programs
@@ -42,8 +43,8 @@ export const api = {
         axiosInstance.delete( `/posts/${id}` ).then( res => res.data.data ),
 
     // Contact
-    submitContactForm: ( data: unknown ) =>
-        axiosInstance.post( '/contact', data ).then( res => res.data.data ),
+    submitContactForm: ( data: ContactFormData ) =>
+        axiosInstance.post<{ data: ContactFormData }>( '/contact-submissions', data ).then( res => res.data.data ),
 
     // Auth
     login: ( credentials: LoginCredentials ) =>

@@ -39,10 +39,10 @@ export interface Facility {
 }
 
 export interface ContactFormData {
-    name: string
-    email: string
-    subject: string
-    message: string
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
 }
 
 export interface Program {
@@ -61,7 +61,6 @@ export interface Program {
 }
 
 export interface RegistrationFormData {
-    id: string
     // Personal Information
     firstName: string
     lastName: string
@@ -69,7 +68,7 @@ export interface RegistrationFormData {
     phone: string
     dateOfBirth: string
     // Program Selection
-    programId: string
+    programId: number
     startDate: string
     // Emergency Contact
     emergencyName: string

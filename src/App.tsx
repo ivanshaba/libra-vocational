@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { RootLayout } from "@/components/layout/RootLayout"
 import { AppProvider } from "@/context/AppContext"
-import { Home as HomePage } from "@/pages/Home"
-import { About as AboutPage } from "@/pages/About"
+import HomePage from "@/pages/Home"
+import AboutPage from "@/pages/About"
 import { Registration as RegistrationPage } from "@/pages/Registration"
 import { News as NewsPage } from "@/pages/News"
 import { Gallery as GalleryPage } from "@/pages/Gallery"
@@ -21,7 +21,7 @@ import { Gallery as AdminGallery } from '@/pages/admin/Gallery'
 import { Login } from '@/pages/admin/Login'
 import { AuthProvider } from '@/contexts/auth-context'
 import { AdminLayout } from '@/components/layout/AdminLayout'
-import { Programs as ProgramsPage } from '@/pages/Programs'
+import ProgramsPage from '@/pages/Programs'
 import { Facilities as FacilitiesPage } from '@/pages/Facilities'
 import { Coaches as CoachesPage } from '@/pages/Coaches'
 import { Toaster } from 'sonner'

@@ -45,7 +45,7 @@ export function RegistrationDetails({ registration }: RegistrationDetailsProps) 
                 <CardContent className="grid gap-0 sm:grid-cols-3"> {/* Changed to 3 columns */}
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">Program</label>
-                        <p className="mt-1">{registration.programId}</p>
+                        <p className="mt-1">{registration.program?.name}</p>
                     </div>
                     <div>
                         <label className="text-sm font-medium text-muted-foreground">Start Date</label>

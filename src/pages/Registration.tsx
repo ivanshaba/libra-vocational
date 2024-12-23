@@ -1,34 +1,39 @@
-import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { api } from '@/services/api'
-import { toast, Toaster } from "sonner"
-import { RegistrationFormData } from '@/types'
-import { useQuery } from '@tanstack/react-query'
-import { Skeleton } from '@/components/ui/skeleton'
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { api } from "@/services/api";
+import { toast, Toaster } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FormData {
   // Personal Information
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  dateOfBirth: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
   // Program Selection
-  programId: string
-  startDate: string
+  programId: number;
+  startDate: string;
   // Emergency Contact
-  emergencyName: string
-  emergencyPhone: string
-  emergencyRelation: string
+  emergencyName: string;
+  emergencyPhone: string;
+  emergencyRelation: string;
   // Medical Information
-  medicalConditions: string
-  allergies: string
-  medications: string
+  medicalConditions: string;
+  allergies: string;
+  medications: string;
 }
 
 const steps = [
@@ -36,18 +41,18 @@ const steps = [
   "Program Selection",
   "Emergency Contact",
   "Medical Information",
-  "Review & Submit"
-]
+  "Review & Submit",
+];
 
 export function Registration() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     dateOfBirth: "",
-    programId: "",
+    programId: 0,
     startDate: "",
     emergencyName: "",
     emergencyPhone: "",
@@ -55,36 +60,40 @@ export function Registration() {
     medicalConditions: "",
     allergies: "",
     medications: "",
-  })
+  });
 
-  const handleInputChange = (field: keyof FormData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: e.target.value }))
-  }
+  const handleInputChange =
+    (field: keyof FormData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+    };
 
   const handleSelectChange = (field: keyof FormData) => (value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
-  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1))
-  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0))
+  const nextStep = () =>
+    setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const handleSubmit = async () => {
     try {
       // Here we'll add API integration later
-      console.log("Form submitted:", formData)
-      const response = await api.submitRegistration(formData as RegistrationFormData)
-      console.log("API response:", response)
+      console.log("Form submitted:", formData);
+      const response = await api.submitRegistration({
+        ...formData,
+        programId: Number(formData.programId),
+      });
+      console.log("API response:", response);
 
       // Show success message or redirect
     } catch (error) {
       // Handle error
       toast.error("Error submitting form", {
         description: "Please try again later" + JSON.stringify(error),
-      })
+      });
     }
-  }
+  };
 
   const renderStep = () => {
     switch (currentStep) {
@@ -94,7 +103,7 @@ export function Registration() {
             formData={formData}
             onChange={handleInputChange}
           />
-        )
+        );
       case 1:
         return (
           <ProgramSelection
@@ -102,27 +111,24 @@ export function Registration() {
             onChange={handleInputChange}
             onSelectChange={handleSelectChange}
           />
-        )
+        );
       case 2:
         return (
-          <EmergencyContact
-            formData={formData}
-            onChange={handleInputChange}
-          />
-        )
+          <EmergencyContact formData={formData} onChange={handleInputChange} />
+        );
       case 3:
         return (
           <MedicalInformation
             formData={formData}
             onChange={handleInputChange}
           />
-        )
+        );
       case 4:
-        return <ReviewSubmit formData={formData} />
+        return <ReviewSubmit formData={formData} />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="container py-12">
@@ -143,7 +149,9 @@ export function Registration() {
               <div
                 key={step}
                 className={`flex flex-col items-center ${
-                  index <= currentStep ? "text-primary" : "text-muted-foreground"
+                  index <= currentStep
+                    ? "text-primary"
+                    : "text-muted-foreground"
                 }`}
               >
                 <div
@@ -195,7 +203,9 @@ export function Registration() {
                 Previous
               </Button>
               <Button
-                onClick={currentStep === steps.length - 1 ? handleSubmit : nextStep}
+                onClick={
+                  currentStep === steps.length - 1 ? handleSubmit : nextStep
+                }
               >
                 {currentStep === steps.length - 1 ? "Submit" : "Next"}
                 {currentStep !== steps.length - 1 && (
@@ -208,7 +218,7 @@ export function Registration() {
       </motion.div>
       <Toaster />
     </div>
-  )
+  );
 }
 
 // Form Step Components
@@ -216,8 +226,10 @@ function PersonalInformation({
   formData,
   onChange,
 }: {
-  formData: FormData
-  onChange: (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => void
+  formData: FormData;
+  onChange: (
+    field: keyof FormData
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -266,7 +278,7 @@ function PersonalInformation({
         />
       </div>
     </div>
-  )
+  );
 }
 
 function ProgramSelection({
@@ -274,26 +286,32 @@ function ProgramSelection({
   onChange,
   onSelectChange,
 }: {
-  formData: FormData
-  onChange: (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => void
-  onSelectChange: (field: keyof FormData) => (value: string) => void
+  formData: FormData;
+  onChange: (
+    field: keyof FormData
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSelectChange: (field: keyof FormData) => (value: string) => void;
 }) {
-  const { data: programs = [], refetch,isLoading } = useQuery({
-        queryKey: ['admin', 'programs'],
-        queryFn: api.getPrograms,
-    })
-    useEffect(() => {
-        refetch()
-    }, [refetch])
+  const {
+    data: programs = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["admin", "programs"],
+    queryFn: api.getPrograms,
+  });
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
-    if (isLoading) return <Skeleton className="h-48 w-full" />
+  if (isLoading) return <Skeleton className="h-48 w-full" />;
 
   return (
     <div className="space-y-4">
       <div>
         <label className="text-sm font-medium">Select Program</label>
         <Select
-          value={formData.programId}
+          value={formData.programId.toString()}
           onValueChange={onSelectChange("programId")}
         >
           <SelectTrigger>
@@ -317,15 +335,17 @@ function ProgramSelection({
         />
       </div>
     </div>
-  )
+  );
 }
 
 function EmergencyContact({
   formData,
   onChange,
 }: {
-  formData: FormData
-  onChange: (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => void
+  formData: FormData;
+  onChange: (
+    field: keyof FormData
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -355,15 +375,17 @@ function EmergencyContact({
         />
       </div>
     </div>
-  )
+  );
 }
 
 function MedicalInformation({
   formData,
   onChange,
 }: {
-  formData: FormData
-  onChange: (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => void
+  formData: FormData;
+  onChange: (
+    field: keyof FormData
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -392,16 +414,18 @@ function MedicalInformation({
         />
       </div>
     </div>
-  )
+  );
 }
 
 function ReviewSubmit({ formData }: { formData: FormData }) {
-   return (
+  return (
     <div className="space-y-6">
       <div>
         <h3 className="font-semibold">Personal Information</h3>
         <div className="mt-2 space-y-2">
-          <p>Name: {formData.firstName} {formData.lastName}</p>
+          <p>
+            Name: {formData.firstName} {formData.lastName}
+          </p>
           <p>Email: {formData.email}</p>
           <p>Phone: {formData.phone}</p>
           <p>Date of Birth: {formData.dateOfBirth}</p>
@@ -431,5 +455,5 @@ function ReviewSubmit({ formData }: { formData: FormData }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
