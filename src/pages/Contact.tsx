@@ -83,7 +83,7 @@ export function Contact() {
 							<CardContent className="p-0">
 								<div className="aspect-video w-full">
 									<iframe
-										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7574286404407!2d32.55661937426803!3d0.3133477640673439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbc0f17d49c8b%3A0xd5f1c7861b913be6!2sKampala%20City%20Square!5e0!3m2!1sen!2sug!4v1700000000000!5m2!1sen!2sug"
+										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.991253938731!2d32.5444476!3d0.287518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbd44231d0351%3A0x73b1ca6f9c593253!2sArena%20Sports%20Academy%20Ug!5e0!3m2!1sen!2sug!4v1702397547959!5m2!1sen!2sug"
 										width="100%"
 										height="100%"
 										style={{ border: 0 }}
