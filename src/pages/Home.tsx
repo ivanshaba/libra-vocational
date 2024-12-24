@@ -14,12 +14,17 @@ import {
 	Phone,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import DonationForm from "@/components/flutterwave";
 
 const HomePage = () => {
 	const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const navigate = useNavigate();
+
+	const handleDonationSuccess = (response: unknown) => {
+		console.log("Donation successful:", response);
+	};
 
 	return (
 		<div className="min-h-screen">
@@ -269,6 +274,14 @@ const HomePage = () => {
 							Contact Us
 							<ArrowRight className="ml-2 h-4 w-4" />
 						</Button>
+					</div>
+					<div className="mt-12">
+						<DonationForm
+							onSuccess={handleDonationSuccess}
+							publicKey={import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || ""}
+							organizationName="Arena Sports Academy"
+							organizationLogo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7urzA8YNTa1Egqt-9IoZQm4Z6FPxNUxzI3_IzL4vjRwMn0xNqqST5W1sPM40hfmDncjo&usqp=CAU"
+						/>
 					</div>
 				</div>
 			</section>

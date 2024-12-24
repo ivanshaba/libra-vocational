@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Image } from "@/components/ui/image";
 
 export function Footer() {
 	return (
@@ -12,7 +13,11 @@ export function Footer() {
 					<div className="space-y-4">
 						<div className="flex items-center gap-2">
 							<div className="h-8 w-8 rounded-full bg-primary-700">
-								{/* Logo can go here */}
+								<Image
+									src="/Logo.png"
+									alt="Arena Sports Academy"
+									className="h-8 w-8"
+								/>
 							</div>
 							<h3 className="text-lg font-bold">Arena Sports Academy</h3>
 						</div>
