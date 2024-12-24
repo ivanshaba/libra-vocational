@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 
-// Previous interfaces remain the same
 interface DonorDetails {
 	name: string;
 	email: string;
@@ -110,41 +109,45 @@ const DonationForm: React.FC<DonationFormProps> = ({
 	};
 
 	return (
-		<div className="container max-w-2xl mx-auto p-6 animate-fade-in">
-			<Card>
-				<CardContent className="p-6">
+		<div className="w-full min-h-screen px-4 py-8 md:px-6">
+			<Card className="max-w-xl mx-auto">
+				<CardContent className="p-4 md:p-6">
 					{donationComplete ? (
-						<div className="text-center space-y-6 animate-slide-up">
+						<div className="text-center space-y-4 md:space-y-6 animate-slide-up">
 							<div className="mx-auto w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
 								<Check className="h-6 w-6 text-primary" />
 							</div>
-							<CardTitle className="text-2xl text-primary">
+							<CardTitle className="text-xl md:text-2xl text-primary">
 								Thank You for Your Donation!
 							</CardTitle>
 							<div className="space-y-2">
-								<p className="text-lg">Dear {donorDetails.name},</p>
-								<p className="text-xl font-semibold">
+								<p className="text-base md:text-lg">Dear {donorDetails.name},</p>
+								<p className="text-lg md:text-xl font-semibold">
 									Your generous donation of UGX {amount.toLocaleString()} has been
 									received.
 								</p>
-								<p className="text-sm text-muted-foreground">
+								<p className="text-xs md:text-sm text-muted-foreground">
 									A confirmation email has been sent to {donorDetails.email}
 								</p>
 							</div>
 						</div>
 					) : (
-						<div className="space-y-8">
+						<div className="space-y-6 md:space-y-8">
 							<div className="text-center space-y-2">
-								<CardTitle className="text-2xl">Make a Donation</CardTitle>
-								<CardDescription>
+								<CardTitle className="text-xl md:text-2xl">
+									Make a Donation
+								</CardTitle>
+								<CardDescription className="text-sm md:text-base">
 									Support our cause and make a difference today
 								</CardDescription>
 							</div>
 
-							<div className="space-y-6">
+							<div className="space-y-4 md:space-y-6">
 								<div className="space-y-4">
 									<div className="space-y-2">
-										<Label htmlFor="name">Full Name</Label>
+										<Label htmlFor="name" className="text-sm md:text-base">
+											Full Name
+										</Label>
 										<Input
 											id="name"
 											type="text"
@@ -156,11 +159,14 @@ const DonationForm: React.FC<DonationFormProps> = ({
 													name: e.target.value,
 												})
 											}
+											className="w-full"
 										/>
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="email">Email Address</Label>
+										<Label htmlFor="email" className="text-sm md:text-base">
+											Email Address
+										</Label>
 										<Input
 											id="email"
 											type="email"
@@ -172,11 +178,14 @@ const DonationForm: React.FC<DonationFormProps> = ({
 													email: e.target.value,
 												})
 											}
+											className="w-full"
 										/>
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="phone">Phone Number</Label>
+										<Label htmlFor="phone" className="text-sm md:text-base">
+											Phone Number
+										</Label>
 										<Input
 											id="phone"
 											type="tel"
@@ -188,19 +197,22 @@ const DonationForm: React.FC<DonationFormProps> = ({
 													phone: e.target.value,
 												})
 											}
+											className="w-full"
 										/>
 									</div>
 								</div>
 
 								<div className="space-y-4">
-									<Label>Select Amount (UGX)</Label>
-									<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+									<Label className="text-sm md:text-base">
+										Select Amount (UGX)
+									</Label>
+									<div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
 										{suggestedAmounts.map((amt) => (
 											<Button
 												key={amt}
 												variant={amount === amt ? "default" : "outline"}
 												onClick={() => handleAmountSelect(amt)}
-												className="w-full"
+												className="w-full text-sm md:text-base py-2"
 											>
 												{amt.toLocaleString()}
 											</Button>
@@ -208,13 +220,19 @@ const DonationForm: React.FC<DonationFormProps> = ({
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="custom-amount">Custom Amount</Label>
+										<Label
+											htmlFor="custom-amount"
+											className="text-sm md:text-base"
+										>
+											Custom Amount
+										</Label>
 										<Input
 											id="custom-amount"
 											type="text"
 											placeholder="Enter a custom amount"
 											value={customAmount}
 											onChange={handleCustomAmountChange}
+											className="w-full"
 										/>
 									</div>
 								</div>
@@ -223,10 +241,10 @@ const DonationForm: React.FC<DonationFormProps> = ({
 									{isFormValid() ? (
 										<FlutterWaveButton
 											{...handleFlutterwavePayment}
-											className="w-full bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-4 py-2 rounded-md"
+											className="w-full bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-4 py-2 rounded-md text-sm md:text-base"
 										/>
 									) : (
-										<p className="text-destructive text-sm text-center">
+										<p className="text-destructive text-xs md:text-sm text-center">
 											Please fill in your details and select an amount to
 											donate
 										</p>

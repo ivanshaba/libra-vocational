@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { api } from "@/services/api";
 import { useAuth } from "@/hooks/useAuth";
 import { motion } from "framer-motion";
-import { Loader2, Lock, Mail } from "lucide-react";
+import { Loader2, Lock, Mail, ChevronLeft } from "lucide-react";
 
 export function Login() {
 	const navigate = useNavigate();
@@ -37,22 +37,34 @@ export function Login() {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center p-4">
+			{/* Back to Home Link */}
+			<Link
+				to="/"
+				className="absolute top-4 left-4 text-white/60 hover:text-white flex items-center gap-2 transition-colors"
+			>
+				<ChevronLeft className="h-4 w-4" />
+				Back to Home
+			</Link>
+
 			<div className="w-full max-w-md">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					{/* Logo/Brand Section */}
+					{/* Logo/Brand Section - Now Clickable */}
 					<div className="text-center mb-8">
-						<div className="flex justify-center mb-4">
-							<div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center">
-								{/* Replace with your logo */}
-								<Lock className="h-6 w-6 text-white" />
+						<Link to="/" className="inline-block group">
+							<div className="flex justify-center mb-4">
+								<div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+									<Lock className="h-6 w-6 text-white" />
+								</div>
 							</div>
-						</div>
-						<h1 className="text-2xl font-bold text-white mb-2">Arena Sports Academy</h1>
-						<p className="text-white/60">Admin Dashboard Login</p>
+							<h1 className="text-2xl font-bold text-white mb-2 group-hover:text-white/90">
+								Arena Sports Academy
+							</h1>
+							<p className="text-white/60">Admin Dashboard Login</p>
+						</Link>
 					</div>
 
 					<Card className="backdrop-blur-sm bg-white/10 border-white/20">
@@ -142,3 +154,5 @@ export function Login() {
 		</div>
 	);
 }
+
+export default Login;
