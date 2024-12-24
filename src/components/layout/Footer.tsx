@@ -14,7 +14,7 @@ export function Footer() {
 						<div className="flex items-center gap-2">
 							<div className="h-8 w-8 rounded-full bg-primary-700">
 								<Image
-									src="/Logo.png"
+									src="/logo.png"
 									alt="Arena Sports Academy"
 									className="h-8 w-8"
 								/>

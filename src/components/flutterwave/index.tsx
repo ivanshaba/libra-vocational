@@ -71,7 +71,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
 		public_key: publicKey,
 		tx_ref: Date.now().toString(),
 		amount: amount,
-		currency: "USD",
+		currency: "UGX",
 		payment_options: "card,mobilemoney,ussd",
 		customer: {
 			email: donorDetails.email,
@@ -124,7 +124,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
 							<div className="space-y-2">
 								<p className="text-lg">Dear {donorDetails.name},</p>
 								<p className="text-xl font-semibold">
-									Your generous donation of USD {amount.toLocaleString()} has been
+									Your generous donation of UGX {amount.toLocaleString()} has been
 									received.
 								</p>
 								<p className="text-sm text-muted-foreground">
@@ -193,7 +193,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
 								</div>
 
 								<div className="space-y-4">
-									<Label>Select Amount (USD)</Label>
+									<Label>Select Amount (UGX)</Label>
 									<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 										{suggestedAmounts.map((amt) => (
 											<Button
