@@ -109,9 +109,9 @@ const DonationForm: React.FC<DonationFormProps> = ({
 	};
 
 	return (
-		<div className="w-full min-h-screen px-4 py-8 md:px-6">
-			<Card className="max-w-xl mx-auto">
-				<CardContent className="p-4 md:p-6">
+		<div className="container-fluid min-h-screen px-2 py-8 md:px-4">
+			<Card className="w-full max-w-xl mx-auto">
+				<CardContent className="p-2 md:p-2">
 					{donationComplete ? (
 						<div className="text-center space-y-4 md:space-y-6 animate-slide-up">
 							<div className="mx-auto w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
@@ -132,7 +132,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
 							</div>
 						</div>
 					) : (
-						<div className="space-y-6 md:space-y-8">
+						<div className="space-y-2 md:space-y-4">
 							<div className="text-center space-y-2">
 								<CardTitle className="text-xl md:text-2xl">
 									Make a Donation
@@ -142,8 +142,8 @@ const DonationForm: React.FC<DonationFormProps> = ({
 								</CardDescription>
 							</div>
 
-							<div className="space-y-4 md:space-y-6">
-								<div className="space-y-4">
+							<div className="space-y-2 md:space-y-4">
+								<div className="space-y-2">
 									<div className="space-y-2">
 										<Label htmlFor="name" className="text-sm md:text-base">
 											Full Name
