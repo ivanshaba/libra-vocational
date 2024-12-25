@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/lib/axios'
 import { RegistrationFormData } from '@/types'
 import { Stats } from '@/types/admin'
-import { LoginCredentials, AuthResponse } from '@/types/auth'
+import { LoginCredentials, AuthResponse, SignupCredentials } from '@/types/auth'
 import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto, ProgramCreateDto, ProgramResponseDto } from '@/types/dtos'
 import { ContactFormData } from "@/types"
 
@@ -44,11 +44,18 @@ export const api = {
 
     // Contact
     submitContactForm: ( data: ContactFormData ) =>
-        axiosInstance.post<{ data: ContactFormData }>( '/contact-submissions', data ).then( res => res.data.data ),
+        axiosInstance.post<{ data: ContactFormData }>( '/contact', data ).then( res => res.data.data ),
+
+    subscribeToNewsletter: ( data: { email: string } ) =>
+        axiosInstance.post<{ data: { email: string } }>( '/newsletter/subscribe', data ).then( res => res.data.data ),
+    unsubscribeFromNewsletter: ( data: { email: string } ) =>
+        axiosInstance.post<{ data: { email: string } }>( '/newsletter/unsubscribe', data ).then( res => res.data.data ),
 
     // Auth
     login: ( credentials: LoginCredentials ) =>
         axiosInstance.post<AuthResponse>( '/admin/login', credentials ).then( res => res.data.data ),
+    signup: ( credentials: SignupCredentials ) =>
+        axiosInstance.post<AuthResponse>( '/admin/signup', credentials ).then( res => res.data.data ),
 
     // Registrations
     submitRegistration: ( data: RegistrationFormData ) =>

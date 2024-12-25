@@ -17,6 +17,12 @@ export interface LoginCredentials {
   password: string
 }
 
+export interface SignupCredentials {
+  email: string
+  password: string
+  confirmPassword: string
+}
+
 export interface AuthResponse {
   success: boolean;
   data: {

@@ -4,9 +4,10 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Loader2 } from "lucide-react";
 import { ContactFormData } from "@/types";
 import { api } from "@/services/api";
+import { toast } from "sonner";
 
 export function Contact() {
 	const [formData, setFormData] = useState<ContactFormData>({
@@ -15,15 +16,29 @@ export function Contact() {
 		subject: "",
 		message: "",
 	});
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Here we'll add API integration later
-		console.log("Form submitted:", formData);
-		const response = await api.submitContactForm(formData);
-		console.log("API response:", response);
+		setIsLoading(true);
+		try {
+			const response = await api.submitContactForm(formData);
+			console.log("API response:", response);
+			toast.success("Message sent successfully");
+			setFormData({
+				name: "",
+				email: "",
+				subject: "",
+				message: "",
+			});
+		} catch (error) {
+			console.error("Error submitting form:", error);
+			toast.error("Error submitting form");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const handleInputChange =
@@ -147,8 +162,12 @@ export function Contact() {
 											className="h-32 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 										/>
 									</div>
-									<Button type="submit" className="w-full">
-										Send Message
+									<Button type="submit" className="w-full" disabled={isLoading}>
+										{isLoading ? (
+											<Loader2 className="h-4 w-4 animate-spin" />
+										) : (
+											"Send Message"
+										)}
 									</Button>
 								</form>
 							</CardContent>

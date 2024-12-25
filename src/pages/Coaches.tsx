@@ -30,7 +30,7 @@ export function Coaches() {
 							<Card className="overflow-hidden">
 								<div className="aspect-[4/3] w-full overflow-hidden">
 									<img
-										src="/images/coaches/Edward-Nsamba.jpg"
+										src="/images/coaches/Fatuma-Luwede-Kayondo.jpg"
 										alt="Fatuma Luwede Kayondo"
 										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 									/>
@@ -73,7 +73,7 @@ export function Coaches() {
 							<Card className="overflow-hidden">
 								<div className="aspect-[4/3] w-full overflow-hidden">
 									<img
-										src="/images/coaches/Edward-Nsamba.jpg"
+										src="/images/coaches/Ronald-Nsambu.jpg"
 										alt="Ronald Nsambu"
 										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 									/>
@@ -118,7 +118,7 @@ export function Coaches() {
 							<Card className="overflow-hidden">
 								<div className="aspect-[4/3] w-full overflow-hidden">
 									<img
-										src="/images/coaches/Edward-Nsamba.jpg"
+										src="/images/coaches/Nyanzi-Henry.jpg"
 										alt="Nyanzi Henry"
 										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 									/>
@@ -167,7 +167,7 @@ export function Coaches() {
 							<Card className="overflow-hidden">
 								<div className="aspect-[4/3] w-full overflow-hidden">
 									<img
-										src="/images/coaches/Edward-Nsamba.jpg"
+										src="/images/coaches/Mirembe-Victoria-Nsamba.jpg"
 										alt="Mirembe Victoria Nsamba"
 										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 									/>
@@ -193,7 +193,7 @@ export function Coaches() {
 							<Card className="overflow-hidden">
 								<div className="aspect-[4/3] w-full overflow-hidden">
 									<img
-										src="/images/coaches/Edward-Nsamba.jpg"
+										src="/images/coaches/Paddy-Ntege.jpg"
 										alt="Paddy Ntege"
 										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 									/>

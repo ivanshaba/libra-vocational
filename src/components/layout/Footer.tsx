@@ -1,9 +1,40 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
+import {
+	Facebook,
+	Instagram,
+	Twitter,
+	MapPin,
+	Phone,
+	Mail,
+	ArrowRight,
+	Loader2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
+import { useState } from "react";
+import { api } from "@/services/api";
+import { toast } from "sonner";
 
 export function Footer() {
+	const [email, setEmail] = useState<string>("");
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setIsLoading(true);
+		try {
+			const response = await api.subscribeToNewsletter({ email });
+			console.log("API response:", response);
+			toast.success("Message sent successfully");
+			setEmail("");
+		} catch (error) {
+			console.error("Error submitting form:", error);
+			toast.error("Error submitting form");
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	return (
 		<footer className="w-full border-t bg-primary-900 text-white">
 			<div className="container">
@@ -134,13 +165,21 @@ export function Footer() {
 							<input
 								type="email"
 								placeholder="Enter your email"
+								required
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								className="rounded-lg bg-white/10 px-4 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
 							/>
 							<Button
-								type="submit"
+								onClick={handleSubmit}
 								className="bg-white text-primary-900 hover:bg-white/90"
+								disabled={isLoading}
 							>
-								Subscribe
+								{isLoading ? (
+									<Loader2 className="h-4 w-4 animate-spin" />
+								) : (
+									"Subscribe"
+								)}
 							</Button>
 						</form>
 					</div>

@@ -27,9 +27,11 @@ export function Login() {
 			login(response.user, response.token);
 			toast.success("Welcome back!");
 			navigate("/admin");
-		} catch (error) {
-			console.error(error);
-			toast.error("Invalid credentials");
+		} catch (error: unknown) {
+			toast.error("Error logging in", {
+				// @ts-ignore
+				description: error.response?.data.error.message,
+			});
 		} finally {
 			setIsLoading(false);
 		}
@@ -134,12 +136,12 @@ export function Login() {
 								</Button>
 
 								<div className="text-center">
-									<a
-										href="#"
+									<Link
+										to="/admin/signup"
 										className="text-sm text-white/60 hover:text-white transition-colors"
 									>
-										Forgot your password?
-									</a>
+										Don't have an account? Sign up
+									</Link>
 								</div>
 							</form>
 						</CardContent>
