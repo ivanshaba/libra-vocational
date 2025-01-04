@@ -337,9 +337,6 @@ const ProgramsPage = () => {
 											<span className="text-sm font-medium text-muted-foreground">
 												{program.duration}
 											</span>
-											<span className="text-sm font-medium text-primary-600 hover:underline cursor-pointer">
-												Learn More →
-											</span>
 										</div>
 									</CardContent>
 								</Card>
