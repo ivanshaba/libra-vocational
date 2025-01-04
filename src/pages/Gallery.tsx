@@ -14,7 +14,6 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { GalleryItemResponseDto } from "@/types/dtos";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
-import { GalleryItem } from "@/types";
 
 export function Gallery() {
 	const [category, setCategory] = useState<string>("all");
@@ -140,62 +139,3 @@ export function Gallery() {
 		</div>
 	);
 }
-
-const galleryItems: GalleryItem[] = [
-	{
-		id: "1",
-		title: "Annual Sports Day Championship",
-		category: "events",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 15, 2024",
-	},
-	{
-		id: "2",
-		title: "State-of-the-Art Training Facility",
-		category: "facilities",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 10, 2024",
-	},
-	{
-		id: "3",
-		title: "Youth Training Session",
-		category: "training",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 8, 2024",
-	},
-	{
-		id: "4",
-		title: "Regional Championships",
-		category: "competitions",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 5, 2024",
-	},
-	{
-		id: "5",
-		title: "Indoor Training Complex",
-		category: "facilities",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 3, 2024",
-	},
-	{
-		id: "6",
-		title: "Elite Performance Workshop",
-		category: "training",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "March 1, 2024",
-	},
-	{
-		id: "7",
-		title: "Summer Camp Opening Ceremony",
-		category: "events",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "February 28, 2024",
-	},
-	{
-		id: "8",
-		title: "National Tournament Finals",
-		category: "competitions",
-		imageUrl: "/images/gallery/arena-sports-academy-ug-champions.jpg",
-		date: "February 25, 2024",
-	},
-];

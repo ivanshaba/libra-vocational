@@ -16,21 +16,6 @@ import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
-interface NewsArticle {
-	id: string;
-	title: string;
-	content: string;
-	excerpt: string;
-	category: string;
-	date: string;
-	author: {
-		name: string;
-		avatar: string;
-	};
-	imageUrl: string;
-	tags: string[];
-}
-
 export function News() {
 	const [category, setCategory] = useState<string>("all");
 	const [search, setSearch] = useState("");
@@ -172,78 +157,3 @@ export function News() {
 		</div>
 	);
 }
-
-const newsArticles: NewsArticle[] = [
-	{
-		id: "1",
-		title: "Arena Sports Academy Celebrates Record-Breaking Year of Achievements",
-		content: "Our athletes have achieved remarkable success this year...",
-		excerpt:
-			"Celebrating an extraordinary year of athletic achievements, personal growth, and community impact at Arena Sports Academy.",
-		category: "achievements",
-		date: "March 15, 2024",
-		author: {
-			name: "Edward Nsamba",
-			avatar: "/images/authors/Edward-Nsamba.jpg",
-		},
-		imageUrl: "/images/news/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		tags: ["achievements", "celebration", "community"],
-	},
-	{
-		id: "2",
-		title: "Summer Training Programs Registration Now Open",
-		content: "Join our comprehensive summer training programs...",
-		excerpt:
-			"Get ready for an exciting summer of sports training and development with our specialized programs.",
-		category: "announcements",
-		date: "March 14, 2024",
-		author: {
-			name: "Edward Nsamba",
-			avatar: "/images/authors/Edward-Nsamba.jpg",
-		},
-		imageUrl: "/images/news/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		tags: ["summer", "training", "registration"],
-	},
-	{
-		id: "3",
-		title: "Youth Development Program Showcase Event",
-		content: "Watch our young athletes demonstrate their skills...",
-		excerpt: "Join us for an inspiring showcase of young talent and athletic development.",
-		category: "events",
-		date: "March 12, 2024",
-		author: {
-			name: "Edward Nsamba",
-			avatar: "/images/authors/Edward-Nsamba.jpg",
-		},
-		imageUrl: "/images/news/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		tags: ["youth", "showcase", "development"],
-	},
-	{
-		id: "4",
-		title: "New Performance Training Equipment Arrival",
-		content: "Expanding our facility with state-of-the-art equipment...",
-		excerpt: "Enhancing our training capabilities with the latest performance equipment.",
-		category: "announcements",
-		date: "March 10, 2024",
-		author: {
-			name: "Edward Nsamba",
-			avatar: "/images/authors/Edward-Nsamba.jpg",
-		},
-		imageUrl: "/images/news/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		tags: ["facility", "equipment", "training"],
-	},
-	{
-		id: "5",
-		title: "Community Outreach Program Success",
-		content: "Making a difference in our local community...",
-		excerpt: "Our community outreach program continues to inspire and support local youth.",
-		category: "community",
-		date: "March 8, 2024",
-		author: {
-			name: "Edward Nsamba",
-			avatar: "/images/authors/Edward-Nsamba.jpg",
-		},
-		imageUrl: "/images/news/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		tags: ["community", "outreach", "impact"],
-	},
-];

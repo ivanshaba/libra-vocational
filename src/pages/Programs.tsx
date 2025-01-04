@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Program } from "@/types";
-import { ProgramCategory } from "@/types/dtos";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Users, Target, Rocket, Globe, Laptop, Palette, Leaf } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -450,100 +449,6 @@ const creativePrograms = [
 		title: "Agribusiness",
 		icon: <Leaf className="h-6 w-6 text-primary-600" />,
 		skills: ["Commercial Farming", "Animal Husbandry", "Agro-forestry", "Food Security"],
-	},
-];
-
-// Keep the existing programs array
-const programs: Program[] = [
-	{
-		id: "1",
-		name: "Elite Performance Training",
-		description:
-			"Advanced training program for serious athletes looking to compete at the highest level.",
-		duration: "12 weeks",
-		price: 999,
-		schedule: "Mon, Wed, Fri 6:00 AM - 8:00 AM",
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		category: ProgramCategory.Training,
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
-	},
-	{
-		id: "2",
-		name: "Youth Development Program",
-		description:
-			"Comprehensive program focusing on fundamental skills and athletic development for young athletes.",
-		duration: "16 weeks",
-		price: 799,
-		schedule: "Tue, Thu 4:00 PM - 6:00 PM",
-		category: ProgramCategory.Training,
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
-	},
-	{
-		id: "3",
-		name: "Summer Sports Camp",
-		description:
-			"Intensive summer camp featuring multiple sports and activities for all skill levels.",
-		duration: "4 weeks",
-		price: 1299,
-		schedule: "Mon-Fri 9:00 AM - 3:00 PM",
-		category: ProgramCategory.Camp,
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
-	},
-	{
-		id: "4",
-		name: "Speed & Agility Clinic",
-		description:
-			"Specialized clinic focusing on improving speed, agility, and quick response time.",
-		duration: "6 weeks",
-		price: 599,
-		schedule: "Sat 10:00 AM - 12:00 PM",
-		category: ProgramCategory.Clinic,
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
-	},
-	{
-		id: "5",
-		name: "Strength Training Program",
-		description:
-			"Professional strength training program with certified trainers and state-of-the-art equipment.",
-		duration: "8 weeks",
-		price: 899,
-		schedule: "Mon, Wed, Fri 5:00 PM - 7:00 PM",
-		category: ProgramCategory.Training,
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
-	},
-	{
-		id: "6",
-		name: "Sports Nutrition Workshop",
-		description:
-			"Educational clinic covering sports nutrition, meal planning, and supplement guidance.",
-		duration: "4 weeks",
-		price: 299,
-		schedule: "Thu 7:00 PM - 8:30 PM",
-		category: ProgramCategory.Clinic,
-		imageUrl: "/images/programs/arena-sports-academy-grp.jpg",
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
-		isActive: true,
-		maxParticipants: 20,
 	},
 ];
 
