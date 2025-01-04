@@ -27,27 +27,27 @@ export function Facilities() {
 				</p>
 
 				{/* Overview Section */}
-				<div className="mt-12">
-					<div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg">
-						<img
-							src="/images/facilities/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg"
-							alt="Facilities Overview"
-							className="h-full w-full object-cover"
-						/>
-						<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
-							<div className="absolute bottom-0 p-8">
-								<h2 className="text-3xl font-bold text-white">
-									State-of-the-Art Training Complex
-								</h2>
-								<p className="mt-2 max-w-2xl text-white/90">
-									Our 50,000 square foot facility features modern equipment,
-									specialized training zones, and professional amenities to
-									support your athletic journey.
-								</p>
+				{facilities.length > 0 && (
+					<div className="mt-12">
+						<div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg">
+							<img
+								src={facilities[0].imageUrl}
+								alt="Facilities Overview"
+								className="h-full w-full object-cover"
+							/>
+							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+								<div className="absolute bottom-0 p-8">
+									<h2 className="text-3xl font-bold text-white">
+										{facilities[0].name}
+									</h2>
+									<p className="mt-2 max-w-2xl text-white/90">
+										{facilities[0].description}
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				)}
 
 				{/* Facilities Grid */}
 				<div ref={ref} className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">

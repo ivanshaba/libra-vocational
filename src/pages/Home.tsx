@@ -26,7 +26,6 @@ interface Testimonial {
 }
 
 const HomePage = () => {
-	const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const navigate = useNavigate();
