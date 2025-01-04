@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import {
@@ -13,11 +13,28 @@ import { Program } from "@/types";
 import { ProgramCategory } from "@/types/dtos";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Users, Target, Rocket, Globe, Laptop, Palette, Leaf } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services/api";
 
 const ProgramsPage = () => {
 	const [category, setCategory] = useState<Program["category"] | "all">("all");
 	const [search, setSearch] = useState("");
 	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const {
+		data: programs = [],
+		refetch,
+		isLoading,
+	} = useQuery({
+		queryKey: ["admin", "programs"],
+		queryFn: api.getPrograms,
+	});
+
+	useEffect(() => {
+		refetch();
+	}, [refetch]);
+
+	if (isLoading) return <div>Loading...</div>;
 
 	const filteredPrograms = programs.filter((program) => {
 		const matchesCategory = category === "all" || program.category === category;

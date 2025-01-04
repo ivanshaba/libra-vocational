@@ -242,7 +242,7 @@ const directors = [
 		image: "/images/coaches/Godfrey-Magero.jpg",
 	},
 	{
-		name: "Mrs. Nabukalu Sauda",
+		name: "Mrs. Nsamba Sauda",
 		role: "Board Member",
 		image: "/images/coaches/Nabukalu-Sauda.jpg",
 	},

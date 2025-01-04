@@ -1,19 +1,44 @@
 import { Link } from "react-router-dom";
-import {
-	Facebook,
-	Instagram,
-	Twitter,
-	MapPin,
-	Phone,
-	Mail,
-	ArrowRight,
-	Loader2,
-} from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Image } from "@/components/ui/image";
 import { useState } from "react";
 import { api } from "@/services/api";
 import { toast } from "sonner";
+import { FaFacebook, FaInstagram, FaTiktok, FaYoutube, FaPaypal } from "react-icons/fa";
+
+const socialLinks = [
+	{
+		name: "Facebook",
+		url: "https://www.facebook.com/share/v/15TeKUVQyt/",
+		icon: <FaFacebook className="h-5 w-5" />,
+		hoverClass: "hover:bg-[#1877F2]",
+	},
+	{
+		name: "Instagram",
+		url: "https://www.instagram.com/arenasportsacademyug/profilecard/?igsh=ZDZmcHZpdmkwcGJy",
+		icon: <FaInstagram className="h-5 w-5" />,
+		hoverClass: "hover:bg-[#E4405F]",
+	},
+	{
+		name: "TikTok",
+		url: "https://vm.tiktok.com/ZS6DGyX25/",
+		icon: <FaTiktok className="h-5 w-5" />,
+		hoverClass: "hover:bg-[#000000]",
+	},
+	{
+		name: "YouTube",
+		url: "https://youtube.com/@arenasportsacademy5067?si=BIFHIuvyN1bJScMN",
+		icon: <FaYoutube className="h-5 w-5" />,
+		hoverClass: "hover:bg-[#FF0000]",
+	},
+	{
+		name: "PayPal",
+		url: "https://www.paypal.me/NSAMBAEDWARD",
+		icon: <FaPaypal className="h-5 w-5" />,
+		hoverClass: "hover:bg-[#00457C]",
+	},
+];
 
 export function Footer() {
 	const [email, setEmail] = useState<string>("");
@@ -56,28 +81,19 @@ export function Footer() {
 							Developing complete soccer players in a safe and supportive environment
 							since 2014. We focus on excellence, teamwork, and personal growth.
 						</p>
-						<div className="flex gap-4">
-							<a
-								href="#"
-								className="rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
-								aria-label="Facebook"
-							>
-								<Facebook className="h-5 w-5" />
-							</a>
-							<a
-								href="#"
-								className="rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
-								aria-label="Twitter"
-							>
-								<Twitter className="h-5 w-5" />
-							</a>
-							<a
-								href="#"
-								className="rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
-								aria-label="Instagram"
-							>
-								<Instagram className="h-5 w-5" />
-							</a>
+						<div className="flex flex-wrap gap-4">
+							{socialLinks.map((social) => (
+								<a
+									key={social.name}
+									href={social.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={`rounded-full bg-white/10 p-2 transition-all duration-300 ${social.hoverClass} hover:text-white hover:scale-110`}
+									aria-label={social.name}
+								>
+									{social.icon}
+								</a>
+							))}
 						</div>
 					</div>
 
@@ -150,7 +166,7 @@ export function Footer() {
 							</li>
 							<li className="flex items-center gap-3 text-sm text-white/80">
 								<Mail className="h-4 w-4 shrink-0" />
-								<span>arenasportsacademyug@gmail.com</span>
+								<span>info@arenasportsacademyug.com</span>
 							</li>
 						</ul>
 					</div>
@@ -161,7 +177,7 @@ export function Footer() {
 						<p className="text-sm text-white/80">
 							Subscribe to our newsletter for the latest updates and news.
 						</p>
-						<form className="flex flex-col gap-3">
+						<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
 							<input
 								type="email"
 								placeholder="Enter your email"
@@ -171,7 +187,7 @@ export function Footer() {
 								className="rounded-lg bg-white/10 px-4 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/20"
 							/>
 							<Button
-								onClick={handleSubmit}
+								type="submit"
 								className="bg-white text-primary-900 hover:bg-white/90"
 								disabled={isLoading}
 							>

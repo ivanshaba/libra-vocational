@@ -26,6 +26,8 @@ import { Facilities as FacilitiesPage } from "@/pages/Facilities";
 import { Coaches as CoachesPage } from "@/pages/Coaches";
 import { Toaster } from "sonner";
 import Signup from "@/pages/admin/Signup";
+import { NewsDetails } from "@/pages/NewsDetails";
+import { WhatsAppChat } from "@/components/whatsapp-chat";
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +41,7 @@ const router = createBrowserRouter([
 			{ path: "facilities", element: <FacilitiesPage /> },
 			{ path: "registration", element: <RegistrationPage /> },
 			{ path: "news", element: <NewsPage /> },
+			{ path: "news/:id", element: <NewsDetails /> },
 			{ path: "gallery", element: <GalleryPage /> },
 			{ path: "contact", element: <ContactPage /> },
 			{ path: "faq", element: <FAQPage /> },
@@ -74,6 +77,7 @@ export default function App() {
 				<AppProvider>
 					<Toaster />
 					<RouterProvider router={router} />
+					<WhatsAppChat phoneNumber="256701102346" />
 				</AppProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
