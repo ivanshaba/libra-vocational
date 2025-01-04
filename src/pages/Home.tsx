@@ -13,7 +13,7 @@ import {
 	Mail,
 	Phone,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DonationForm from "@/components/flutterwave";
 
 interface Testimonial {
@@ -37,61 +37,53 @@ const HomePage = () => {
 
 	return (
 		<div className="min-h-screen">
-			{/* Hero Section */}
-			<section
-				ref={heroRef}
-				className="relative min-h-[90vh] w-full overflow-hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-900 via-primary-800 to-primary-700"
-			>
-				<div className="absolute inset-0">
-					{/* Gradient overlays for depth */}
-					<div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.3),transparent_50%)]" />
-					<div className="absolute inset-0 bg-grid-white/[0.02]" />
-
-					{/* Animated gradient orbs */}
-					<div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary-500/30 blur-3xl animate-pulse" />
-					<div className="absolute right-0 top-0 h-60 w-60 rounded-full bg-primary-400/20 blur-3xl animate-pulse delay-700" />
-					<div className="absolute bottom-0 right-20 h-40 w-40 rounded-full bg-primary-300/20 blur-2xl animate-pulse delay-1000" />
+			{/* Hero Section with Background Image */}
+			<section className="relative min-h-[90vh] flex items-center">
+				{/* Background Image */}
+				<div
+					className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+					style={{
+						backgroundImage: "url('/images/hero/1.jpg')",
+					}}
+				>
+					{/* Overlay with gradient for better text readability */}
+					<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
 				</div>
 
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={heroInView ? { opacity: 1, y: 0 } : {}}
-					transition={{ duration: 0.8 }}
-					className="container relative z-10 flex h-[90vh] flex-col items-center justify-center text-center"
-				>
-					{/* Gradient text effect */}
-					<h1 className="text-4xl font-bold tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-						Welcome to{" "}
-						<span className="bg-gradient-to-r from-white via-primary-200 to-primary-100 bg-clip-text text-transparent">
-							Arena Sports Academy
-						</span>
-					</h1>
-					<p className="mt-6 max-w-[600px] text-lg text-white/90 sm:text-xl">
-						Unlock your athletic potential with world-class coaching and
-						state-of-the-art facilities
-					</p>
-					<div className="mt-8 flex flex-col gap-4 sm:flex-row">
-						<Button
-							onClick={() => navigate("/programs")}
-							size="lg"
-							className="bg-white text-primary-900 hover:bg-white/90 transition-all duration-300"
-						>
-							Explore Programs
-							<ArrowRight className="ml-2 h-4 w-4" />
-						</Button>
-						<Button
-							onClick={() => navigate("/about")}
-							size="lg"
-							variant="outline"
-							className="border-white text-black hover:text-white hover:bg-white/10 transition-all duration-300"
-						>
-							Learn More
-						</Button>
-					</div>
-				</motion.div>
-
-				{/* Bottom fade effect */}
-				<div className="absolute bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-white via-white/30 to-transparent" />
+				{/* Hero Content */}
+				<div className="container relative z-10">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						className="max-w-2xl text-white"
+					>
+						<h1 className="text-5xl font-bold mb-6 leading-tight">
+							Developing Complete Soccer Players Since 2014
+						</h1>
+						<p className="text-xl text-white/90 mb-8">
+							Join Arena Sports Academy and excel in Technical, Tactical, Physical,
+							and Psychological aspects of the game while building strong character
+							and values.
+						</p>
+						<div className="flex flex-wrap gap-4">
+							<Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+								<Link to="/registration">
+									Join Academy
+									<ArrowRight className="ml-2 h-4 w-4" />
+								</Link>
+							</Button>
+							<Button
+								asChild
+								size="lg"
+								variant="outline"
+								className="bg-white/10 border-white/20 hover:bg-white/20 text-white"
+							>
+								<Link to="/programs">Explore Programs</Link>
+							</Button>
+						</div>
+					</motion.div>
+				</div>
 			</section>
 
 			{/* Stats Section */}

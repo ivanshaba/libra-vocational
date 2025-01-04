@@ -30,9 +30,14 @@ export function Signup() {
 			toast.success("Signup successful!");
 			navigate("/admin");
 		} catch (error: unknown) {
-			toast.error("Signup failed", {
-				// @ts-ignore
-				description: error.response?.data.error.message,
+			// @ts-ignore
+			toast.error(error.response?.data.error.message, {
+				description:
+					// @ts-ignore
+					error.response?.data.error.details.length > 0
+						? // @ts-ignore
+						  error.response?.data.error.details[0].message
+						: null,
 			});
 		} finally {
 			setIsLoading(false);
@@ -151,10 +156,10 @@ export function Signup() {
 									{isLoading ? (
 										<>
 											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-											Signing in...
+											Signing up...
 										</>
 									) : (
-										"Sign In"
+										"Sign up"
 									)}
 								</Button>
 
