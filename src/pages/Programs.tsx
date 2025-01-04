@@ -20,11 +20,7 @@ const ProgramsPage = () => {
 	const [search, setSearch] = useState("");
 	const [ref, inView] = useInView({ triggerOnce: true });
 
-	const {
-		data: programs = [],
-		refetch,
-		isLoading,
-	} = useQuery({
+	const { data: programs = [], refetch } = useQuery({
 		queryKey: ["admin", "programs"],
 		queryFn: api.getPrograms,
 	});
@@ -32,8 +28,6 @@ const ProgramsPage = () => {
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
-
-	if (isLoading) return <div>Loading...</div>;
 
 	const filteredPrograms = programs.filter((program) => {
 		const matchesCategory = category === "all" || program.category === category;

@@ -213,3 +213,26 @@ export interface CoachUpdateDto {
     specialties?: string[];
     image?: File; // For multipart/form-data upload
 }
+
+export interface AlumniResponseDto {
+    id: number;
+    name: string;
+    graduationYear: number;
+    currentTeam?: string;
+    achievements: string[];
+    image: string;
+    position: string;
+    category: "professional" | "college" | "youth";
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface AlumniCreateDto {
+    name: string;
+    graduationYear: number;
+    currentTeam?: string;
+    achievements: string[];
+    image: string;
+    position: string;
+    category: "professional" | "college" | "youth";
+}

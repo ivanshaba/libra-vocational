@@ -21,11 +21,7 @@ export function News() {
 	const [search, setSearch] = useState("");
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-	const {
-		data: newsArticles = [],
-		refetch,
-		isLoading,
-	} = useQuery({
+	const { data: newsArticles = [], refetch } = useQuery({
 		queryKey: ["admin", "news"],
 		queryFn: api.getPosts,
 	});
@@ -33,8 +29,6 @@ export function News() {
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
-
-	if (isLoading) return <div>Loading...</div>;
 
 	const filteredArticles = newsArticles.filter((article) => {
 		const matchesCategory = category === "all" || article.category === category;

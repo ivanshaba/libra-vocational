@@ -2,7 +2,7 @@ import { axiosInstance } from '@/lib/axios'
 import { RegistrationFormData } from '@/types'
 import { Stats } from '@/types/admin'
 import { LoginCredentials, AuthResponse, SignupCredentials } from '@/types/auth'
-import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto, ProgramCreateDto, ProgramResponseDto } from '@/types/dtos'
+import { CoachResponseDto, CoachCreateDto, PostResponseDto, RegistrationResponseDto, FacilityResponseDto, FacilityCreateDto, GalleryItemResponseDto, GalleryItemCreateDto, PostCreateDto, ProgramCreateDto, ProgramResponseDto, AlumniResponseDto, AlumniCreateDto } from '@/types/dtos'
 import { ContactFormData } from "@/types"
 
 export const api = {
@@ -81,6 +81,16 @@ export const api = {
         axiosInstance.put<{ data: FacilityResponseDto }>( `/facilities/${id}`, data ).then( res => res.data.data ),
     deleteFacility: ( id: number ) =>
         axiosInstance.delete( `/facilities/${id}` ).then( res => res.data.data ),
+
+    // Alumni
+    getAlumni: () =>
+        axiosInstance.get<{ data: AlumniResponseDto[] }>( '/alumni' ).then( res => res.data.data ),
+    createAlumni: ( data: Partial<AlumniCreateDto> ) =>
+        axiosInstance.post<{ data: AlumniResponseDto }>( '/alumni', data ).then( res => res.data.data ),
+    updateAlumni: ( id: number, data: Partial<AlumniCreateDto> ) =>
+        axiosInstance.put<{ data: AlumniResponseDto }>( `/alumni/${id}`, data ).then( res => res.data.data ),
+    deleteAlumni: ( id: number ) =>
+        axiosInstance.delete( `/alumni/${id}` ).then( res => res.data.data ),
 
     // Gallery
     getGallery: () =>

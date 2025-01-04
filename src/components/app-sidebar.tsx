@@ -47,6 +47,10 @@ const data = {
 					title: "Facilities",
 					url: "/admin/facilities",
 				},
+				{
+					title: "Alumni",
+					url: "/admin/alumni",
+				},
 			],
 		},
 		{

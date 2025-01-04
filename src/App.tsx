@@ -28,6 +28,8 @@ import { Toaster } from "sonner";
 import Signup from "@/pages/admin/Signup";
 import { NewsDetails } from "@/pages/NewsDetails";
 import { WhatsAppChat } from "@/components/whatsapp-chat";
+import { AlumniNetwork as AlumniPage } from "@/pages/Alumni";
+import { AlumniNetwork as AdminAlumniNetwork } from "@/pages/admin/AlumniNetwork";
 
 const router = createBrowserRouter([
 	{
@@ -45,6 +47,7 @@ const router = createBrowserRouter([
 			{ path: "gallery", element: <GalleryPage /> },
 			{ path: "contact", element: <ContactPage /> },
 			{ path: "faq", element: <FAQPage /> },
+			{ path: "alumni", element: <AlumniPage /> },
 		],
 	},
 	{
@@ -66,6 +69,7 @@ const router = createBrowserRouter([
 			{ path: "coaches", element: <AdminCoaches /> },
 			{ path: "facilities", element: <AdminFacilities /> },
 			{ path: "gallery", element: <AdminGallery /> },
+			{ path: "alumni", element: <AdminAlumniNetwork /> },
 		],
 	},
 ]);
@@ -77,7 +81,7 @@ export default function App() {
 				<AppProvider>
 					<Toaster />
 					<RouterProvider router={router} />
-					<WhatsAppChat phoneNumber="256701102346" />
+					<WhatsAppChat phoneNumber="256746971205" />
 				</AppProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>

@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
-import { Facility } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services/api";
 
 export function Facilities() {
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
+	const { data: facilities = [] } = useQuery({
+		queryKey: ["facilities"],
+		queryFn: () => api.getFacilities(),
+	});
 
 	return (
 		<div className="container py-12">
@@ -45,7 +51,7 @@ export function Facilities() {
 
 				{/* Facilities Grid */}
 				<div ref={ref} className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-					{facilities.map((facility, index) => (
+					{facilities.slice(1).map((facility, index) => (
 						<motion.div
 							key={facility.id}
 							initial={{ opacity: 0, y: 20 }}
@@ -127,49 +133,6 @@ export function Facilities() {
 		</div>
 	);
 }
-
-const facilities: Facility[] = [
-	{
-		id: 1,
-		name: "Indoor Training Arena",
-		description:
-			"A climate-controlled environment for year-round training with specialized zones for different sports.",
-		features: [
-			"40,000 sq ft of training space",
-			"Professional-grade flooring",
-			"High-ceiling design",
-			"Advanced lighting system",
-		],
-		imageUrl: "/images/facilities/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		equipment: ["Training machines", "Free weights", "Cardio equipment"],
-	},
-	{
-		id: 2,
-		name: "Performance Center",
-		description: "State-of-the-art facility dedicated to strength and conditioning training.",
-		features: [
-			"Modern weight training area",
-			"Cardio zone",
-			"Recovery room",
-			"Performance tracking systems",
-		],
-		imageUrl: "/images/facilities/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		equipment: ["Olympic lifting platforms", "Recovery equipment", "Assessment tools"],
-	},
-	{
-		id: 3,
-		name: "Aquatic Center",
-		description: "Professional swimming facility for training and recovery.",
-		features: [
-			"Olympic-size pool",
-			"Recovery pools",
-			"Spa facilities",
-			"Certified instructors",
-		],
-		imageUrl: "/images/facilities/Mini-Pitch-Empower-Communities-San-Antonio-TX.jpg",
-		equipment: ["Training equipment", "Recovery tools", "Safety gear"],
-	},
-];
 
 const equipmentCategories = [
 	{

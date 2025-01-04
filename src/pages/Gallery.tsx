@@ -20,11 +20,7 @@ export function Gallery() {
 	const [selectedImage, setSelectedImage] = useState<GalleryItemResponseDto | null>(null);
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-	const {
-		data: items = [],
-		refetch,
-		isLoading,
-	} = useQuery({
+	const { data: items = [], refetch } = useQuery({
 		queryKey: ["admin", "gallery"],
 		queryFn: api.getGallery,
 	});
@@ -32,8 +28,6 @@ export function Gallery() {
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
-
-	if (isLoading) return <div>Loading...</div>;
 
 	const filteredImages = items.filter((item) => {
 		return category === "all" || item.category === category;

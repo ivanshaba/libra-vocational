@@ -1,13 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Users, Target, Heart, Briefcase, Globe, Sprout, School } from "lucide-react";
-import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle2, Target, Compass, Award } from "lucide-react";
 
-const AboutPage = () => {
-	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
+export function About() {
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-white to-green-50">
+		<div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
 			{/* Hero Section */}
 			<section className="relative py-20 bg-primary-600">
 				<div className="absolute inset-0 bg-primary-900/20" />
@@ -18,9 +15,10 @@ const AboutPage = () => {
 						transition={{ duration: 0.8 }}
 						className="max-w-3xl mx-auto text-center text-white"
 					>
-						<h1 className="text-5xl font-bold mb-6">About Arena Sports Academy</h1>
+						<h1 className="text-5xl font-bold mb-6">About Us</h1>
 						<p className="text-xl text-white/90">
-							Developing complete athletes since 2014
+							Established in 2014, Arena Sports Academy has grown from 20 members to
+							over 350 today, becoming a leading force in Uganda's sports development.
 						</p>
 					</motion.div>
 				</div>
@@ -30,10 +28,10 @@ const AboutPage = () => {
 			<section className="py-16">
 				<div className="container">
 					<motion.div
-						ref={ref}
 						initial={{ opacity: 0, y: 20 }}
-						animate={inView ? { opacity: 1, y: 0 } : {}}
-						transition={{ duration: 0.8 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
 						className="max-w-3xl mx-auto"
 					>
 						<Card className="p-8 shadow-lg">
@@ -46,12 +44,19 @@ const AboutPage = () => {
 									Arena Sports Academy was formed in 2014 with an initial
 									membership of 20 members. From our humble beginnings, we have
 									grown in membership, networks and credibility within the Sports
-									fraternity, especially soccer games itself in Uganda.
+									fraternity, especially soccer games itself in Uganda. The growth
+									in the club's player membership has even accelerated over the
+									years, where membership has tripled from 100 in 2020 to over 350
+									members today and keeps on increasing.
 								</p>
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
 									<div className="flex items-center gap-4">
 										<div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
-											<Users className="h-6 w-6 text-primary-600" />
+											<img
+												src="/images/about/history-1.jpg"
+												alt="2014"
+												className="h-full w-full rounded-full object-cover"
+											/>
 										</div>
 										<div>
 											<h3 className="font-semibold">2014</h3>
@@ -62,7 +67,11 @@ const AboutPage = () => {
 									</div>
 									<div className="flex items-center gap-4">
 										<div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
-											<Trophy className="h-6 w-6 text-primary-600" />
+											<img
+												src="/images/about/history-2.jpg"
+												alt="2024"
+												className="h-full w-full rounded-full object-cover"
+											/>
 										</div>
 										<div>
 											<h3 className="font-semibold">2024</h3>
@@ -78,39 +87,119 @@ const AboutPage = () => {
 				</div>
 			</section>
 
-			{/* Objectives Section */}
-			<section className="py-16 bg-gradient-to-b from-green-50 to-white">
+			{/* Mission & Vision Section */}
+			<section className="py-16 bg-primary-50">
+				<div className="container">
+					<div className="grid gap-8 md:grid-cols-2">
+						{/* Mission */}
+						<motion.div
+							initial={{ opacity: 0, x: -20 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.6 }}
+						>
+							<Card className="h-full">
+								<CardContent className="p-6">
+									<div className="flex items-center gap-4 mb-4">
+										<Compass className="h-8 w-8 text-primary-600" />
+										<h2 className="text-2xl font-bold">Our Mission</h2>
+									</div>
+									<p className="text-muted-foreground">
+										To develop complete soccer players and teams in a safe and
+										supportive environmental conservation and sustainable
+										social-economic Development through Climate Change
+										Mitigation and Adaptation Plan of Action, by excelling in
+										the Technical, Tactical, Physical and Psychological areas of
+										the Sports and Games, while simultaneously instilling among
+										our young players Positive Core Values for excellent Work
+										Ethics, Self-Discipline and Professionalism at a very young
+										age for career development and success in life.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+
+						{/* Vision */}
+						<motion.div
+							initial={{ opacity: 0, x: 20 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.6 }}
+						>
+							<Card className="h-full">
+								<CardContent className="p-6">
+									<div className="flex items-center gap-4 mb-4">
+										<Target className="h-8 w-8 text-primary-600" />
+										<h2 className="text-2xl font-bold">Our Vision</h2>
+									</div>
+									<ul className="space-y-4 text-muted-foreground">
+										<li className="flex items-start gap-2">
+											<CheckCircle2 className="h-5 w-5 mt-1 text-primary-600 shrink-0" />
+											<span>
+												To provide the best environment for elite soccer
+												players in Uganda and worldwide by providing the
+												highest quality player development programs,
+												facilities, coaches, training, competition and
+												leadership.
+											</span>
+										</li>
+										<li className="flex items-start gap-2">
+											<CheckCircle2 className="h-5 w-5 mt-1 text-primary-600 shrink-0" />
+											<span>
+												To advance players on to all levels of college
+												rosters, Uganda National Teams, and to be recognized
+												leader and centre for player development at every
+												level of play.
+											</span>
+										</li>
+										<li className="flex items-start gap-2">
+											<CheckCircle2 className="h-5 w-5 mt-1 text-primary-600 shrink-0" />
+											<span>
+												To be the number sports project in Africa on and off
+												the pitch.
+											</span>
+										</li>
+									</ul>
+								</CardContent>
+							</Card>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* Core Values Section */}
+			<section className="py-16">
 				<div className="container">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={inView ? { opacity: 1, y: 0 } : {}}
-						transition={{ duration: 0.8, delay: 0.2 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
 						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold">Objectives & Expected Outcomes</h2>
+						<h2 className="text-3xl font-bold">Our Core Values</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Our mission is to develop well-rounded athletes and community leaders
+							The principles that guide everything we do
 						</p>
 					</motion.div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						{objectives.map((objective, index) => (
+					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						{coreValues.map((value, index) => (
 							<motion.div
-								key={objective.title}
+								key={value.title}
 								initial={{ opacity: 0, y: 20 }}
-								animate={inView ? { opacity: 1, y: 0 } : {}}
-								transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ duration: 0.5, delay: index * 0.1 }}
 							>
-								<Card className="h-full hover:shadow-lg transition-shadow">
+								<Card className="h-full">
 									<CardContent className="p-6">
-										<div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center mb-6">
-											{objective.icon}
-										</div>
-										<h3 className="text-xl font-bold mb-4">
-											{objective.title}
+										<Award className="h-8 w-8 text-primary-600 mb-4" />
+										<h3 className="text-lg font-semibold mb-2">
+											{value.title}
 										</h3>
-										<p className="text-muted-foreground">
-											{objective.description}
+										<p className="text-sm text-muted-foreground">
+											{value.description}
 										</p>
 									</CardContent>
 								</Card>
@@ -125,7 +214,8 @@ const AboutPage = () => {
 				<div className="container">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={inView ? { opacity: 1, y: 0 } : {}}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
 						transition={{ duration: 0.8, delay: 0.4 }}
 						className="text-center mb-12"
 					>
@@ -140,7 +230,8 @@ const AboutPage = () => {
 							<motion.div
 								key={director.name}
 								initial={{ opacity: 0, y: 20 }}
-								animate={inView ? { opacity: 1, y: 0 } : {}}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
 								transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
 							>
 								<Card className="overflow-hidden hover:shadow-lg transition-all">
@@ -161,72 +252,44 @@ const AboutPage = () => {
 					</div>
 				</div>
 			</section>
-
-			{/* Future Plans Section */}
-			<section className="py-16 bg-gradient-to-b from-white to-green-50">
-				<div className="container">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						animate={inView ? { opacity: 1, y: 0 } : {}}
-						transition={{ duration: 0.8, delay: 0.6 }}
-						className="text-center mb-12"
-					>
-						<h2 className="text-3xl font-bold">Future Plans</h2>
-						<p className="mt-4 text-lg text-muted-foreground">
-							Our roadmap for continued growth and impact
-						</p>
-					</motion.div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						{futurePlans.map((plan, index) => (
-							<motion.div
-								key={plan.title}
-								initial={{ opacity: 0, y: 20 }}
-								animate={inView ? { opacity: 1, y: 0 } : {}}
-								transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
-							>
-								<Card className="h-full hover:shadow-lg transition-shadow">
-									<CardContent className="p-6">
-										<div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center mb-6">
-											{plan.icon}
-										</div>
-										<h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-										<p className="text-muted-foreground">{plan.description}</p>
-									</CardContent>
-								</Card>
-							</motion.div>
-						))}
-					</div>
-				</div>
-			</section>
 		</div>
 	);
-};
+}
 
-const objectives = [
+const coreValues = [
 	{
-		title: "Skills Development",
-		description:
-			"Help early career Young ASA Network member beneficiaries aged 12-25 years improve their business, financial management, and hands-on skills.",
-		icon: <Target className="h-6 w-6 text-primary-600" />,
+		title: "Fair Play",
+		description: "Ensuring equity for all in everything we do.",
 	},
 	{
-		title: "Project Sustainability",
+		title: "Oneness",
 		description:
-			"Enhance the work-ethics and sustainability of Youths Incubation Projects operating in the creative sector.",
-		icon: <Briefcase className="h-6 w-6 text-primary-600" />,
+			"Bringing everyone together irrespective of Social, Political, and Economic & cultural attributes.",
 	},
 	{
-		title: "Network Strengthening",
-		description:
-			"Strengthen ASA Networks for Youths Incubation creative industry and associations.",
-		icon: <Users className="h-6 w-6 text-primary-600" />,
+		title: "Openness",
+		description: "Accepting positive criticism, being transparent and honest in all we do.",
 	},
 	{
-		title: "Global Connections",
+		title: "Team Work",
 		description:
-			"Connect ASA Sports and Skills Development Networks working in the creative sector to National, Regional and Global counterparts or mentors.",
-		icon: <Globe className="h-6 w-6 text-primary-600" />,
+			"Cooperation in delivering of our targets with both internal and external stakeholders.",
+	},
+	{
+		title: "Belonging",
+		description: "Fulfilling obligations and enjoying rights of association.",
+	},
+	{
+		title: "Accountability",
+		description: "Accounting for all decisions and activities performed.",
+	},
+	{
+		title: "Loyalty",
+		description: "Offering committed service to the game.",
+	},
+	{
+		title: "Leadership",
+		description: "Providing clear and exemplary management.",
 	},
 ];
 
@@ -248,31 +311,4 @@ const directors = [
 	},
 ];
 
-const futurePlans = [
-	{
-		title: "Sports Infrastructure",
-		description:
-			"Building a One Stop Center Sports and Games Recreation Infrastructure for Training and Tournament Competitions, including Stadiums facilities.",
-		icon: <Trophy className="h-6 w-6 text-primary-600" />,
-	},
-	{
-		title: "Housing Development",
-		description:
-			"Real Estate Housing Development for Children and Youths ASA Members from Vulnerable and Poor Households families.",
-		icon: <Heart className="h-6 w-6 text-primary-600" />,
-	},
-	{
-		title: "Commercial Farming",
-		description:
-			"Establish Commercial Mixed Farmland for Crops and Animal husbandry and Agro-forestry, for the purposes of Nutritional Food Security and Income generation.",
-		icon: <Sprout className="h-6 w-6 text-primary-600" />,
-	},
-	{
-		title: "International Programs",
-		description:
-			"Promote International Exchange Programs in Sports, Games and Creative Industries, including participation in Conferences and access to Sports and Games International Scholarships.",
-		icon: <School className="h-6 w-6 text-primary-600" />,
-	},
-];
-
-export default AboutPage;
+export default About;
