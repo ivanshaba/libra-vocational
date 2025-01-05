@@ -1,9 +1,20 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { api } from "@/services/api";
+import { useQuery } from "@tanstack/react-query";
 
 export function Coaches() {
 	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const { data: coaches, isLoading } = useQuery({
+		queryKey: ["coaches"],
+		queryFn: () => api.getCoaches(),
+	});
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="container py-12">
@@ -22,136 +33,44 @@ export function Coaches() {
 				<div className="mt-16">
 					<h2 className="text-3xl font-bold mb-8">Board of Management</h2>
 					<div ref={ref} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={inView ? { opacity: 1, y: 0 } : {}}
-							transition={{ duration: 0.8 }}
-						>
-							<Card className="overflow-hidden">
-								<div className="aspect-[4/3] w-full overflow-hidden">
-									<img
-										src="/images/coaches/Fatuma-Luwede-Kayondo.jpg"
-										alt="Fatuma Luwede Kayondo"
-										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-									/>
-								</div>
-								<CardHeader>
-									<CardTitle>Fatuma Luwede Kayondo</CardTitle>
-									<CardDescription>Head Coach, Girls Football</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<p className="text-sm text-muted-foreground">
-										Former She Cranes Player with extensive experience in
-										women's football development.
-									</p>
-									<div className="mt-4">
-										<h4 className="text-sm font-semibold">Specialties:</h4>
-										<div className="mt-2 flex flex-wrap gap-2">
-											{[
-												"Women's Football",
-												"Youth Development",
-												"Team Management",
-											].map((specialty) => (
-												<span
-													key={specialty}
-													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
-												>
-													{specialty}
-												</span>
-											))}
-										</div>
+						{coaches?.map((coach) => (
+							<motion.div
+								key={coach.id}
+								initial={{ opacity: 0, y: 20 }}
+								animate={inView ? { opacity: 1, y: 0 } : {}}
+								transition={{ duration: 0.8 }}
+							>
+								<Card className="overflow-hidden">
+									<div className="aspect-[4/3] w-full overflow-hidden">
+										<img
+											src={coach.imageUrl}
+											alt={coach.name}
+											className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+										/>
 									</div>
-								</CardContent>
-							</Card>
-						</motion.div>
-
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={inView ? { opacity: 1, y: 0 } : {}}
-							transition={{ duration: 0.8, delay: 0.1 }}
-						>
-							<Card className="overflow-hidden">
-								<div className="aspect-[4/3] w-full overflow-hidden">
-									<img
-										src="/images/coaches/Ronald-Nsambu.jpg"
-										alt="Ronald Nsambu"
-										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-									/>
-								</div>
-								<CardHeader>
-									<CardTitle>Ronald Nsambu</CardTitle>
-									<CardDescription>
-										Vice Chairman & Technical Director
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<p className="text-sm text-muted-foreground">
-										Experienced technical director with a focus on player
-										development and tactical analysis.
-									</p>
-									<div className="mt-4">
-										<h4 className="text-sm font-semibold">Specialties:</h4>
-										<div className="mt-2 flex flex-wrap gap-2">
-											{[
-												"Technical Development",
-												"Strategic Planning",
-												"Performance Analysis",
-											].map((specialty) => (
-												<span
-													key={specialty}
-													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
-												>
-													{specialty}
-												</span>
-											))}
+									<CardHeader>
+										<CardTitle>{coach.name}</CardTitle>
+										<CardDescription>{coach.role}</CardDescription>
+									</CardHeader>
+									<CardContent>
+										<p className="text-sm text-muted-foreground">{coach.bio}</p>
+										<div className="mt-4">
+											<h4 className="text-sm font-semibold">Specialties:</h4>
+											<div className="mt-2 flex flex-wrap gap-2">
+												{coach.specialties.map((specialty) => (
+													<span
+														key={specialty}
+														className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
+													>
+														{specialty}
+													</span>
+												))}
+											</div>
 										</div>
-									</div>
-								</CardContent>
-							</Card>
-						</motion.div>
-
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={inView ? { opacity: 1, y: 0 } : {}}
-							transition={{ duration: 0.8, delay: 0.2 }}
-						>
-							<Card className="overflow-hidden">
-								<div className="aspect-[4/3] w-full overflow-hidden">
-									<img
-										src="/images/coaches/Nyanzi-Henry.jpg"
-										alt="Nyanzi Henry"
-										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-									/>
-								</div>
-								<CardHeader>
-									<CardTitle>Nyanzi Henry</CardTitle>
-									<CardDescription>Manager & FUFA Liaison</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<p className="text-sm text-muted-foreground">
-										Former soccer player now working with FUFA to develop
-										grassroots football.
-									</p>
-									<div className="mt-4">
-										<h4 className="text-sm font-semibold">Specialties:</h4>
-										<div className="mt-2 flex flex-wrap gap-2">
-											{[
-												"Sports Administration",
-												"Youth Development",
-												"Football Operations",
-											].map((specialty) => (
-												<span
-													key={specialty}
-													className="rounded-full bg-secondary px-3 py-1 text-xs font-medium"
-												>
-													{specialty}
-												</span>
-											))}
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						</motion.div>
+									</CardContent>
+								</Card>
+							</motion.div>
+						))}
 					</div>
 				</div>
 

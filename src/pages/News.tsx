@@ -26,6 +26,8 @@ export function News() {
 		queryFn: api.getPosts,
 	});
 
+	console.log(newsArticles);
+
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
@@ -46,37 +48,39 @@ export function News() {
 				transition={{ duration: 0.8 }}
 			>
 				{/* Featured Article */}
-				<Link to={`/news/${newsArticles[0].id}`}>
-					<div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg">
-						<img
-							src={newsArticles[0].imageUrl}
-							alt={newsArticles[0].title}
-							className="h-full w-full object-cover"
-						/>
-						<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-							<div className="absolute bottom-0 p-8">
-								<div className="flex items-center gap-4">
-									<span className="rounded-full bg-primary/20 px-3 py-1 text-sm text-primary-foreground">
-										{newsArticles[0].category}
-									</span>
-									<span className="text-sm text-white/80">
-										{newsArticles[0].createdAt}
-									</span>
+				{newsArticles.length > 0 && (
+					<Link to={`/news/${newsArticles[0].id}`}>
+						<div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg">
+							<img
+								src={newsArticles[0].imageUrl}
+								alt={newsArticles[0].title}
+								className="h-full w-full object-cover"
+							/>
+							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+								<div className="absolute bottom-0 p-8">
+									<div className="flex items-center gap-4">
+										<span className="rounded-full bg-primary/20 px-3 py-1 text-sm text-primary-foreground">
+											{newsArticles[0].category}
+										</span>
+										<span className="text-sm text-white/80">
+											{newsArticles[0].createdAt}
+										</span>
+									</div>
+									<h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+										{newsArticles[0].title}
+									</h1>
+									<p className="mt-2 max-w-2xl text-lg text-white/90">
+										{newsArticles[0].content}
+									</p>
+									<Button className="mt-6" variant="secondary">
+										Read More
+										<ArrowRight className="ml-2 h-4 w-4" />
+									</Button>
 								</div>
-								<h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-									{newsArticles[0].title}
-								</h1>
-								<p className="mt-2 max-w-2xl text-lg text-white/90">
-									{newsArticles[0].content}
-								</p>
-								<Button className="mt-6" variant="secondary">
-									Read More
-									<ArrowRight className="ml-2 h-4 w-4" />
-								</Button>
 							</div>
 						</div>
-					</div>
-				</Link>
+					</Link>
+				)}
 
 				{/* Filters */}
 				<div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">

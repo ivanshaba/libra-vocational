@@ -14,13 +14,18 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { GalleryItemResponseDto } from "@/types/dtos";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function Gallery() {
 	const [category, setCategory] = useState<string>("all");
 	const [selectedImage, setSelectedImage] = useState<GalleryItemResponseDto | null>(null);
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-	const { data: items = [], refetch } = useQuery({
+	const {
+		data: items = [],
+		refetch,
+		isLoading,
+	} = useQuery({
 		queryKey: ["admin", "gallery"],
 		queryFn: api.getGallery,
 	});
@@ -32,6 +37,16 @@ export function Gallery() {
 	const filteredImages = items.filter((item) => {
 		return category === "all" || item.category === category;
 	});
+
+	if (isLoading) {
+		return (
+			<div className="container py-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+				<Skeleton className="h-10 w-full" />
+				<Skeleton className="h-10 w-full" />
+				<Skeleton className="h-10 w-full" />
+			</div>
+		);
+	}
 
 	return (
 		<div className="container py-12">
