@@ -337,6 +337,9 @@ const ProgramsPage = () => {
 											<span className="text-sm font-medium text-muted-foreground">
 												{program.duration}
 											</span>
+											<span className="text-sm font-medium text-muted-foreground">
+												{program.price > 1 ? `${program.price}` : "Free"}
+											</span>
 										</div>
 									</CardContent>
 								</Card>
