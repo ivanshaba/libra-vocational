@@ -10,9 +10,39 @@ import {
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const testimonials = [
+	{
+		name: "David Obua",
+		role: "Professional Footballer",
+		image: "/images/testimonials/david-obua.jpg",
+		content:
+			"Arena Sports Academy laid the foundation for my professional career. The coaching and mentorship I received were invaluable.",
+		graduationYear: 2015,
+		currentTeam: "Retired",
+	},
+	{
+		name: "Sarah Nambawa",
+		role: "National Team Player",
+		image: "/images/testimonials/sarah-nambawa.jpg",
+		content:
+			"The academy's focus on both athletic and academic excellence helped shape my journey to becoming a national team player.",
+		graduationYear: 2017,
+		currentTeam: "Uganda National Team",
+	},
+	{
+		name: "Mike Mutebi",
+		role: "Professional Coach",
+		image: "/images/testimonials/mike-mutebi.jpg",
+		content:
+			"As a former student and now a coach, I can attest to the academy's commitment to developing well-rounded athletes.",
+		graduationYear: 2012,
+		currentTeam: "KCCA FC",
+	},
+];
 
 export function AlumniNetwork() {
 	const [category, setCategory] = useState<string>("all");
@@ -56,10 +86,9 @@ export function AlumniNetwork() {
 				</div>
 			</section>
 
-			{/* Featured Alumni */}
-			<section className="py-16">
+			{/* Testimonials Section */}
+			<section className="py-16 bg-muted/50">
 				<div className="container">
-					<h2 className="text-3xl font-bold mb-8 text-center">Alumni Directory</h2>
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -67,50 +96,51 @@ export function AlumniNetwork() {
 						transition={{ duration: 0.6 }}
 						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold">Featured Alumni</h2>
+						<h2 className="text-3xl font-bold">Testimonials</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Meet some of our most accomplished graduates
+							Hear from our distinguished graduates about their journey
 						</p>
 					</motion.div>
 
 					<div className="grid gap-8 md:grid-cols-3">
-						{alumni.slice(0, 3).map((alum, index) => (
+						{testimonials.map((testimonial, index) => (
 							<motion.div
-								key={alum.id}
+								key={testimonial.name}
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ duration: 0.5, delay: index * 0.1 }}
 							>
-								<Card className="overflow-hidden hover:shadow-lg transition-all">
-									<div className="aspect-[4/5] relative overflow-hidden">
-										<img
-											src={alum.image}
-											alt={alum.name}
-											className="object-cover w-full h-full transition-transform hover:scale-105"
-										/>
-										{alum.currentTeam && (
-											<div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-												<p className="text-white text-sm">
-													{alum.currentTeam}
+								<Card className="h-full">
+									<CardContent className="p-6">
+										<div className="flex items-start gap-4">
+											<Avatar className="h-12 w-12">
+												<AvatarImage
+													src={testimonial.image}
+													alt={testimonial.name}
+												/>
+												<AvatarFallback>
+													{testimonial.name
+														.split(" ")
+														.map((n) => n[0])
+														.join("")}
+												</AvatarFallback>
+											</Avatar>
+											<div>
+												<h3 className="font-semibold">
+													{testimonial.name}
+												</h3>
+												<p className="text-sm text-muted-foreground">
+													{testimonial.role}
+												</p>
+												<p className="text-sm text-muted-foreground">
+													Class of {testimonial.graduationYear}
 												</p>
 											</div>
-										)}
-									</div>
-									<CardContent className="p-6">
-										<h3 className="text-xl font-bold mb-2">{alum.name}</h3>
-										<p className="text-primary-600 mb-4">{alum.position}</p>
-										<div className="flex flex-wrap gap-2">
-											{alum.achievements.map((achievement, i) => (
-												<span
-													key={i}
-													className="inline-flex items-center gap-1 text-xs bg-primary-50 text-primary-600 px-2 py-1 rounded-full"
-												>
-													<Star className="h-3 w-3" />
-													{achievement}
-												</span>
-											))}
 										</div>
+										<blockquote className="mt-4 text-muted-foreground">
+											"{testimonial.content}"
+										</blockquote>
 									</CardContent>
 								</Card>
 							</motion.div>

@@ -1,9 +1,9 @@
-
 export enum GalleryCategory {
     Events = 'events',
     Facilities = 'facilities',
     Training = 'training',
-    Competitions = 'competitions'
+    Competitions = 'competitions',
+    Videos = 'videos'
 }
 
 export enum PostCategory {
@@ -42,14 +42,18 @@ export interface GalleryItemResponseDto {
     title: string;
     category: GalleryCategory;
     imageUrl: string;
+    videoUrl?: string;
     date: string;
+    type: 'image' | 'video';
 }
 
 export interface GalleryItemCreateDto {
     title: string;
     category: GalleryCategory;
     imageUrl: string;
+    videoUrl?: string;
     date: string;
+    type: 'image' | 'video';
 }
 
 export interface GalleryItemUpdateDto {

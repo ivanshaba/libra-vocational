@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export function Facilities() {
 	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -78,16 +80,28 @@ export function Facilities() {
 									<div className="mt-4 space-y-2">
 										<h4 className="font-semibold">Key Features:</h4>
 										<ul className="space-y-2">
-											{facility.features.map((feature: string) => (
-												<li
-													key={feature}
-													className="flex items-center gap-2"
-												>
-													<CheckCircle2 className="h-4 w-4 text-primary" />
-													<span className="text-sm">{feature}</span>
-												</li>
-											))}
+											{facility.features
+												.slice(0, 3)
+												.map((feature: string) => (
+													<li
+														key={feature}
+														className="flex items-center gap-2"
+													>
+														<CheckCircle2 className="h-4 w-4 text-primary" />
+														<span className="text-sm">{feature}</span>
+													</li>
+												))}
 										</ul>
+										{facility.features.length > 3 && (
+											<p className="text-sm text-muted-foreground">
+												+{facility.features.length - 3} more features
+											</p>
+										)}
+									</div>
+									<div className="mt-6">
+										<Link to={`/facilities/${facility.id}`}>
+											<Button className="w-full">Read More</Button>
+										</Link>
 									</div>
 								</CardContent>
 							</Card>

@@ -31,6 +31,8 @@ import { WhatsAppChat } from "@/components/whatsapp-chat";
 import { AlumniNetwork as AlumniPage } from "@/pages/Alumni";
 import { AlumniNetwork as AdminAlumniNetwork } from "@/pages/admin/AlumniNetwork";
 import { ProgramDetails } from "@/pages/ProgramDetails";
+import { FacilityDetails } from "@/pages/FacilityDetails";
+import { Videos } from "@/pages/Videos";
 
 const router = createBrowserRouter([
 	{
@@ -50,6 +52,8 @@ const router = createBrowserRouter([
 			{ path: "faq", element: <FAQPage /> },
 			{ path: "alumni", element: <AlumniPage /> },
 			{ path: "programs/:id", element: <ProgramDetails /> },
+			{ path: "/facilities/:id", element: <FacilityDetails /> },
+			{ path: "videos", element: <Videos /> },
 		],
 	},
 	{

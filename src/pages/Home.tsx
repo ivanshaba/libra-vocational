@@ -409,78 +409,6 @@ const HomePage = () => {
 				</div>
 			</section>
 
-			{/* Testimonials Section */}
-			<section className="relative overflow-hidden bg-primary-50/50 py-20">
-				<div className="container relative z-10">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.8 }}
-						className="text-center"
-					>
-						<h2 className="text-3xl font-bold">What Our Community Says</h2>
-						<p className="mt-4 text-lg text-muted-foreground">
-							Hear from our students, parents, and community members
-						</p>
-					</motion.div>
-
-					<div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-						{testimonials.map((testimonial, index) => (
-							<motion.div
-								key={testimonial.id}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ duration: 0.5, delay: index * 0.1 }}
-							>
-								<Card className="h-full">
-									<CardContent className="p-6">
-										{/* Rating */}
-										<div className="flex gap-1">
-											{[...Array(testimonial.rating)].map((_, i) => (
-												<Star
-													key={i}
-													className="h-5 w-5 fill-primary text-primary"
-												/>
-											))}
-										</div>
-
-										{/* Content */}
-										<blockquote className="mt-4">
-											<p className="text-muted-foreground">
-												"{testimonial.content}"
-											</p>
-										</blockquote>
-
-										{/* Author */}
-										<div className="mt-6 flex items-center gap-4">
-											<div className="h-12 w-12 overflow-hidden rounded-full bg-primary-100">
-												<img
-													src={testimonial.avatar}
-													alt={testimonial.name}
-													className="h-full w-full object-cover"
-												/>
-											</div>
-											<div>
-												<p className="font-semibold">{testimonial.name}</p>
-												<p className="text-sm text-muted-foreground">
-													{testimonial.role}
-												</p>
-											</div>
-										</div>
-									</CardContent>
-								</Card>
-							</motion.div>
-						))}
-					</div>
-
-					{/* Decorative Elements */}
-					<div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary-100/50 blur-3xl" />
-					<div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-primary-100/50 blur-3xl" />
-				</div>
-			</section>
-
 			{/* Partners Section */}
 			<section className="py-16 bg-white">
 				<div className="container">
@@ -679,61 +607,31 @@ const contactInfo = [
 	},
 ];
 
-const testimonials: Testimonial[] = [
-	{
-		id: 1,
-		name: "David Mukisa",
-		role: "Parent",
-		content:
-			"My son has shown remarkable improvement since joining Arena Sports Academy. The coaches are dedicated and professional, focusing on both athletic and personal development.",
-		avatar: "/images/testimonials/avatar-1.jpg",
-		rating: 5,
-	},
-	{
-		id: 2,
-		name: "Sarah Namukasa",
-		role: "Student Athlete",
-		content:
-			"The training programs at Arena Sports Academy are world-class. I've developed not just as a player, but also as a person. The facilities and coaching staff are exceptional.",
-		avatar: "/images/testimonials/avatar-2.jpg",
-		rating: 5,
-	},
-	{
-		id: 3,
-		name: "John Muwonge",
-		role: "Community Member",
-		content:
-			"Arena Sports Academy has made a significant impact in our community. Their commitment to youth development and social programs is truly commendable.",
-		avatar: "/images/testimonials/avatar-3.jpg",
-		rating: 5,
-	},
-];
-
 const partners: Partner[] = [
 	{
 		id: 1,
 		name: "Partner 1",
-		logo: "/images/partners/partner1.png",
+		logo: "/images/partners/partner.png",
 	},
 	{
 		id: 2,
 		name: "Partner 2",
-		logo: "/images/partners/partner2.png",
+		logo: "/images/partners/partner.png",
 	},
 	{
 		id: 3,
 		name: "Partner 3",
-		logo: "/images/partners/partner3.png",
+		logo: "/images/partners/partner.png",
 	},
 	{
 		id: 4,
 		name: "Partner 4",
-		logo: "/images/partners/partner4.png",
+		logo: "/images/partners/partner.png",
 	},
 	{
 		id: 5,
 		name: "Partner 5",
-		logo: "/images/partners/partner5.png",
+		logo: "/images/partners/partner.png",
 	},
 ];
 

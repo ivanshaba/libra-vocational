@@ -81,6 +81,8 @@ export const api = {
         axiosInstance.put<{ data: FacilityResponseDto }>( `/facilities/${id}`, data ).then( res => res.data.data ),
     deleteFacility: ( id: number ) =>
         axiosInstance.delete( `/facilities/${id}` ).then( res => res.data.data ),
+    getFacility: ( id: number ) =>
+        axiosInstance.get( `/facilities/${id}` ).then( res => res.data.data ),
 
     // Alumni
     getAlumni: () =>

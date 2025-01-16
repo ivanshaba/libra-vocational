@@ -4,9 +4,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, Lock } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-	{ href: "/", label: "Home" },
+	{
+		href: "/",
+		label: "Home",
+		isLogo: true,
+	},
 	{ href: "/about", label: "About" },
 	{ href: "/programs", label: "Programs" },
 	{ href: "/coaches", label: "Coaches" },
@@ -14,6 +19,7 @@ const navItems = [
 	{ href: "/registration", label: "Registration" },
 	{ href: "/news", label: "News" },
 	{ href: "/gallery", label: "Gallery" },
+	{ href: "/videos", label: "Videos" },
 	{ href: "/alumni", label: "Alumni" },
 	{ href: "/contact", label: "Contact" },
 	{ href: "/faq", label: "FAQ" },
@@ -43,10 +49,24 @@ export function MobileNav() {
 							>
 								<Link
 									to={item.href}
-									className="block px-2 py-1 text-lg font-medium transition-colors hover:text-primary"
+									className={cn(
+										"block px-2 py-1 text-lg font-medium transition-colors hover:text-primary",
+										item.isLogo && "flex items-center gap-2"
+									)}
 									onClick={() => setOpen(false)}
 								>
-									{item.label}
+									{item.isLogo ? (
+										<>
+											<img
+												src="/images/logo.png"
+												alt="Arena Sports Academy"
+												className="h-8 w-auto"
+											/>
+											{item.label}
+										</>
+									) : (
+										item.label
+									)}
 								</Link>
 							</motion.div>
 						))}

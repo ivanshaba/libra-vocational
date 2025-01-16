@@ -15,6 +15,7 @@ import { GalleryItemResponseDto } from "@/types/dtos";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { VideoPlayer } from "@/components/video-player";
 
 export function Gallery() {
 	const [category, setCategory] = useState<string>("all");
@@ -94,18 +95,34 @@ export function Gallery() {
 								className="group relative cursor-pointer overflow-hidden rounded-lg"
 								onClick={() => setSelectedImage(item)}
 							>
-								<img
-									src={item.imageUrl}
-									alt={item.title}
-									className="w-full transform object-cover transition-transform duration-300 hover:scale-105"
-								/>
-								<div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-									<div className="flex h-full flex-col items-center justify-center p-4 text-center text-white">
-										<h3 className="text-lg font-semibold">{item.title}</h3>
-										<p className="mt-2 text-sm">{item.date}</p>
-										<span className="mt-2 rounded-full bg-white/20 px-3 py-1 text-xs">
-											{item.category}
-										</span>
+								{item.type === "video" ? (
+									<VideoPlayer
+										videoUrl={item.videoUrl!}
+										title={item.title}
+										thumbnail={item.imageUrl}
+									/>
+								) : (
+									<div className="aspect-square">
+										<img
+											src={item.imageUrl}
+											alt={item.title}
+											className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										/>
+									</div>
+								)}
+								<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent p-4">
+									<div className="flex h-full flex-col justify-between">
+										<div className="self-end">
+											<span className="rounded-full bg-primary/20 px-2 py-1 text-xs text-primary-foreground">
+												{item.category}
+											</span>
+										</div>
+										<div>
+											<h3 className="font-semibold text-white">
+												{item.title}
+											</h3>
+											<p className="text-sm text-white/80">{item.date}</p>
+										</div>
 									</div>
 								</div>
 							</div>

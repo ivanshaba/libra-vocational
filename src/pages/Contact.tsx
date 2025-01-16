@@ -1,13 +1,56 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+	MapPin,
+	Phone,
+	Mail,
+	Building2,
+	GraduationCap,
+	HeartHandshake,
+	Trophy,
+	Users,
+	Clock,
+} from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock, Loader2 } from "lucide-react";
 import { ContactFormData } from "@/types";
 import { api } from "@/services/api";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+
+const departments = [
+	{
+		name: "General Inquiries",
+		email: "info@arenasportsacademy.com",
+		phone: "+256 746 971 205",
+		icon: Building2,
+	},
+	{
+		name: "Admissions",
+		email: "admissions@arenasportsacademy.com",
+		phone: "+256 746 971 206",
+		icon: Users,
+	},
+	{
+		name: "Academic Support",
+		email: "academics@arenasportsacademy.com",
+		phone: "+256 746 971 207",
+		icon: GraduationCap,
+	},
+	{
+		name: "Sports Programs",
+		email: "sports@arenasportsacademy.com",
+		phone: "+256 746 971 208",
+		icon: Trophy,
+	},
+	{
+		name: "Community Relations",
+		email: "community@arenasportsacademy.com",
+		phone: "+256 746 971 209",
+		icon: HeartHandshake,
+	},
+];
 
 export function Contact() {
 	const [formData, setFormData] = useState<ContactFormData>({
@@ -17,8 +60,6 @@ export function Contact() {
 		message: "",
 	});
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -56,73 +97,96 @@ export function Contact() {
 			>
 				<h1 className="text-4xl font-bold">Contact Us</h1>
 				<p className="mt-4 text-lg text-muted-foreground">
-					Get in touch with us for any inquiries or support.
+					Get in touch with us. We're here to help and answer any questions you may have.
 				</p>
 
 				<div className="mt-12 grid gap-8 lg:grid-cols-2">
-					{/* Contact Information */}
-					<div ref={ref} className="space-y-6">
-						<Card>
-							<CardHeader>
-								<CardTitle>Contact Information</CardTitle>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<div className="flex items-center space-x-3">
-									<MapPin className="h-5 w-5 text-primary" />
-									<span>
-										Arena Sports Academy, Bunamwaya, Ngobe, Near Hass Petrol
-										Station, Shop No:Doo3
-									</span>
-								</div>
-								<div className="flex items-center space-x-3">
-									<Phone className="h-5 w-5 text-primary" />
-									<span>+256 701102346 / +256 746971205</span>
-								</div>
-								<div className="flex items-center space-x-3">
-									<Mail className="h-5 w-5 text-primary" />
-									<span>info@arenasportsacademyug.com</span>
-								</div>
-								<div className="flex items-center space-x-3">
-									<Clock className="h-5 w-5 text-primary" />
-									<div>
-										<p>Monday - Friday: 8:00 AM - 6:00 PM</p>
-										<p>Saturday: 9:00 AM - 4:00 PM</p>
-										<p>Sunday: Closed</p>
-									</div>
-								</div>
-							</CardContent>
-						</Card>
+					<div className="space-y-8">
+						<div>
+							<h2 className="text-2xl font-semibold">Department Contacts</h2>
+							<div className="mt-4 grid gap-4">
+								{departments.map((dept) => (
+									<Card key={dept.name}>
+										<CardContent className="flex items-start gap-4 p-4">
+											<div className="rounded-lg bg-primary/10 p-2">
+												<dept.icon className="h-5 w-5 text-primary" />
+											</div>
+											<div>
+												<h3 className="font-semibold">{dept.name}</h3>
+												<div className="mt-1 space-y-1 text-sm text-muted-foreground">
+													<p className="flex items-center gap-2">
+														<Mail className="h-4 w-4" />
+														{dept.email}
+													</p>
+													<p className="flex items-center gap-2">
+														<Phone className="h-4 w-4" />
+														{dept.phone}
+													</p>
+												</div>
+											</div>
+										</CardContent>
+									</Card>
+								))}
+							</div>
+						</div>
 
-						{/* Map */}
-						<Card>
-							<CardContent className="p-0">
-								<div className="aspect-video w-full">
-									<iframe
-										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.991253938731!2d32.5444476!3d0.287518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbd44231d0351%3A0x73b1ca6f9c593253!2sArena%20Sports%20Academy%20Ug!5e0!3m2!1sen!2sug!4v1702397547959!5m2!1sen!2sug"
-										width="100%"
-										height="100%"
-										style={{ border: 0 }}
-										allowFullScreen
-										loading="lazy"
-										referrerPolicy="no-referrer-when-downgrade"
-										title="Arena Sports Academy Location"
-									/>
-								</div>
-							</CardContent>
-						</Card>
+						<div>
+							<h2 className="text-2xl font-semibold">Visit Us</h2>
+							<Card className="mt-4">
+								<CardContent className="p-4">
+									<div className="flex items-start gap-4">
+										<div className="rounded-lg bg-primary/10 p-2">
+											<MapPin className="h-5 w-5 text-primary" />
+										</div>
+										<div>
+											<h3 className="font-semibold">Our Location</h3>
+											<p className="mt-1 text-sm text-muted-foreground">
+												Arena Sports Academy, Bunamwaya, Ngobe
+												<br />
+												Near Hass Petrol Station, Shop No:Doo3
+											</p>
+											<div className="mt-4">
+												<h4 className="font-semibold">Opening Hours</h4>
+												<div className="mt-1 space-y-1 text-sm text-muted-foreground">
+													<p className="flex items-center gap-2">
+														<Clock className="h-4 w-4" />
+														Monday - Friday: 8:00 AM - 6:00 PM
+													</p>
+													<p className="ps-6">
+														Saturday: 9:00 AM - 4:00 PM
+													</p>
+													<p className="ps-6">Sunday: Closed</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+
+							{/* Map */}
+							<Card className="mt-4">
+								<CardContent className="p-0">
+									<div className="aspect-video w-full">
+										<iframe
+											src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.991253938731!2d32.5444476!3d0.287518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbd44231d0351%3A0x73b1ca6f9c593253!2sArena%20Sports%20Academy%20Ug!5e0!3m2!1sen!2sug!4v1702397547959!5m2!1sen!2sug"
+											width="100%"
+											height="100%"
+											style={{ border: 0 }}
+											allowFullScreen
+											loading="lazy"
+											referrerPolicy="no-referrer-when-downgrade"
+											title="Arena Sports Academy Location"
+										/>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
 					</div>
 
-					{/* Contact Form */}
-					<motion.div
-						initial={{ opacity: 0, x: 20 }}
-						animate={inView ? { opacity: 1, x: 0 } : {}}
-						transition={{ duration: 0.8, delay: 0.2 }}
-					>
-						<Card>
-							<CardHeader>
-								<CardTitle>Send us a Message</CardTitle>
-							</CardHeader>
-							<CardContent>
+					<div>
+						<h2 className="text-2xl font-semibold">Send us a Message</h2>
+						<Card className="mt-4">
+							<CardContent className="p-6">
 								<form onSubmit={handleSubmit} className="space-y-4">
 									<div>
 										<label className="text-sm font-medium">Name</label>
@@ -172,7 +236,7 @@ export function Contact() {
 								</form>
 							</CardContent>
 						</Card>
-					</motion.div>
+					</div>
 				</div>
 			</motion.div>
 		</div>
