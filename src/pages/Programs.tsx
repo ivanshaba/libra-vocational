@@ -14,6 +14,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, Users, Target, Rocket, Globe, Laptop, Palette, Leaf } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const ProgramsPage = () => {
 	const [category, setCategory] = useState<Program["category"] | "all">("all");
@@ -331,9 +334,11 @@ const ProgramsPage = () => {
 											{program.name}
 										</h3>
 										<p className="text-sm text-muted-foreground mb-4">
-											{program.description}
+											{program.description.length > 150
+												? `${program.description.substring(0, 150)}...`
+												: program.description}
 										</p>
-										<div className="flex items-center justify-between">
+										<div className="flex items-center justify-between mb-4">
 											<span className="text-sm font-medium text-muted-foreground">
 												{program.duration}
 											</span>
@@ -341,6 +346,12 @@ const ProgramsPage = () => {
 												{program.price > 1 ? `${program.price}` : "Free"}
 											</span>
 										</div>
+										<Button asChild className="w-full" variant="outline">
+											<Link to={`/programs/${program.id}`}>
+												Read More
+												<ArrowRight className="ml-2 h-4 w-4" />
+											</Link>
+										</Button>
 									</CardContent>
 								</Card>
 							</motion.div>

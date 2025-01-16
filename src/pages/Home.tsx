@@ -12,9 +12,16 @@ import {
 	MapPin,
 	Mail,
 	Phone,
+	ChevronLeft,
+	ChevronRight,
+	Building2,
+	GraduationCap,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import DonationForm from "@/components/flutterwave";
+import { useState, useEffect } from "react";
+import { api } from "@/services/api";
+import { useQuery } from "@tanstack/react-query";
 
 interface Testimonial {
 	id: number;
@@ -25,10 +32,63 @@ interface Testimonial {
 	rating: number;
 }
 
+interface Partner {
+	id: number;
+	name: string;
+	logo: string;
+}
+
 const HomePage = () => {
 	const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const navigate = useNavigate();
+
+	const {
+		data: registrations = [],
+		refetch,
+		isLoading,
+	} = useQuery({
+		queryKey: ["admin", "registrations"],
+		queryFn: api.getRegistrations,
+	});
+
+	const { data: programs = [] } = useQuery({
+		queryKey: ["programs"],
+		queryFn: api.getPrograms,
+	});
+
+	const { data: coaches = [] } = useQuery({
+		queryKey: ["coaches"],
+		queryFn: api.getCoaches,
+	});
+
+	const { data: facilities = [] } = useQuery({
+		queryKey: ["facilities"],
+		queryFn: api.getFacilities,
+	});
+
+	const { data: alumni = [] } = useQuery({
+		queryKey: ["alumni"],
+		queryFn: api.getAlumni,
+	});
+
+	const [currentSlide, setCurrentSlide] = useState(0);
+
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+		}, 5000); // Change slide every 5 seconds
+
+		return () => clearInterval(timer);
+	}, []);
+
+	const nextSlide = () => {
+		setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+	};
+
+	const prevSlide = () => {
+		setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+	};
 
 	const handleDonationSuccess = (response: unknown) => {
 		console.log("Donation successful:", response);
@@ -36,34 +96,75 @@ const HomePage = () => {
 
 	return (
 		<div className="min-h-screen">
-			{/* Hero Section with Background Image */}
+			{/* Hero Section with Slideshow */}
 			<section className="relative min-h-[90vh] flex items-center">
-				{/* Background Image */}
-				<div
-					className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-					style={{
-						backgroundImage: "url('/images/hero/1.jpg')",
-					}}
+				{/* Slideshow Background */}
+				{heroSlides.map((slide, index) => (
+					<motion.div
+						key={slide.id}
+						className="absolute inset-0"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: currentSlide === index ? 1 : 0 }}
+						transition={{ duration: 0.7 }}
+					>
+						<div
+							className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+							style={{
+								backgroundImage: `url('${slide.image}')`,
+							}}
+						>
+							{/* Overlay with gradient */}
+							<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+						</div>
+					</motion.div>
+				))}
+
+				{/* Navigation Arrows */}
+				<button
+					onClick={prevSlide}
+					className="absolute left-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors"
+					aria-label="Previous slide"
 				>
-					{/* Overlay with gradient for better text readability */}
-					<div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+					<ChevronLeft className="h-6 w-6" />
+				</button>
+				<button
+					onClick={nextSlide}
+					className="absolute right-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors"
+					aria-label="Next slide"
+				>
+					<ChevronRight className="h-6 w-6" />
+				</button>
+
+				{/* Slide Indicators */}
+				<div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+					{heroSlides.map((_, index) => (
+						<button
+							key={index}
+							onClick={() => setCurrentSlide(index)}
+							className={`w-2 h-2 rounded-full transition-all ${
+								currentSlide === index
+									? "bg-white w-8"
+									: "bg-white/50 hover:bg-white/80"
+							}`}
+							aria-label={`Go to slide ${index + 1}`}
+						/>
+					))}
 				</div>
 
 				{/* Hero Content */}
 				<div className="container relative z-10">
 					<motion.div
+						key={currentSlide}
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 						className="max-w-2xl text-white"
 					>
 						<h1 className="text-5xl font-bold mb-6 leading-tight">
-							Developing Complete Soccer Players Since 2014
+							{heroSlides[currentSlide].title}
 						</h1>
 						<p className="text-xl text-white/90 mb-8">
-							Join Arena Sports Academy and excel in Technical, Tactical, Physical,
-							and Psychological aspects of the game while building strong character
-							and values.
+							{heroSlides[currentSlide].subtitle}
 						</p>
 						<div className="flex flex-wrap gap-4">
 							<Button asChild size="lg" className="bg-primary hover:bg-primary/90">
@@ -86,32 +187,111 @@ const HomePage = () => {
 			</section>
 
 			{/* Stats Section */}
-			<section className="py-20" ref={statsRef}>
-				<div className="container">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						animate={statsInView ? { opacity: 1, y: 0 } : {}}
-						transition={{ duration: 0.8 }}
-						className="grid grid-cols-1 gap-8 md:grid-cols-4"
-					>
-						{stats.map((stat, index) => (
-							<motion.div
-								key={stat.label}
-								initial={{ opacity: 0, y: 20 }}
-								animate={statsInView ? { opacity: 1, y: 0 } : {}}
-								transition={{ duration: 0.8, delay: index * 0.1 }}
-								className="group relative overflow-hidden rounded-lg bg-white p-6 shadow-lg transition-all hover:shadow-xl"
-							>
-								<div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-primary-100 transition-transform group-hover:scale-150" />
-								<div className="relative">
-									<h3 className="mb-2 text-4xl font-bold text-primary-600">
-										{stat.value}
-									</h3>
-									<p className="text-muted-foreground">{stat.label}</p>
-								</div>
-							</motion.div>
-						))}
-					</motion.div>
+			<section
+				ref={statsRef}
+				className="relative overflow-hidden bg-primary-900 py-16 text-white"
+			>
+				<div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10" />
+				<div className="container relative">
+					<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5 }}
+							className="text-center"
+						>
+							<Trophy className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								{isLoading ? (
+									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
+								) : (
+									<p className="text-3xl font-bold">{registrations.length}+</p>
+								)}
+								<p className="text-sm text-white/80">Active Students</p>
+							</div>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5, delay: 0.1 }}
+							className="text-center"
+						>
+							<Users className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								{isLoading ? (
+									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
+								) : (
+									<p className="text-3xl font-bold">{coaches.length}+</p>
+								)}
+								<p className="text-sm text-white/80">Expert Coaches</p>
+							</div>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5, delay: 0.2 }}
+							className="text-center"
+						>
+							<Target className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								{isLoading ? (
+									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
+								) : (
+									<p className="text-3xl font-bold">{programs.length}+</p>
+								)}
+								<p className="text-sm text-white/80">Training Programs</p>
+							</div>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5, delay: 0.3 }}
+							className="text-center"
+						>
+							<Building2 className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								{isLoading ? (
+									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
+								) : (
+									<p className="text-3xl font-bold">{facilities.length}+</p>
+								)}
+								<p className="text-sm text-white/80">Training Facilities</p>
+							</div>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5, delay: 0.4 }}
+							className="text-center"
+						>
+							<GraduationCap className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								{isLoading ? (
+									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
+								) : (
+									<p className="text-3xl font-bold">{alumni.length}+</p>
+								)}
+								<p className="text-sm text-white/80">Alumni Members</p>
+							</div>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={statsInView ? { opacity: 1, y: 0 } : {}}
+							transition={{ duration: 0.5, delay: 0.5 }}
+							className="text-center"
+						>
+							<Star className="mx-auto h-8 w-8 text-primary-400" />
+							<div className="mt-4">
+								<p className="text-3xl font-bold">9+</p>
+								<p className="text-sm text-white/80">Years Experience</p>
+							</div>
+						</motion.div>
+					</div>
 				</div>
 			</section>
 
@@ -301,6 +481,55 @@ const HomePage = () => {
 				</div>
 			</section>
 
+			{/* Partners Section */}
+			<section className="py-16 bg-white">
+				<div className="container">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.8 }}
+						className="text-center mb-12"
+					>
+						<h2 className="text-3xl font-bold">Our Partners</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Proud to work with organizations that share our vision
+						</p>
+					</motion.div>
+
+					<div className="relative overflow-hidden">
+						<div className="flex animate-scroll">
+							{/* First set of partners */}
+							{partners.map((partner) => (
+								<div
+									key={partner.id}
+									className="shrink-0 mx-8 w-[150px] grayscale hover:grayscale-0 transition-all"
+								>
+									<img
+										src={partner.logo}
+										alt={partner.name}
+										className="h-16 w-auto object-contain"
+									/>
+								</div>
+							))}
+							{/* Duplicate set for seamless loop */}
+							{partners.map((partner) => (
+								<div
+									key={`${partner.id}-duplicate`}
+									className="shrink-0 mx-8 w-[150px] grayscale hover:grayscale-0 transition-all"
+								>
+									<img
+										src={partner.logo}
+										alt={partner.name}
+										className="h-16 w-auto object-contain"
+									/>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+
 			{/* Contact Section */}
 			<section className="relative overflow-hidden bg-primary-900 py-20 text-white">
 				<div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10" />
@@ -477,6 +706,58 @@ const testimonials: Testimonial[] = [
 			"Arena Sports Academy has made a significant impact in our community. Their commitment to youth development and social programs is truly commendable.",
 		avatar: "/images/testimonials/avatar-3.jpg",
 		rating: 5,
+	},
+];
+
+const partners: Partner[] = [
+	{
+		id: 1,
+		name: "Partner 1",
+		logo: "/images/partners/partner1.png",
+	},
+	{
+		id: 2,
+		name: "Partner 2",
+		logo: "/images/partners/partner2.png",
+	},
+	{
+		id: 3,
+		name: "Partner 3",
+		logo: "/images/partners/partner3.png",
+	},
+	{
+		id: 4,
+		name: "Partner 4",
+		logo: "/images/partners/partner4.png",
+	},
+	{
+		id: 5,
+		name: "Partner 5",
+		logo: "/images/partners/partner5.png",
+	},
+];
+
+const heroSlides = [
+	{
+		id: 1,
+		image: "/images/hero/1.jpg",
+		title: "Developing Complete Soccer Players Since 2014",
+		subtitle:
+			"Join Arena Sports Academy and excel in Technical, Tactical, Physical, and Psychological aspects of the game while building strong character and values.",
+	},
+	{
+		id: 2,
+		image: "/images/hero/2.jpg",
+		title: "Professional Training Programs",
+		subtitle:
+			"Access world-class coaching and facilities designed to nurture talent and develop champions.",
+	},
+	{
+		id: 3,
+		image: "/images/hero/3.jpg",
+		title: "Building Future Champions",
+		subtitle:
+			"Join our comprehensive youth development program focused on both athletic excellence and personal growth.",
 	},
 ];
 

@@ -30,6 +30,7 @@ import { NewsDetails } from "@/pages/NewsDetails";
 import { WhatsAppChat } from "@/components/whatsapp-chat";
 import { AlumniNetwork as AlumniPage } from "@/pages/Alumni";
 import { AlumniNetwork as AdminAlumniNetwork } from "@/pages/admin/AlumniNetwork";
+import { ProgramDetails } from "@/pages/ProgramDetails";
 
 const router = createBrowserRouter([
 	{
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
 			{ path: "contact", element: <ContactPage /> },
 			{ path: "faq", element: <FAQPage /> },
 			{ path: "alumni", element: <AlumniPage /> },
+			{ path: "programs/:id", element: <ProgramDetails /> },
 		],
 	},
 	{

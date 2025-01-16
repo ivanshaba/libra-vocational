@@ -41,11 +41,11 @@ export function Coaches() {
 								transition={{ duration: 0.8 }}
 							>
 								<Card className="overflow-hidden">
-									<div className="aspect-[4/3] w-full overflow-hidden">
+									<div className="relative w-full pt-[125%]">
 										<img
 											src={coach.imageUrl}
 											alt={coach.name}
-											className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+											className="absolute inset-0 h-full w-full object-contain bg-gray-50"
 										/>
 									</div>
 									<CardHeader>
@@ -88,7 +88,7 @@ export function Coaches() {
 									<img
 										src="/images/coaches/Mirembe-Victoria-Nsamba.jpg"
 										alt="Mirembe Victoria Nsamba"
-										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+										className="h-full w-full object-contain bg-gray-50"
 									/>
 								</div>
 								<CardHeader>
@@ -114,7 +114,7 @@ export function Coaches() {
 									<img
 										src="/images/coaches/Paddy-Ntege.jpg"
 										alt="Paddy Ntege"
-										className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+										className="h-full w-full object-contain bg-gray-50"
 									/>
 								</div>
 								<CardHeader>

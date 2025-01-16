@@ -5,11 +5,30 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { toast } from "sonner";
+
+type Currency = "USD" | "UGX" | "KES" | "EUR" | "GBP";
+
+const currencyOptions: { value: Currency; label: string; symbol: string }[] = [
+	{ value: "USD", label: "US Dollar", symbol: "$" },
+	{ value: "UGX", label: "Ugandan Shilling", symbol: "UGX" },
+	{ value: "KES", label: "Kenyan Shilling", symbol: "KSh" },
+	{ value: "EUR", label: "Euro", symbol: "€" },
+	{ value: "GBP", label: "British Pound", symbol: "£" },
+];
 
 interface DonorDetails {
 	name: string;
 	email: string;
 	phone: string;
+	currency: Currency;
 }
 
 interface FlutterwaveConfig {
@@ -48,29 +67,59 @@ const DonationForm: React.FC<DonationFormProps> = ({
 		name: "",
 		email: "",
 		phone: "",
+		currency: "USD",
 	});
 	const [customAmount, setCustomAmount] = useState<string>("");
 	const [donationComplete, setDonationComplete] = useState<boolean>(false);
 	const [, setPaymentResponse] = useState<unknown>(null);
 
+	const currencyLimits: Record<Currency, number> = {
+		UGX: 50000,
+		USD: 15, // Approximately 50000 UGX
+		EUR: 14,
+		GBP: 12,
+		KES: 2000,
+	};
+
 	const suggestedAmounts = [1000, 5000, 10000, 50000];
 
 	const handleAmountSelect = (selectedAmount: number) => {
+		const limit = currencyLimits[donorDetails.currency];
+		if (selectedAmount > limit) {
+			toast.error(
+				`Maximum donation amount in ${
+					donorDetails.currency
+				} is ${getCurrentCurrencySymbol()} ${limit.toLocaleString()}`
+			);
+			return;
+		}
 		setAmount(selectedAmount);
 		setCustomAmount("");
 	};
 
 	const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.replace(/[^0-9]/g, "");
+		const numValue = Number(value);
+		const limit = currencyLimits[donorDetails.currency];
+
+		if (numValue > limit) {
+			toast.error(
+				`Maximum donation amount in ${
+					donorDetails.currency
+				} is ${getCurrentCurrencySymbol()} ${limit.toLocaleString()}`
+			);
+			return;
+		}
+
 		setCustomAmount(value);
-		setAmount(Number(value));
+		setAmount(numValue);
 	};
 
 	const config: FlutterwaveConfig = {
 		public_key: publicKey,
 		tx_ref: Date.now().toString(),
 		amount: amount,
-		currency: "UGX",
+		currency: donorDetails.currency,
 		payment_options: "card,mobilemoney,ussd",
 		customer: {
 			email: donorDetails.email,
@@ -108,6 +157,27 @@ const DonationForm: React.FC<DonationFormProps> = ({
 		);
 	};
 
+	const getCurrentCurrencySymbol = () => {
+		return currencyOptions.find((c) => c.value === donorDetails.currency)?.symbol || "$";
+	};
+
+	const getSuggestedAmounts = () => {
+		switch (donorDetails.currency) {
+			case "UGX":
+				return [1000, 5000, 10000, 50000];
+			case "USD":
+				return [1, 5, 10, 15];
+			case "EUR":
+				return [1, 5, 10, 14];
+			case "GBP":
+				return [1, 5, 10, 12];
+			case "KES":
+				return [100, 500, 1000, 2000];
+			default:
+				return [1, 5, 10, 15];
+		}
+	};
+
 	return (
 		<div className="container-fluid min-h-screen px-2 py-8 md:px-4">
 			<Card className="w-full max-w-xl mx-auto">
@@ -123,8 +193,8 @@ const DonationForm: React.FC<DonationFormProps> = ({
 							<div className="space-y-2">
 								<p className="text-base md:text-lg">Dear {donorDetails.name},</p>
 								<p className="text-lg md:text-xl font-semibold">
-									Your generous donation of UGX {amount.toLocaleString()} has been
-									received.
+									Your generous donation of {getCurrentCurrencySymbol()}{" "}
+									{amount.toLocaleString()} has been received.
 								</p>
 								<p className="text-xs md:text-sm text-muted-foreground">
 									A confirmation email has been sent to {donorDetails.email}
@@ -200,21 +270,50 @@ const DonationForm: React.FC<DonationFormProps> = ({
 											className="w-full"
 										/>
 									</div>
+
+									<div className="space-y-2">
+										<Label htmlFor="currency" className="text-sm md:text-base">
+											Currency
+										</Label>
+										<Select
+											value={donorDetails.currency}
+											onValueChange={(value: Currency) =>
+												setDonorDetails({
+													...donorDetails,
+													currency: value,
+												})
+											}
+										>
+											<SelectTrigger id="currency">
+												<SelectValue placeholder="Select currency" />
+											</SelectTrigger>
+											<SelectContent>
+												{currencyOptions.map((currency) => (
+													<SelectItem
+														key={currency.value}
+														value={currency.value}
+													>
+														{currency.label} ({currency.symbol})
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+									</div>
 								</div>
 
 								<div className="space-y-4">
 									<Label className="text-sm md:text-base">
-										Select Amount (UGX)
+										Select Amount {donorDetails.currency}
 									</Label>
 									<div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
-										{suggestedAmounts.map((amt) => (
+										{getSuggestedAmounts().map((amt) => (
 											<Button
 												key={amt}
 												variant={amount === amt ? "default" : "outline"}
 												onClick={() => handleAmountSelect(amt)}
 												className="w-full text-sm md:text-base py-2"
 											>
-												{amt.toLocaleString()}
+												{getCurrentCurrencySymbol()} {amt.toLocaleString()}
 											</Button>
 										))}
 									</div>
@@ -229,7 +328,7 @@ const DonationForm: React.FC<DonationFormProps> = ({
 										<Input
 											id="custom-amount"
 											type="text"
-											placeholder="Enter a custom amount"
+											placeholder={`Enter amount in ${donorDetails.currency}`}
 											value={customAmount}
 											onChange={handleCustomAmountChange}
 											className="w-full"

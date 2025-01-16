@@ -84,6 +84,7 @@ export default {
 				'slide-up': 'slideUp 0.5s ease-out',
 				'slide-in': 'slideIn 0.5s ease-out',
 				'pulse': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				scroll: 'scroll 20s linear infinite',
 			},
 			keyframes: {
 				fadeIn: {
@@ -108,6 +109,10 @@ export default {
 						transform: 'scale(1.1)',
 					},
 				},
+				scroll: {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' },
+				}
 			},
 			backgroundImage: {
 				'grid-white': 'linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
