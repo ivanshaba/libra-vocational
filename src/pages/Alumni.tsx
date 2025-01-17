@@ -18,29 +18,47 @@ const testimonials = [
 	{
 		name: "David Obua",
 		role: "Professional Footballer",
-		image: "/images/testimonials/david-obua.jpg",
+		image: "/images/testimonials/Edward-Nsamba.jpg",
 		content:
-			"Arena Sports Academy laid the foundation for my professional career. The coaching and mentorship I received were invaluable.",
+			"Arena Sports Academy laid the foundation for my professional career. The coaching and mentorship I received were invaluable. The academy's focus on technical skills and tactical understanding helped me develop into a complete player.",
 		graduationYear: 2015,
 		currentTeam: "Retired",
 	},
 	{
 		name: "Sarah Nambawa",
 		role: "National Team Player",
-		image: "/images/testimonials/sarah-nambawa.jpg",
+		image: "/images/testimonials/Edward-Nsamba.jpg",
 		content:
-			"The academy's focus on both athletic and academic excellence helped shape my journey to becoming a national team player.",
+			"The academy's focus on both athletic and academic excellence helped shape my journey to becoming a national team player. The discipline and work ethic I learned here continue to serve me well in my professional career.",
 		graduationYear: 2017,
 		currentTeam: "Uganda National Team",
 	},
 	{
 		name: "Mike Mutebi",
 		role: "Professional Coach",
-		image: "/images/testimonials/mike-mutebi.jpg",
+		image: "/images/testimonials/Edward-Nsamba.jpg",
 		content:
-			"As a former student and now a coach, I can attest to the academy's commitment to developing well-rounded athletes.",
+			"As a former student and now a coach, I can attest to the academy's commitment to developing well-rounded athletes. The holistic approach to player development sets Arena Sports Academy apart from others.",
 		graduationYear: 2012,
 		currentTeam: "KCCA FC",
+	},
+	{
+		name: "Peter Ssenyonjo",
+		role: "Youth Coach",
+		image: "/images/testimonials/Edward-Nsamba.jpg",
+		content:
+			"The academy's commitment to excellence is unmatched. The foundation I received here has been instrumental in my coaching career. I'm proud to be giving back to the next generation of players.",
+		graduationYear: 2016,
+		currentTeam: "KCCA FC Youth",
+	},
+	{
+		name: "Grace Nalukenge",
+		role: "National Team Player",
+		image: "/images/testimonials/Edward-Nsamba.jpg",
+		content:
+			"My journey from the academy to the national team has been incredible. The academy's emphasis on female player development and equal opportunities has helped pave the way for many young girls in football.",
+		graduationYear: 2018,
+		currentTeam: "Uganda Crested Cranes",
 	},
 ];
 

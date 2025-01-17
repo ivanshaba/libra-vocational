@@ -2,8 +2,15 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Compass } from "lucide-react";
 import { PDFVieweR } from "@/components/pdf-viewer";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services/api";
 
 export function About() {
+	const { data: coaches = [] } = useQuery({
+		queryKey: ["coaches"],
+		queryFn: () => api.getCoaches(),
+	});
+
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
 			{/* Hero Section */}
@@ -193,29 +200,31 @@ export function About() {
 					</motion.div>
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-						{directors.map((director, index) => (
-							<motion.div
-								key={director.name}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
-							>
-								<Card className="overflow-hidden hover:shadow-lg transition-all">
-									<div className="aspect-square relative overflow-hidden">
-										<img
-											src={director.image}
-											alt={director.name}
-											className="object-cover w-full h-full transition-transform hover:scale-105"
-										/>
-									</div>
-									<CardContent className="p-6 text-center">
-										<h3 className="text-xl font-bold">{director.name}</h3>
-										<p className="text-primary-600">{director.role}</p>
-									</CardContent>
-								</Card>
-							</motion.div>
-						))}
+						{coaches
+							.filter((coach) => coach.role.toLowerCase().includes("board"))
+							.map((coach, index) => (
+								<motion.div
+									key={coach.name}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
+								>
+									<Card className="overflow-hidden hover:shadow-lg transition-all">
+										<div className="aspect-square relative overflow-hidden">
+											<img
+												src={coach.imageUrl}
+												alt={coach.name}
+												className="object-cover w-full h-full transition-transform hover:scale-105"
+											/>
+										</div>
+										<CardContent className="p-6 text-center">
+											<h3 className="text-xl font-bold">{coach.name}</h3>
+											<p className="text-primary-600">{coach.role}</p>
+										</CardContent>
+									</Card>
+								</motion.div>
+							))}
 					</div>
 				</div>
 			</section>
@@ -257,24 +266,6 @@ const coreValues = [
 	{
 		title: "Leadership",
 		description: "Providing clear and exemplary management",
-	},
-];
-
-const directors = [
-	{
-		name: "Mr. Edward Nsamba",
-		role: "Executive Director/CEO",
-		image: "/images/coaches/Edward-Nsamba.jpg",
-	},
-	{
-		name: "Mr. Godfrey Magero",
-		role: "Board Member",
-		image: "/images/coaches/Godfrey-Magero.jpg",
-	},
-	{
-		name: "Mrs. Nsamba Sauda",
-		role: "Board Member",
-		image: "/images/coaches/Nabukalu-Sauda.jpg",
 	},
 ];
 

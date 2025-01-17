@@ -113,6 +113,9 @@ export function AlumniNetwork() {
 								className="pl-9"
 							/>
 						</div>
+						<div className="text-sm text-muted-foreground">
+							Total Alumni: {alumni.length}
+						</div>
 					</div>
 					<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 						<DialogTrigger asChild>

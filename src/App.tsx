@@ -33,6 +33,8 @@ import { AlumniNetwork as AdminAlumniNetwork } from "@/pages/admin/AlumniNetwork
 import { ProgramDetails } from "@/pages/ProgramDetails";
 import { FacilityDetails } from "@/pages/FacilityDetails";
 import { Videos } from "@/pages/Videos";
+import { Donations } from "@/pages/Donations";
+import { RegistrationSuccess } from "@/pages/RegistrationSuccess";
 
 const router = createBrowserRouter([
 	{
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
 			{ path: "programs/:id", element: <ProgramDetails /> },
 			{ path: "/facilities/:id", element: <FacilityDetails /> },
 			{ path: "videos", element: <Videos /> },
+			{
+				path: "/donations",
+				element: <Donations />,
+			},
+			{
+				path: "/registration-success",
+				element: <RegistrationSuccess />,
+			},
 		],
 	},
 	{

@@ -10,11 +10,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { api } from "@/services/api";
 import { toast, Toaster } from "sonner";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate } from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface FormData {
 	// Personal Information
@@ -34,6 +37,8 @@ interface FormData {
 	medicalConditions: string;
 	allergies: string;
 	medications: string;
+	// Consent
+	consent: boolean;
 }
 
 const steps = [
@@ -45,6 +50,7 @@ const steps = [
 ];
 
 export function Registration() {
+	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [formData, setFormData] = useState<FormData>({
 		firstName: "",
@@ -60,6 +66,7 @@ export function Registration() {
 		medicalConditions: "",
 		allergies: "",
 		medications: "",
+		consent: false,
 	});
 
 	const handleInputChange =
@@ -75,24 +82,38 @@ export function Registration() {
 	const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
 	const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
-	const handleSubmit = async () => {
-		try {
-			await api.submitRegistration({
-				...formData,
-				programId: Number(formData.programId),
+	const mutation = useMutation({
+		mutationFn: (data: FormData) =>
+			api.submitRegistration({
+				...data,
+				programId: Number(data.programId),
+			}),
+		onSuccess: () => {
+			toast.success("Registration Successful!", {
+				description: "Thank you for registering with Arena Sports Academy.",
 			});
+			// Redirect after a short delay
+			setTimeout(() => {
+				navigate("/registration-success");
+			}, 2000);
+		},
+		onError: (error) => {
+			toast.error("Registration Failed", {
+				description: "Please try again later. " + error.message,
+			});
+		},
+	});
 
-			toast.success("Registration successful", {
-				description: "Your registration has been submitted successfully",
+	const handleSubmit = () => {
+		if (!formData.consent) {
+			toast.error("Please provide consent to continue", {
+				description: "You must agree to the terms and consent to data usage",
 			});
-
-			// Show success message or redirect
-		} catch (error) {
-			// Handle error
-			toast.error("Error submitting form", {
-				description: "Please try again later" + JSON.stringify(error),
-			});
+			return;
 		}
+
+		if (mutation.isPending) return;
+		mutation.mutate(formData);
 	};
 
 	const renderStep = () => {
@@ -190,10 +211,22 @@ export function Registration() {
 							</Button>
 							<Button
 								onClick={currentStep === steps.length - 1 ? handleSubmit : nextStep}
+								disabled={mutation.isPending}
 							>
-								{currentStep === steps.length - 1 ? "Submit" : "Next"}
-								{currentStep !== steps.length - 1 && (
-									<ChevronRight className="ml-2 h-4 w-4" />
+								{currentStep === steps.length - 1 ? (
+									mutation.isPending ? (
+										<>
+											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+											Submitting...
+										</>
+									) : (
+										"Submit"
+									)
+								) : (
+									<>
+										Next
+										<ChevronRight className="ml-2 h-4 w-4" />
+									</>
 								)}
 							</Button>
 						</div>
@@ -392,6 +425,29 @@ function MedicalInformation({
 function ReviewSubmit({ formData }: { formData: FormData }) {
 	return (
 		<div className="space-y-6">
+			<div className="mt-8 space-y-4 rounded-lg border p-4 bg-muted/50">
+				<div className="flex items-start space-x-3">
+					<Checkbox id="consent" />
+					<div className="space-y-1 leading-none">
+						<Label
+							htmlFor="consent"
+							className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+						>
+							Consent and Authorization
+						</Label>
+						<p className="text-sm text-muted-foreground">
+							I hereby consent and authorize Arena Sports Academy to collect, process,
+							and store the provided information for registration and program-related
+							purposes.
+						</p>
+						<p className="text-sm text-muted-foreground mt-2">
+							By checking this box, I confirm that all information provided is
+							accurate and true to the best of my knowledge.
+						</p>
+					</div>
+				</div>
+			</div>
+
 			<div>
 				<h3 className="font-semibold">Personal Information</h3>
 				<div className="mt-2 space-y-2">

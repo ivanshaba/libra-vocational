@@ -5,6 +5,7 @@ import { api } from "@/services/api";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { VideoPlayer } from "@/components/video-player";
 
 export function NewsDetails() {
 	const { id } = useParams();
@@ -65,13 +66,22 @@ export function NewsDetails() {
 						<h1 className="mt-4 text-4xl font-bold">{article.title}</h1>
 					</div>
 
-					{/* Featured Image */}
-					<div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg mb-8">
-						<img
-							src={article.imageUrl}
-							alt={article.title}
-							className="h-full w-full object-cover"
-						/>
+					{/* Featured Media */}
+					<div className="relative w-full mb-8">
+						{article.videoUrl ? (
+							<VideoPlayer
+								videoUrl={article.videoUrl}
+								thumbnail={article.imageUrl}
+								title={article.title}
+							/>
+						) : (
+							<img
+								src={article.imageUrl}
+								alt={article.title}
+								className="w-full h-auto object-contain rounded-lg"
+								style={{ maxHeight: "800px" }}
+							/>
+						)}
 					</div>
 
 					{/* Article Content */}

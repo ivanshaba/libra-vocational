@@ -9,7 +9,7 @@ import { CoachResponseDto } from "@/types/dtos";
 import { api } from "@/services/api";
 import { useImageUpload } from "@/hooks/useImageUpload";
 
-type StaffType = "coach" | "staff" | "other";
+type StaffType = "coach" | "staff" | "board" | "other";
 
 interface CoachFormProps {
 	coach?: CoachResponseDto | null;
@@ -24,6 +24,8 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
 			? "coach"
 			: coach?.role?.toLowerCase().includes("staff")
 			? "staff"
+			: coach?.role?.toLowerCase().includes("board")
+			? "board"
 			: "other"
 	);
 	const [formData, setFormData] = useState({
@@ -55,6 +57,8 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
 						? `Coach - ${formData.role}`
 						: staffType === "staff"
 						? `Staff - ${formData.role}`
+						: staffType === "board"
+						? `Board Member - ${formData.role}`
 						: formData.role,
 				specialties: formData.specialties
 					.split(",")
@@ -79,53 +83,47 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
 	};
 
 	const renderSpecialtiesField = () => (
-		<div>
-			<Label>Specialties (comma-separated)</Label>
-			<Input
+		<div className="space-y-2">
+			<Label>Areas of Expertise (comma-separated)</Label>
+			<Textarea
 				value={formData.specialties}
-				onChange={(e) =>
-					setFormData((prev) => ({
-						...prev,
-						specialties: e.target.value,
-					}))
-				}
+				onChange={(e) => setFormData((prev) => ({ ...prev, specialties: e.target.value }))}
 				placeholder={
 					staffType === "coach"
-						? "e.g., Strength Training, Youth Development, Performance Analysis"
+						? "e.g., Youth Development, Strength Training, Tactical Analysis"
 						: staffType === "staff"
-						? "e.g., Sports Medicine, Physical Therapy, Team Management"
-						: "e.g., Event Planning, Marketing, Administration"
+						? "e.g., Sports Medicine, Physical Therapy, Performance Analysis"
+						: staffType === "board"
+						? "e.g., Strategic Planning, Finance, Community Relations"
+						: "Enter areas of expertise"
 				}
-				required
 			/>
 		</div>
 	);
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4">
-			<div>
-				<Label>Name</Label>
-				<Input
-					value={formData.name}
-					onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-					required
-					placeholder="Enter full name"
-				/>
-			</div>
-
-			<Tabs
-				value={staffType}
-				onValueChange={(value) => setStaffType(value as StaffType)}
-				className="w-full"
-			>
-				<TabsList className="grid w-full grid-cols-3">
+		<form onSubmit={handleSubmit} className="space-y-6">
+			<Tabs value={staffType} onValueChange={(value) => setStaffType(value as StaffType)}>
+				<TabsList className="grid w-full grid-cols-4">
 					<TabsTrigger value="coach">Coach</TabsTrigger>
 					<TabsTrigger value="staff">Staff</TabsTrigger>
+					<TabsTrigger value="board">Board</TabsTrigger>
 					<TabsTrigger value="other">Other</TabsTrigger>
 				</TabsList>
 
 				<TabsContent value="coach">
 					<div className="space-y-4">
+						<div>
+							<Label>Name</Label>
+							<Input
+								value={formData.name}
+								onChange={(e) =>
+									setFormData((prev) => ({ ...prev, name: e.target.value }))
+								}
+								required
+								placeholder="Enter full name"
+							/>
+						</div>
 						<div>
 							<Label>Coaching Role</Label>
 							<Input
@@ -144,6 +142,17 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
 				<TabsContent value="staff">
 					<div className="space-y-4">
 						<div>
+							<Label>Name</Label>
+							<Input
+								value={formData.name}
+								onChange={(e) =>
+									setFormData((prev) => ({ ...prev, name: e.target.value }))
+								}
+								required
+								placeholder="Enter full name"
+							/>
+						</div>
+						<div>
 							<Label>Staff Role</Label>
 							<Input
 								value={formData.role}
@@ -158,8 +167,47 @@ export function CoachForm({ coach, onSuccess }: CoachFormProps) {
 					</div>
 				</TabsContent>
 
+				<TabsContent value="board">
+					<div className="space-y-4">
+						<div>
+							<Label>Name</Label>
+							<Input
+								value={formData.name}
+								onChange={(e) =>
+									setFormData((prev) => ({ ...prev, name: e.target.value }))
+								}
+								required
+								placeholder="Enter full name"
+							/>
+						</div>
+						<div>
+							<Label>Board Position</Label>
+							<Input
+								value={formData.role}
+								onChange={(e) =>
+									setFormData((prev) => ({ ...prev, role: e.target.value }))
+								}
+								required
+								placeholder="e.g., Chairperson, Director, Executive Member"
+							/>
+						</div>
+						{renderSpecialtiesField()}
+					</div>
+				</TabsContent>
+
 				<TabsContent value="other">
 					<div className="space-y-4">
+						<div>
+							<Label>Name</Label>
+							<Input
+								value={formData.name}
+								onChange={(e) =>
+									setFormData((prev) => ({ ...prev, name: e.target.value }))
+								}
+								required
+								placeholder="Enter full name"
+							/>
+						</div>
 						<div>
 							<Label>Role</Label>
 							<Input

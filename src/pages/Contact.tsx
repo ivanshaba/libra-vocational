@@ -1,16 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-	MapPin,
-	Phone,
-	Mail,
-	Building2,
-	GraduationCap,
-	HeartHandshake,
-	Trophy,
-	Users,
-	Clock,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Building2, Users, Clock } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,33 +12,16 @@ import { Loader2 } from "lucide-react";
 const departments = [
 	{
 		name: "General Inquiries",
-		email: "info@arenasportsacademy.com",
+		email: "info@arenasportsacademyug.org",
 		phone: "+256 746 971 205",
 		icon: Building2,
 	},
 	{
-		name: "Admissions",
-		email: "admissions@arenasportsacademy.com",
-		phone: "+256 746 971 206",
+		name: "Consultancy",
+		email: "consultancy@arenasportsacademyug.org",
+		phone: "+256 784839145",
 		icon: Users,
-	},
-	{
-		name: "Academic Support",
-		email: "academics@arenasportsacademy.com",
-		phone: "+256 746 971 207",
-		icon: GraduationCap,
-	},
-	{
-		name: "Sports Programs",
-		email: "sports@arenasportsacademy.com",
-		phone: "+256 746 971 208",
-		icon: Trophy,
-	},
-	{
-		name: "Community Relations",
-		email: "community@arenasportsacademy.com",
-		phone: "+256 746 971 209",
-		icon: HeartHandshake,
+		contact: "Rev Phillips",
 	},
 ];
 

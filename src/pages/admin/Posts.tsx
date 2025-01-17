@@ -110,6 +110,7 @@ export function Posts() {
 							className="pl-9"
 						/>
 					</div>
+					<div className="text-sm text-muted-foreground">Total Posts: {posts.length}</div>
 				</div>
 
 				<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

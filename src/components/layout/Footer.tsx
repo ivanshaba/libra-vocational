@@ -207,15 +207,22 @@ export function Footer() {
 						<p className="text-sm text-white/60">
 							© {new Date().getFullYear()} Arena Sports Academy. All rights reserved.
 						</p>
-						<div className="flex gap-6 text-sm text-white/60">
-							<Link to="/privacy" className="hover:text-white">
-								Privacy Policy
-							</Link>
-							<Link to="/terms" className="hover:text-white">
-								Terms of Service
-							</Link>
-						</div>
 					</div>
+				</div>
+
+				<div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+					<p>© {new Date().getFullYear()} Arena Sports Academy. All rights reserved.</p>
+					<p className="mt-2">
+						Developed by{" "}
+						<a
+							href="https://acceleratedtechnosoft.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-primary hover:underline"
+						>
+							Accelerated Technosoft Limited
+						</a>
+					</p>
 				</div>
 			</div>
 		</footer>

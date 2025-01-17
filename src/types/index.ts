@@ -4,7 +4,7 @@ export interface Post {
     id: number;
     title: string;
     content: string;
-    imageUrl?: string;
+    imageUrl: string;
     videoUrl?: string;
     category: 'news' | 'events' | 'updates';
     createdAt: Date;

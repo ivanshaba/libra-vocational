@@ -12,6 +12,16 @@ interface VideoPlayerProps {
 
 export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
 	const [isOpen, setIsOpen] = useState(false);
+	const defaultThumbnail = "/images/video-thumbnail-default.jpg";
+
+	const getVideoThumbnail = () => {
+		if (thumbnail) return thumbnail;
+		const youtubeId = getYouTubeId(videoUrl);
+		if (youtubeId) {
+			return `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+		}
+		return defaultThumbnail;
+	};
 
 	return (
 		<>
@@ -20,12 +30,12 @@ export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
 				onClick={() => setIsOpen(true)}
 			>
 				<img
-					src={
-						thumbnail ||
-						`https://img.youtube.com/vi/${getYouTubeId(videoUrl)}/maxresdefault.jpg`
-					}
+					src={getVideoThumbnail()}
 					alt={title}
 					className="w-full h-full object-cover rounded-lg"
+					onError={(e) => {
+						e.currentTarget.src = defaultThumbnail;
+					}}
 				/>
 				<div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
 					<Button variant="secondary" size="icon" className="w-16 h-16 rounded-full">
@@ -35,10 +45,11 @@ export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
 			</div>
 
 			<Dialog open={isOpen} onOpenChange={setIsOpen}>
-				<DialogContent className="sm:max-w-[900px] p-0">
+				<DialogContent title={title} className="sm:max-w-[900px] p-0">
 					<div className="aspect-video">
 						<ReactPlayer
 							url={videoUrl}
+							thumbnail={getVideoThumbnail()}
 							width="100%"
 							height="100%"
 							controls

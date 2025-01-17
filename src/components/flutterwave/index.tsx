@@ -81,8 +81,6 @@ const DonationForm: React.FC<DonationFormProps> = ({
 		KES: 2000,
 	};
 
-	const suggestedAmounts = [1000, 5000, 10000, 50000];
-
 	const handleAmountSelect = (selectedAmount: number) => {
 		const limit = currencyLimits[donorDetails.currency];
 		if (selectedAmount > limit) {

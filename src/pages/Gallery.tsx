@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { Button } from "@/components/ui/button";
 import {
 	Select,
 	SelectContent,
@@ -11,23 +8,23 @@ import {
 } from "@/components/ui/select";
 import { X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { GalleryItemResponseDto } from "@/types/dtos";
+import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/services/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { VideoPlayer } from "@/components/video-player";
+import { GalleryItemResponseDto } from "@/types/dtos";
 
 export function Gallery() {
 	const [category, setCategory] = useState<string>("all");
 	const [selectedImage, setSelectedImage] = useState<GalleryItemResponseDto | null>(null);
-	const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
 	const {
 		data: items = [],
 		refetch,
 		isLoading,
 	} = useQuery({
-		queryKey: ["admin", "gallery"],
+		queryKey: ["gallery"],
 		queryFn: api.getGallery,
 	});
 
@@ -41,21 +38,22 @@ export function Gallery() {
 
 	if (isLoading) {
 		return (
-			<div className="container py-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-				<Skeleton className="h-10 w-full" />
-				<Skeleton className="h-10 w-full" />
-				<Skeleton className="h-10 w-full" />
+			<div className="container py-12">
+				<div className="space-y-8">
+					<div className="h-10 w-[200px] bg-muted rounded" />
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+						{[...Array(8)].map((_, i) => (
+							<Skeleton key={i} className="aspect-square w-full rounded-lg" />
+						))}
+					</div>
+				</div>
 			</div>
 		);
 	}
 
 	return (
 		<div className="container py-12">
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.8 }}
-			>
+			<div>
 				<h1 className="text-4xl font-bold">Gallery</h1>
 				<p className="mt-4 text-lg text-muted-foreground">
 					Explore our collection of photos showcasing our facilities, events, and athletes
@@ -78,57 +76,59 @@ export function Gallery() {
 					</Select>
 				</div>
 
-				{/* Masonry Grid */}
-				<div
-					ref={ref}
-					className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4"
-				>
-					{filteredImages.map((item, index) => (
-						<motion.div
-							key={item.id}
-							initial={{ opacity: 0, y: 20 }}
-							animate={inView ? { opacity: 1, y: 0 } : {}}
-							transition={{ duration: 0.8, delay: index * 0.1 }}
-							className="mb-4 break-inside-avoid"
-						>
+				{/* Images Grid */}
+				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+					{filteredImages
+						.filter((i) => i.type === "image")
+						.map((item) => (
 							<div
-								className="group relative cursor-pointer overflow-hidden rounded-lg"
+								key={item.id}
+								className="relative aspect-square cursor-pointer group"
 								onClick={() => setSelectedImage(item)}
 							>
-								{item.type === "video" ? (
-									<VideoPlayer
-										videoUrl={item.videoUrl!}
-										title={item.title}
-										thumbnail={item.imageUrl}
+								<div className="h-full w-full overflow-hidden rounded-lg">
+									<img
+										src={item.imageUrl}
+										alt={item.title}
+										className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+										loading="lazy"
 									/>
-								) : (
-									<div className="aspect-square">
-										<img
-											src={item.imageUrl}
-											alt={item.title}
-											className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-										/>
-									</div>
-								)}
-								<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent p-4">
-									<div className="flex h-full flex-col justify-between">
-										<div className="self-end">
-											<span className="rounded-full bg-primary/20 px-2 py-1 text-xs text-primary-foreground">
+									<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+										<div className="absolute bottom-0 p-4">
+											<span className="inline-block px-2 py-1 text-xs text-white bg-primary/80 rounded-full">
 												{item.category}
 											</span>
-										</div>
-										<div>
-											<h3 className="font-semibold text-white">
+											<h3 className="mt-2 text-white font-semibold">
 												{item.title}
 											</h3>
-											<p className="text-sm text-white/80">{item.date}</p>
 										</div>
 									</div>
 								</div>
 							</div>
-						</motion.div>
-					))}
+						))}
 				</div>
+
+				{/* Videos Grid */}
+				<div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+					{filteredImages
+						.filter((i) => i.type === "video")
+						.map((item) => (
+							<div key={item.id}>
+								<VideoPlayer
+									videoUrl={item.videoUrl!}
+									title={item.title}
+									thumbnail={item.imageUrl}
+								/>
+							</div>
+						))}
+				</div>
+
+				{/* Empty State */}
+				{filteredImages.length === 0 && !isLoading && (
+					<div className="mt-12 text-center text-muted-foreground">
+						<p>No images found in this category.</p>
+					</div>
+				)}
 
 				{/* Lightbox */}
 				<Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
@@ -143,10 +143,7 @@ export function Gallery() {
 								<X className="h-4 w-4" />
 							</Button>
 							{selectedImage && (
-								<motion.img
-									initial={{ opacity: 0, scale: 0.95 }}
-									animate={{ opacity: 1, scale: 1 }}
-									exit={{ opacity: 0, scale: 0.95 }}
+								<img
 									src={selectedImage.imageUrl}
 									alt={selectedImage.title}
 									className="h-auto w-full rounded-lg"
@@ -155,13 +152,7 @@ export function Gallery() {
 						</div>
 					</DialogContent>
 				</Dialog>
-
-				{items.length === 0 && (
-					<p className="mt-12 text-center text-muted-foreground">
-						No images found in this category.
-					</p>
-				)}
-			</motion.div>
+			</div>
 		</div>
 	);
 }

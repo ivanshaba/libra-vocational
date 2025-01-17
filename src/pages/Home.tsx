@@ -9,33 +9,26 @@ import {
 	Target,
 	Star,
 	Calendar,
-	MapPin,
-	Mail,
-	Phone,
 	ChevronLeft,
 	ChevronRight,
 	Building2,
 	GraduationCap,
+	MapPin,
+	Mail,
+	Phone,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import DonationForm from "@/components/flutterwave";
-import { useState, useEffect } from "react";
-import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
+import { api } from "@/services/api";
+import { useState, useEffect } from "react";
 
-interface Testimonial {
-	id: number;
-	name: string;
-	role: string;
-	content: string;
-	avatar: string;
-	rating: number;
-}
-
-interface Partner {
-	id: number;
-	name: string;
-	logo: string;
+function chunkArray<T>(array: T[], size: number): T[][] {
+	return array.reduce((acc, _, i) => {
+		if (i % size === 0) {
+			acc.push(array.slice(i, i + size));
+		}
+		return acc;
+	}, [] as T[][]);
 }
 
 const HomePage = () => {
@@ -43,11 +36,7 @@ const HomePage = () => {
 	const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const navigate = useNavigate();
 
-	const {
-		data: registrations = [],
-		refetch,
-		isLoading,
-	} = useQuery({
+	const { data: registrations = [], isLoading } = useQuery({
 		queryKey: ["admin", "registrations"],
 		queryFn: api.getRegistrations,
 	});
@@ -82,16 +71,15 @@ const HomePage = () => {
 		return () => clearInterval(timer);
 	}, []);
 
+	// Group programs into chunks of 3
+	const programSlides = chunkArray(programs, 1);
+
 	const nextSlide = () => {
-		setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+		setCurrentSlide((prev) => (prev + 1) % programSlides.length);
 	};
 
 	const prevSlide = () => {
-		setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
-	};
-
-	const handleDonationSuccess = (response: unknown) => {
-		console.log("Donation successful:", response);
+		setCurrentSlide((prev) => (prev - 1 + programSlides.length) % programSlides.length);
 	};
 
 	return (
@@ -161,10 +149,10 @@ const HomePage = () => {
 						className="max-w-2xl text-white"
 					>
 						<h1 className="text-5xl font-bold mb-6 leading-tight">
-							{heroSlides[currentSlide].title}
+							{heroSlides[currentSlide]?.title}
 						</h1>
 						<p className="text-xl text-white/90 mb-8">
-							{heroSlides[currentSlide].subtitle}
+							{heroSlides[currentSlide]?.subtitle}
 						</p>
 						<div className="flex flex-wrap gap-4">
 							<Button asChild size="lg" className="bg-primary hover:bg-primary/90">
@@ -368,43 +356,96 @@ const HomePage = () => {
 				</div>
 			</section>
 
-			{/* Services Section */}
-			<section className="py-20">
+			{/* Replace Services Section with Programs Carousel */}
+			<section className="py-20 bg-muted/50">
 				<div className="container">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-						transition={{ duration: 0.8 }}
-						className="text-center"
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
+						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold lg:text-4xl">Our Services</h2>
-						<p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-							Comprehensive programs and services designed to develop complete
-							athletes
+						<h2 className="text-3xl font-bold">Our Programs</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Discover our comprehensive range of football development programs
 						</p>
 					</motion.div>
 
-					<div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-						{services.map((service, index) => (
+					<div className="relative">
+						<div className="overflow-hidden">
 							<motion.div
-								key={service.title}
-								initial={{ opacity: 0, y: 20 }}
-								animate={aboutInView ? { opacity: 1, y: 0 } : {}}
-								transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
+								className="flex transition-transform duration-500 ease-out"
+								style={{
+									transform: `translateX(-${currentSlide * 100}%)`,
+								}}
 							>
-								<Card className="group h-full cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg">
-									<CardContent className="p-6">
-										<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 transition-colors group-hover:bg-primary-500 group-hover:text-white">
-											{service.icon}
-										</div>
-										<h3 className="mb-2 text-xl font-bold">{service.title}</h3>
-										<p className="text-muted-foreground">
-											{service.description}
-										</p>
-									</CardContent>
-								</Card>
+								{programSlides.map((slidePrograms, slideIndex) => (
+									<div
+										key={slideIndex}
+										className="w-full flex-shrink-0 grid grid-cols-1 gap-4 px-4"
+									>
+										{slidePrograms.map((program) => (
+											<Card key={program.id} className="overflow-hidden">
+												<div className="aspect-video relative">
+													<img
+														src={program.imageUrl}
+														alt={program.name}
+														className="w-full h-full object-cover"
+													/>
+													<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+													<div className="absolute bottom-0 p-6 text-white">
+														<h3 className="text-xl font-bold mb-2">
+															{program.name}
+														</h3>
+														<p className="text-white/90 line-clamp-2 text-sm">
+															{program.description}
+														</p>
+													</div>
+												</div>
+												<CardContent className="p-4">
+													<div className="flex justify-between items-center">
+														<div>
+															<p className="text-xs text-muted-foreground">
+																Duration: {program.duration}
+															</p>
+															<p className="font-semibold text-sm">
+																{program.price.toLocaleString()} UGX
+															</p>
+														</div>
+														<Link to={`/programs/${program.id}`}>
+															<Button size="sm">Learn More</Button>
+														</Link>
+													</div>
+												</CardContent>
+											</Card>
+										))}
+									</div>
+								))}
 							</motion.div>
-						))}
+						</div>
+
+						{programSlides.length > 1 && (
+							<>
+								<Button
+									variant="ghost"
+									size="icon"
+									className="absolute -left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background/90 rounded-full"
+									onClick={prevSlide}
+								>
+									<ChevronLeft className="h-6 w-6" />
+								</Button>
+
+								<Button
+									variant="ghost"
+									size="icon"
+									className="absolute -right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background/90 rounded-full"
+									onClick={nextSlide}
+								>
+									<ChevronRight className="h-6 w-6" />
+								</Button>
+							</>
+						)}
 					</div>
 				</div>
 			</section>
@@ -438,6 +479,7 @@ const HomePage = () => {
 										alt={partner.name}
 										className="h-16 w-auto object-contain"
 									/>
+									<p className="text-sm text-muted-foreground">{partner.name}</p>
 								</div>
 							))}
 							{/* Duplicate set for seamless loop */}
@@ -504,25 +546,28 @@ const HomePage = () => {
 							<ArrowRight className="ml-2 h-4 w-4" />
 						</Button>
 					</div>
-					<div className="mt-12">
-						<DonationForm
-							onSuccess={handleDonationSuccess}
-							publicKey={import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || ""}
-							organizationName="Arena Sports Academy"
-							organizationLogo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7urzA8YNTa1Egqt-9IoZQm4Z6FPxNUxzI3_IzL4vjRwMn0xNqqST5W1sPM40hfmDncjo&usqp=CAU"
-						/>
-					</div>
 				</div>
 			</section>
 		</div>
 	);
 };
 
-const stats = [
-	{ value: "350+", label: "Active Members" },
-	{ value: "16+", label: "Teams" },
-	{ value: "130+", label: "Junior Players" },
-	{ value: "500+", label: "Community Members" },
+const contactInfo = [
+	{
+		title: "Address",
+		value: "Kampala, Uganda",
+		icon: <MapPin className="h-5 w-5 text-primary-600" />,
+	},
+	{
+		title: "Email",
+		value: "info@arenasportsacademy.com",
+		icon: <Mail className="h-5 w-5 text-primary-600" />,
+	},
+	{
+		title: "Phone",
+		value: "+256 746 971 205",
+		icon: <Phone className="h-5 w-5 text-primary-600" />,
+	},
 ];
 
 const features = [
@@ -571,70 +616,6 @@ const values = [
 	},
 ];
 
-const services = [
-	{
-		title: "Euro Tours",
-		description: "Professional football tours in Europe for exposure and experience",
-		icon: <Trophy className="h-6 w-6" />,
-	},
-	{
-		title: "Football Agency",
-		description: "Professional player representation and management",
-		icon: <Users className="h-6 w-6" />,
-	},
-	{
-		title: "Soccer Academy",
-		description: "Professional training and talent development programs",
-		icon: <Target className="h-6 w-6" />,
-	},
-];
-
-const contactInfo = [
-	{
-		title: "Location",
-		value: "Bunamwaya, Ngobe, Near Hass Petrol Station",
-		icon: <MapPin className="h-6 w-6" />,
-	},
-	{
-		title: "Email",
-		value: "info@arenasportsacademyug.com",
-		icon: <Mail className="h-6 w-6" />,
-	},
-	{
-		title: "Phone",
-		value: "+256 701102346 / +256 746971205",
-		icon: <Phone className="h-6 w-6" />,
-	},
-];
-
-const partners: Partner[] = [
-	{
-		id: 1,
-		name: "Partner 1",
-		logo: "/images/partners/partner.png",
-	},
-	{
-		id: 2,
-		name: "Partner 2",
-		logo: "/images/partners/partner.png",
-	},
-	{
-		id: 3,
-		name: "Partner 3",
-		logo: "/images/partners/partner.png",
-	},
-	{
-		id: 4,
-		name: "Partner 4",
-		logo: "/images/partners/partner.png",
-	},
-	{
-		id: 5,
-		name: "Partner 5",
-		logo: "/images/partners/partner.png",
-	},
-];
-
 const heroSlides = [
 	{
 		id: 1,
@@ -656,6 +637,34 @@ const heroSlides = [
 		title: "Building Future Champions",
 		subtitle:
 			"Join our comprehensive youth development program focused on both athletic excellence and personal growth.",
+	},
+];
+
+const partners = [
+	{
+		id: 1,
+		logo: "/logo.png",
+		name: "Arena Sports Academy",
+	},
+	{
+		id: 2,
+		logo: "/logo.png",
+		name: "Arena Sports Academy",
+	},
+	{
+		id: 3,
+		logo: "/logo.png",
+		name: "Arena Sports Academy",
+	},
+	{
+		id: 4,
+		logo: "/logo.png",
+		name: "Arena Sports Academy",
+	},
+	{
+		id: 5,
+		logo: "/logo.png",
+		name: "Arena Sports Academy",
 	},
 ];
 
