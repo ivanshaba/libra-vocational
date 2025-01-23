@@ -51,37 +51,6 @@ export function About() {
 				</div>
 			</section>
 
-			{/* History Section */}
-			<section className="py-16">
-				<div className="container">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.6 }}
-						className="max-w-3xl mx-auto"
-					>
-						<Card className="p-8 shadow-lg">
-							<CardContent className="space-y-6">
-								<div className="flex items-center gap-4 mb-6">
-									<div className="h-16 w-1 bg-primary-600" />
-									<h2 className="text-3xl font-bold">About us</h2>
-								</div>
-								<p className="text-lg text-muted-foreground leading-relaxed">
-									Arena Sports Academy was formed in 2014 with an initial
-									membership of 20 members. From our humble beginnings, we have
-									grown in membership, networks and credibility within the Sports
-									fraternity, especially in soccer games itself in Uganda. The
-									growth in the club's player membership has even accelerated over
-									the years, where membership has tripled from 100 in 2020 to over
-									350 members today and keeps on increasing.
-								</p>
-							</CardContent>
-						</Card>
-					</motion.div>
-				</div>
-			</section>
-
 			{/* Mission & Vision Section */}
 			<section className="py-16 bg-primary-50">
 				<div className="container">
@@ -146,6 +115,37 @@ export function About() {
 							</Card>
 						</motion.div>
 					</div>
+				</div>
+			</section>
+
+			{/* History Section */}
+			<section className="py-16">
+				<div className="container">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
+						className="max-w-3xl mx-auto"
+					>
+						<Card className="p-8 shadow-lg">
+							<CardContent className="space-y-6">
+								<div className="flex items-center gap-4 mb-6">
+									<div className="h-16 w-1 bg-primary-600" />
+									<h2 className="text-3xl font-bold">About us</h2>
+								</div>
+								<p className="text-lg text-muted-foreground leading-relaxed">
+									Arena Sports Academy was formed in 2014 with an initial
+									membership of 20 members. From our humble beginnings, we have
+									grown in membership, networks and credibility within the Sports
+									fraternity, especially in soccer games itself in Uganda. The
+									growth in the club's player membership has even accelerated over
+									the years, where membership has tripled from 100 in 2020 to over
+									350 members today and keeps on increasing.
+								</p>
+							</CardContent>
+						</Card>
+					</motion.div>
 				</div>
 			</section>
 

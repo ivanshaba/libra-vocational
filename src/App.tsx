@@ -57,11 +57,11 @@ const router = createBrowserRouter([
 			{ path: "/facilities/:id", element: <FacilityDetails /> },
 			{ path: "videos", element: <Videos /> },
 			{
-				path: "/donations",
+				path: "donations",
 				element: <Donations />,
 			},
 			{
-				path: "/registration-success",
+				path: "registration-success",
 				element: <RegistrationSuccess />,
 			},
 		],
