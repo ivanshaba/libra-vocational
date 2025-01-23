@@ -28,6 +28,29 @@ export function About() {
 				</div>
 			</section>
 
+			{/* Company Profile Section */}
+			<section className="py-16 bg-white">
+				<div className="container">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.6 }}
+						className="text-center mb-12"
+					>
+						<h2 className="text-3xl font-bold">Company Profile</h2>
+						<p className="mt-4 text-lg text-muted-foreground">
+							Download or read through our detailed company profile
+						</p>
+					</motion.div>
+
+					<PDFVieweR
+						title="Arena Sports Academy - Company Profile"
+						pdfUrl="/documents/company-profile.pdf"
+					/>
+				</div>
+			</section>
+
 			{/* History Section */}
 			<section className="py-16">
 				<div className="container">
@@ -42,7 +65,7 @@ export function About() {
 							<CardContent className="space-y-6">
 								<div className="flex items-center gap-4 mb-6">
 									<div className="h-16 w-1 bg-primary-600" />
-									<h2 className="text-3xl font-bold">About us | Our Journey</h2>
+									<h2 className="text-3xl font-bold">About us</h2>
 								</div>
 								<p className="text-lg text-muted-foreground leading-relaxed">
 									Arena Sports Academy was formed in 2014 with an initial
@@ -157,29 +180,6 @@ export function About() {
 							</motion.div>
 						))}
 					</div>
-				</div>
-			</section>
-
-			{/* Company Profile Section */}
-			<section className="py-16 bg-white">
-				<div className="container">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.6 }}
-						className="text-center mb-12"
-					>
-						<h2 className="text-3xl font-bold">Company Profile</h2>
-						<p className="mt-4 text-lg text-muted-foreground">
-							Download or read through our detailed company profile
-						</p>
-					</motion.div>
-
-					<PDFVieweR
-						title="Arena Sports Academy - Company Profile"
-						pdfUrl="/documents/company-profile.pdf"
-					/>
 				</div>
 			</section>
 

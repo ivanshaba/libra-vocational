@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const testimonials = [
 	{
-		name: "David Obua",
+		name: "Edward Nsamba",
 		role: "Professional Footballer",
 		image: "/images/testimonials/Edward-Nsamba.jpg",
 		content:
@@ -25,36 +25,36 @@ const testimonials = [
 		currentTeam: "Retired",
 	},
 	{
-		name: "Sarah Nambawa",
+		name: "Godfrey-Magero",
 		role: "National Team Player",
-		image: "/images/testimonials/Edward-Nsamba.jpg",
+		image: "/images/testimonials/Godfrey-Magero.jpg",
 		content:
 			"The academy's focus on both athletic and academic excellence helped shape my journey to becoming a national team player. The discipline and work ethic I learned here continue to serve me well in my professional career.",
 		graduationYear: 2017,
 		currentTeam: "Uganda National Team",
 	},
 	{
-		name: "Mike Mutebi",
+		name: "Mirembe-Victoria-Nsamba",
 		role: "Professional Coach",
-		image: "/images/testimonials/Edward-Nsamba.jpg",
+		image: "/images/testimonials/Mirembe-Victoria-Nsamba.jpg",
 		content:
 			"As a former student and now a coach, I can attest to the academy's commitment to developing well-rounded athletes. The holistic approach to player development sets Arena Sports Academy apart from others.",
 		graduationYear: 2012,
 		currentTeam: "KCCA FC",
 	},
 	{
-		name: "Peter Ssenyonjo",
+		name: "Ronald-Nsambu",
 		role: "Youth Coach",
-		image: "/images/testimonials/Edward-Nsamba.jpg",
+		image: "/images/testimonials/Ronald-Nsambu.jpg",
 		content:
 			"The academy's commitment to excellence is unmatched. The foundation I received here has been instrumental in my coaching career. I'm proud to be giving back to the next generation of players.",
 		graduationYear: 2016,
 		currentTeam: "KCCA FC Youth",
 	},
 	{
-		name: "Grace Nalukenge",
+		name: "Nyanzi-Henry",
 		role: "National Team Player",
-		image: "/images/testimonials/Edward-Nsamba.jpg",
+		image: "/images/testimonials/Nyanzi-Henry.jpg",
 		content:
 			"My journey from the academy to the national team has been incredible. The academy's emphasis on female player development and equal opportunities has helped pave the way for many young girls in football.",
 		graduationYear: 2018,
@@ -156,6 +156,8 @@ export function AlumniNetwork() {
 												</p>
 											</div>
 										</div>
+										<img src={testimonial.image} />
+
 										<blockquote className="mt-4 text-muted-foreground">
 											"{testimonial.content}"
 										</blockquote>
