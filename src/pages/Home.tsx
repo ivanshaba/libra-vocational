@@ -462,40 +462,34 @@ const HomePage = () => {
 					>
 						<h2 className="text-3xl font-bold">Our Partners</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Proud to work with organizations that share our vision
+							Proud to work with organizations that share our vision for youth
+							development
 						</p>
 					</motion.div>
 
-					<div className="relative overflow-hidden">
-						<div className="flex animate-scroll">
-							{/* First set of partners */}
-							{partners.map((partner) => (
-								<div
-									key={partner.id}
-									className="shrink-0 mx-8 w-[150px] grayscale hover:grayscale-0 transition-all"
-								>
+					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+						{partners.map((partner) => (
+							<motion.div
+								key={partner.id}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ duration: 0.5 }}
+								className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-muted/50 transition-colors"
+							>
+								<div className="h-24 w-full flex items-center justify-center mb-4">
 									<img
 										src={partner.logo}
 										alt={partner.name}
-										className="h-16 w-auto object-contain"
-									/>
-									<p className="text-sm text-muted-foreground">{partner.name}</p>
-								</div>
-							))}
-							{/* Duplicate set for seamless loop */}
-							{partners.map((partner) => (
-								<div
-									key={`${partner.id}-duplicate`}
-									className="shrink-0 mx-8 w-[150px] grayscale hover:grayscale-0 transition-all"
-								>
-									<img
-										src={partner.logo}
-										alt={partner.name}
-										className="h-16 w-auto object-contain"
+										className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all"
 									/>
 								</div>
-							))}
-						</div>
+								<h3 className="font-semibold text-lg mb-2">{partner.name}</h3>
+								<p className="text-sm text-muted-foreground">
+									{partner.description}
+								</p>
+							</motion.div>
+						))}
 					</div>
 				</div>
 			</section>
@@ -643,28 +637,33 @@ const heroSlides = [
 const partners = [
 	{
 		id: 1,
-		logo: "/logo.png",
-		name: "Arena Sports Academy",
+		name: "Kings of Soccer Gala",
+		logo: "/images/partners/kings-soccer.jpg",
+		description: "Premier youth soccer tournament organizer",
 	},
 	{
 		id: 2,
-		logo: "/logo.png",
-		name: "Arena Sports Academy",
+		name: "Kampala Junior Football Association",
+		logo: "/images/partners/kjfa.jpg",
+		description: "Developing youth football in Kampala",
 	},
 	{
 		id: 3,
-		logo: "/logo.png",
-		name: "Arena Sports Academy",
+		name: "Uganda Youth Football Association",
+		logo: "/images/partners/uyfa.jpg",
+		description: "Affiliated to Federation of Uganda Football Association-FUFA",
 	},
 	{
 		id: 4,
-		logo: "/logo.png",
-		name: "Arena Sports Academy",
+		name: "New Leaf Technologies Uganda Ltd",
+		logo: "/images/partners/new-leaf.jpg",
+		description: "Christian Mission in Holistic Transformational Development",
 	},
 	{
 		id: 5,
-		logo: "/logo.png",
-		name: "Arena Sports Academy",
+		name: "FCV International Football Academy",
+		logo: "/images/partners/fcv.jpg",
+		description: "London, United Kingdom",
 	},
 ];
 

@@ -9,7 +9,6 @@ import { Gallery as GalleryPage } from "@/pages/Gallery";
 import { Contact as ContactPage } from "@/pages/Contact";
 import { FAQ as FAQPage } from "@/pages/FAQ";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "@/lib/react-query";
 import { Dashboard } from "@/pages/admin/Dashboard";
 import { Posts as AdminPosts } from "@/pages/admin/Posts";
@@ -27,7 +26,6 @@ import { Coaches as CoachesPage } from "@/pages/Coaches";
 import { Toaster } from "sonner";
 import Signup from "@/pages/admin/Signup";
 import { NewsDetails } from "@/pages/NewsDetails";
-import { WhatsAppChat } from "@/components/whatsapp-chat";
 import { AlumniNetwork as AlumniPage } from "@/pages/Alumni";
 import { AlumniNetwork as AdminAlumniNetwork } from "@/pages/admin/AlumniNetwork";
 import { ProgramDetails } from "@/pages/ProgramDetails";
@@ -35,6 +33,8 @@ import { FacilityDetails } from "@/pages/FacilityDetails";
 import { Videos } from "@/pages/Videos";
 import { Donations } from "@/pages/Donations";
 import { RegistrationSuccess } from "@/pages/RegistrationSuccess";
+import { WhatsAppChat } from "@/components/whatsapp-chat";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
 	{
@@ -91,15 +91,35 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
+	const googleTranslateElementInit = () => {
+		new (window as any).google.translate.TranslateElement(
+			{
+				pageLanguage: "en",
+				autoDisplay: false,
+				includedLanguages: "en,sw,lg,fr",
+			},
+			"google_translate_element"
+		);
+	};
+	useEffect(() => {
+		const addScript = document.createElement("script");
+		addScript.setAttribute(
+			"src",
+			"//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+		);
+		document.body.appendChild(addScript);
+		(window as any).googleTranslateElementInit = googleTranslateElementInit;
+	}, []);
+
 	return (
 		<AuthProvider>
 			<QueryClientProvider client={queryClient}>
 				<AppProvider>
+					<div id="google_translate_element"></div>
 					<Toaster />
 					<RouterProvider router={router} />
 					<WhatsAppChat phoneNumber="256746971205" />
 				</AppProvider>
-				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</AuthProvider>
 	);
