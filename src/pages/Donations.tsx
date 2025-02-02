@@ -4,8 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaMobile, FaPaypal } from "react-icons/fa";
 import { Banknote } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function Donations() {
+	const navigate = useNavigate();
+
 	const handleDonationSuccess = (response: unknown) => {
 		console.log("Donation successful:", response);
 	};
@@ -25,41 +28,24 @@ export function Donations() {
 					</p>
 
 					<div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-						{/* Bank Transfer */}
+						{/* Bank Transfer - Updated */}
 						<Card>
 							<CardContent className="p-6">
 								<div className="flex items-center gap-3 mb-4">
 									<Banknote className="h-6 w-6 text-primary" />
 									<h2 className="text-xl font-semibold">Bank Transfer</h2>
 								</div>
-								<div className="space-y-2 text-muted-foreground">
-									<p>
-										<span className="font-medium text-foreground">Bank:</span>{" "}
-										Stanbic Bank Uganda
-									</p>
-									<p>
-										<span className="font-medium text-foreground">
-											Account Name:
-										</span>{" "}
-										Arena Sports Academy Limited
-									</p>
-									<p>
-										<span className="font-medium text-foreground">
-											Account Number:
-										</span>{" "}
-										9030017895319
-									</p>
-									<p>
-										<span className="font-medium text-foreground">
-											Swift Code:
-										</span>{" "}
-										SBICUGKX
-									</p>
-									<p>
-										<span className="font-medium text-foreground">Branch:</span>{" "}
-										Forest Mall
-									</p>
-								</div>
+								<p className="mb-4 text-muted-foreground">
+									For bank transfer details, please contact us directly. We'll
+									provide you with our current banking information.
+								</p>
+								<Button
+									onClick={() => navigate("/contact")}
+									className="w-full"
+									variant="outline"
+								>
+									Request Bank Details
+								</Button>
 							</CardContent>
 						</Card>
 
