@@ -16,49 +16,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const testimonials = [
 	{
-		name: "Edward Nsamba",
-		role: "Professional Footballer",
-		image: "/images/testimonials/Edward-Nsamba.jpg",
+		name: "Magala Charles",
+		role: "Former Academy player, now coach U14",
+		image: "/images/testimonials/Magala-Charles.jpg",
 		content:
-			"Arena Sports Academy laid the foundation for my professional career. The coaching and mentorship I received were invaluable. The academy's focus on technical skills and tactical understanding helped me develop into a complete player.",
-		graduationYear: 2015,
-		currentTeam: "Retired",
-	},
-	{
-		name: "Godfrey-Magero",
-		role: "National Team Player",
-		image: "/images/testimonials/Godfrey-Magero.jpg",
-		content:
-			"The academy's focus on both athletic and academic excellence helped shape my journey to becoming a national team player. The discipline and work ethic I learned here continue to serve me well in my professional career.",
-		graduationYear: 2017,
-		currentTeam: "Uganda National Team",
-	},
-	{
-		name: "Mirembe-Victoria-Nsamba",
-		role: "Professional Coach",
-		image: "/images/testimonials/Mirembe-Victoria-Nsamba.jpg",
-		content:
-			"As a former student and now a coach, I can attest to the academy's commitment to developing well-rounded athletes. The holistic approach to player development sets Arena Sports Academy apart from others.",
-		graduationYear: 2012,
-		currentTeam: "KCCA FC",
-	},
-	{
-		name: "Ronald-Nsambu",
-		role: "Youth Coach",
-		image: "/images/testimonials/Ronald-Nsambu.jpg",
-		content:
-			"The academy's commitment to excellence is unmatched. The foundation I received here has been instrumental in my coaching career. I'm proud to be giving back to the next generation of players.",
+			"From being a player at the academy to now coaching the U14 team, I've experienced firsthand the exceptional development program at Arena Sports Academy. I'm passionate about passing on the same values and skills that I learned here to the next generation.",
 		graduationYear: 2016,
-		currentTeam: "KCCA FC Youth",
+		currentTeam: "Arena Sports Academy U14",
 	},
 	{
-		name: "Nyanzi-Henry",
-		role: "National Team Player",
-		image: "/images/testimonials/Nyanzi-Henry.jpg",
+		name: "Ssebatta Christiano Augus",
+		role: "Former Academy player, Now coach/CEO",
+		image: "/images/testimonials/Ssebatta-Christiano-Augus.jpg",
 		content:
-			"My journey from the academy to the national team has been incredible. The academy's emphasis on female player development and equal opportunities has helped pave the way for many young girls in football.",
-		graduationYear: 2018,
-		currentTeam: "Uganda Crested Cranes",
+			"My journey from being an academy player to founding and leading SCASA Academy in Masaka has been remarkable. The leadership and coaching principles I learned at Arena Sports Academy have been instrumental in shaping my vision for developing young talent.",
+		graduationYear: 2015,
+		currentTeam: "SCASA ACADEMY MASAKA",
 	},
 ];
 

@@ -96,7 +96,8 @@ export default function App() {
 			{
 				pageLanguage: "en",
 				autoDisplay: false,
-				includedLanguages: "en,sw,lg,fr",
+				includedLanguages:
+					"en,es,fr,de,lg,it,pt,ru,zh,ja,ko,ar,hi,bn,id,ms,th,vi,tr,nl,pl,uk,cs,ro,hu,el,sv,da,fi,no,he,fa,ur,ta,te,kn,ml,gu,pa,mr,si,ne,my,km,lo,fil,hmn,ceb,jv,su,tl,haw,sw",
 			},
 			"google_translate_element"
 		);
