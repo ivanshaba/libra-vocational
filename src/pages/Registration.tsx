@@ -105,6 +105,7 @@ export function Registration() {
 	});
 
 	const handleSubmit = () => {
+		console.log(formData);
 		if (!formData.consent) {
 			toast.error("Please provide consent to continue", {
 				description: "You must agree to the terms and consent to data usage",
@@ -133,7 +134,7 @@ export function Registration() {
 			case 3:
 				return <MedicalInformation formData={formData} onChange={handleInputChange} />;
 			case 4:
-				return <ReviewSubmit formData={formData} />;
+				return <ReviewSubmit formData={formData} setFormData={setFormData} />;
 			default:
 				return null;
 		}
@@ -422,12 +423,28 @@ function MedicalInformation({
 	);
 }
 
-function ReviewSubmit({ formData }: { formData: FormData }) {
+function ReviewSubmit({
+	formData,
+	setFormData,
+}: {
+	formData: FormData;
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+}) {
 	return (
 		<div className="space-y-6">
 			<div className="mt-8 space-y-4 rounded-lg border p-4 bg-muted/50">
 				<div className="flex items-start space-x-3">
-					<Checkbox id="consent" />
+					<Checkbox
+						id="consent"
+						checked={formData.consent}
+						onCheckedChange={(checked) => {
+							// Handle the boolean value from the checkbox
+							setFormData((prev) => ({
+								...prev,
+								consent: checked as boolean,
+							}));
+						}}
+					/>
 					<div className="space-y-1 leading-none">
 						<Label
 							htmlFor="consent"

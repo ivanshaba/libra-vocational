@@ -33,6 +33,15 @@ const testimonials = [
 		graduationYear: 2015,
 		currentTeam: "SCASA ACADEMY MASAKA",
 	},
+	{
+		name: "Collins Mayanja",
+		role: "Former Academy player, now trainer & coach U10",
+		image: "/images/testimonials/Collins-Mayanja.jpg",
+		content:
+			"From being a player at the academy to now training and coaching the U10 team, I've seen firsthand how Arena Sports Academy shapes young talents. It's rewarding to be part of developing the next generation of players.",
+		graduationYear: 2017,
+		currentTeam: "Arena Sports Academy U10",
+	},
 ];
 
 export function AlumniNetwork() {
