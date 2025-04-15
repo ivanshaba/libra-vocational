@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, Lock, Heart } from "lucide-react";
+import { Menu, Lock,  } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ const navItems = [
 	},
 	{ href: "/about", label: "About" },
 	{ href: "/programs", label: "Programs" },
-	{ href: "/coaches", label: "Coaches" },
+	{ href: "/trainers", label: "Coaches" },
 	{ href: "/facilities", label: "Facilities" },
 	{ href: "/registration", label: "Registration" },
 	{ href: "/news", label: "News" },
@@ -60,8 +60,8 @@ export function MobileNav() {
 									{item.isLogo ? (
 										<>
 											<img
-												src="/images/logo.png"
-												alt="Arena Sports Academy"
+												src="logo2.svg"
+												alt="Libra Vocational"
 												className="h-8 w-auto"
 											/>
 											{item.label}
@@ -72,14 +72,14 @@ export function MobileNav() {
 								</Link>
 							</motion.div>
 						))}
-						<Link
+						{/* <Link
 							to="/donations"
 							className="flex items-center gap-2 text-sm font-medium"
 							onClick={() => setOpen(false)}
 						>
 							<Heart className="h-4 w-4" />
 							Donate
-						</Link>
+						</Link> */}
 						<Link
 							to="/admin/login"
 							className="flex items-center gap-2 text-sm font-medium"

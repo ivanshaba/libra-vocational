@@ -16,7 +16,7 @@ import { useAuth } from "@/hooks/useAuth";
 const data = {
 	teams: [
 		{
-			name: "Arena sports academyug",
+			name: "libra vocational",
 			logo: Users,
 			plan: "",
 		},

@@ -41,8 +41,8 @@ export function MainNav() {
 					{link.isLogo ? (
 						<>
 							<img
-								src="/images/logo2.svg"
-								alt="Arena Sports Academy"
+								src="logo2.svg"
+								alt="Libra Vocational"
 								className="h-8 w-auto"
 							/>
 							{link.label}
