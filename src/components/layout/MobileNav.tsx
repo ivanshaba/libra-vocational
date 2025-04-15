@@ -14,7 +14,7 @@ const navItems = [
 	},
 	{ href: "/about", label: "About" },
 	{ href: "/programs", label: "Programs" },
-	{ href: "/trainers", label: "Coaches" },
+	{ href: "/coaches", label: "Trainers" },
 	{ href: "/facilities", label: "Facilities" },
 	{ href: "/registration", label: "Registration" },
 	{ href: "/news", label: "News" },
