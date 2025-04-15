@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+// import { useState } from "react";
+// import { Button } from "@/components/ui/button";
+// import { Download } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 interface PDFViewerProps {
@@ -9,27 +9,27 @@ interface PDFViewerProps {
 }
 
 export function PDFVieweR({ title, pdfUrl }: PDFViewerProps) {
-	const [isLoading, setIsLoading] = useState(false);
+	// const [isLoading, setIsLoading] = useState(false);
 
-	const handleDownload = async () => {
-		try {
-			setIsLoading(true);
-			const response = await fetch(pdfUrl);
-			const blob = await response.blob();
-			const url = window.URL.createObjectURL(blob);
-			const link = document.createElement("a");
-			link.href = url;
-			link.download = `${title || "document"}.pdf`;
-			document.body.appendChild(link);
-			link.click();
-			link.remove();
-			window.URL.revokeObjectURL(url);
-		} catch (error) {
-			console.error("Error downloading PDF:", error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+	// const handleDownload = async () => {
+	// 	try {
+	// 		setIsLoading(true);
+	// 		const response = await fetch(pdfUrl);
+	// 		const blob = await response.blob();
+	// 		const url = window.URL.createObjectURL(blob);
+	// 		const link = document.createElement("a");
+	// 		link.href = url;
+	// 		link.download = `${title || "document"}.pdf`;
+	// 		document.body.appendChild(link);
+	// 		link.click();
+	// 		link.remove();
+	// 		window.URL.revokeObjectURL(url);
+	// 	} catch (error) {
+	// 		console.error("Error downloading PDF:", error);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// };
 
 	return (
 		<Card className="p-4 md:p-6">

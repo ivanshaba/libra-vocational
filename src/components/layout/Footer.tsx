@@ -5,7 +5,7 @@ import { Image } from "@/components/ui/image";
 import { useState } from "react";
 import { api } from "@/services/api";
 import { toast } from "sonner";
-import { FaFacebook, FaInstagram, FaTiktok, FaYoutube, FaPaypal } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok,} from "react-icons/fa";
 
 const socialLinks = [
 	{

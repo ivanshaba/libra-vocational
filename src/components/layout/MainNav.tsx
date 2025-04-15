@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
-import { Lock, Heart } from "lucide-react";
+import { Lock,  } from "lucide-react";
 
 const links = [
 	{

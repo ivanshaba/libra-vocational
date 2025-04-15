@@ -36,7 +36,7 @@ const HomePage = () => {
 	const [aboutRef, aboutInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 	const navigate = useNavigate();
 
-	const { data: registrations = [], isLoading } = useQuery({
+	const { isLoading } = useQuery({
 		queryKey: ["admin", "registrations"],
 		queryFn: api.getRegistrations,
 	});
