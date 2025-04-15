@@ -71,7 +71,7 @@ export function Footer() {
 							<div className="h-8 w-8 rounded-full bg-primary-700">
 								<Image
 									src="/images/logo2.svg"
-									alt="Arena Sports Academy"
+									alt="Libra vocational"
 									className="h-8 w-8"
 								/>
 							</div>

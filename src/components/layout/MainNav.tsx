@@ -41,7 +41,7 @@ export function MainNav() {
 					{link.isLogo ? (
 						<>
 							<img
-								src="logo2.svg"
+								src="/images/logo2.svg"
 								alt="Libra Vocational"
 								className="h-8 w-auto"
 							/>
