@@ -10,34 +10,34 @@ import { FaFacebook, FaInstagram, FaTiktok, FaYoutube, FaPaypal } from "react-ic
 const socialLinks = [
 	{
 		name: "Facebook",
-		url: "https://www.facebook.com/share/v/15TeKUVQyt/",
+		url: "https://www.facebook.com/LibraVocational",
 		icon: <FaFacebook className="h-5 w-5" />,
 		hoverClass: "hover:bg-[#1877F2]",
 	},
 	{
 		name: "Instagram",
-		url: "https://www.instagram.com/arenasportsacademyug/profilecard/?igsh=ZDZmcHZpdmkwcGJy",
+		url: "https://www.instagram.com/libra_vocational_institute/",
 		icon: <FaInstagram className="h-5 w-5" />,
 		hoverClass: "hover:bg-[#E4405F]",
 	},
 	{
 		name: "TikTok",
-		url: "https://vm.tiktok.com/ZS6DGyX25/",
+		url: "https://www.tiktok.com/@libravocational12",
 		icon: <FaTiktok className="h-5 w-5" />,
 		hoverClass: "hover:bg-[#000000]",
 	},
-	{
-		name: "YouTube",
-		url: "https://youtube.com/@arenasportsacademy5067?si=BIFHIuvyN1bJScMN",
-		icon: <FaYoutube className="h-5 w-5" />,
-		hoverClass: "hover:bg-[#FF0000]",
-	},
-	{
-		name: "PayPal",
-		url: "https://www.paypal.me/NSAMBAEDWARD",
-		icon: <FaPaypal className="h-5 w-5" />,
-		hoverClass: "hover:bg-[#00457C]",
-	},
+	// {
+	// 	name: "YouTube",
+	// 	url: "https://youtube.com/@arenasportsacademy5067?si=BIFHIuvyN1bJScMN",
+	// 	icon: <FaYoutube className="h-5 w-5" />,
+	// 	hoverClass: "hover:bg-[#FF0000]",
+	// },
+	// {
+	// 	name: "PayPal",
+	// 	url: "https://www.paypal.me/NSAMBAEDWARD",
+	// 	icon: <FaPaypal className="h-5 w-5" />,
+	// 	hoverClass: "hover:bg-[#00457C]",
+	// },
 ];
 
 export function Footer() {
@@ -70,16 +70,17 @@ export function Footer() {
 						<div className="flex items-center gap-2">
 							<div className="h-8 w-8 rounded-full bg-primary-700">
 								<Image
-									src="/logo.png"
+									src="/images/logo2.svg"
 									alt="Arena Sports Academy"
 									className="h-8 w-8"
 								/>
 							</div>
-							<h3 className="text-lg font-bold">Arena Sports Academy</h3>
+							<h3 className="text-lg font-bold">Libra Vocational</h3>
 						</div>
 						<p className="text-sm text-white/80">
-							Developing complete soccer players in a safe and supportive environment
-							since 2014. We focus on excellence, teamwork, and personal growth.
+						Libra is committed to providing an academically rigorous education
+                        to students who will walk out of
+                        school ready for lives of leadership and service to their community.
 						</p>
 						<div className="flex flex-wrap gap-4">
 							{socialLinks.map((social) => (
@@ -134,7 +135,7 @@ export function Footer() {
 									className="flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white"
 								>
 									<ArrowRight className="h-4 w-4" />
-									Coaches
+									Trainers
 								</Link>
 							</li>
 							<li>
@@ -156,17 +157,19 @@ export function Footer() {
 							<li className="flex items-start gap-3 text-sm text-white/80">
 								<MapPin className="mt-1 h-4 w-4 shrink-0" />
 								<span>
-									Arena Sports Academy, Bunamwaya, Ngobe, Near Hass Petrol
-									Station, Shop No:Doo3
+								Libra Vocational and Business Institute 
 								</span>
 							</li>
 							<li className="flex items-center gap-3 text-sm text-white/80">
 								<Phone className="h-4 w-4 shrink-0" />
-								<span>+256 701102346 / +256 746971205</span>
+								<span>
+									{/* +256 701102346 / +256 746971205 */}
+								+256 393 247 785 / +256 703 725 726 / +256 772 434 509
+								</span>
 							</li>
 							<li className="flex items-center gap-3 text-sm text-white/80">
 								<Mail className="h-4 w-4 shrink-0" />
-								<span>info@arenasportsacademyug.com</span>
+								<span>info@libravocational.com</span>
 							</li>
 						</ul>
 					</div>
@@ -205,22 +208,22 @@ export function Footer() {
 				<div className="border-t border-white/10 py-6">
 					<div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row">
 						<p className="text-sm text-white/60">
-							© {new Date().getFullYear()} Arena Sports Academy. All rights reserved.
+							© {new Date().getFullYear()} Libra Vocational and Business Institute. All rights reserved.
 						</p>
 					</div>
 				</div>
 
 				<div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-					<p>© {new Date().getFullYear()} Arena Sports Academy. All rights reserved.</p>
+					<p>© {new Date().getFullYear()} Libra Vocational and Business Institute. All rights reserved.</p>
 					<p className="mt-2">
-						Developed by{" "}
+						{/* Developed by{" "} */}
 						<a
 							href="https://acceleratedtechnosoft.com"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-primary hover:underline"
 						>
-							Accelerated Technosoft Limited
+							{/* Accelerated Technosoft Limited */}
 						</a>
 					</p>
 				</div>

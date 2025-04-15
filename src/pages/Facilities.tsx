@@ -113,7 +113,7 @@ export function Facilities() {
 				<div className="mt-24">
 					<h2 className="text-3xl font-bold">Equipment & Technology</h2>
 					<p className="mt-4 text-lg text-muted-foreground">
-						We invest in the latest equipment and technology to provide you with the
+						We invest in the latest equipment and technology to provide our students with the
 						best training experience.
 					</p>
 					<div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,23 +150,23 @@ export function Facilities() {
 
 const equipmentCategories = [
 	{
-		name: "Strength Training",
-		items: ["Olympic platforms", "Free weights", "Power racks", "Cable machines"],
+		name: "Certification from DIT & UBTEB",
+		items: ["Information Technology", "Cosmetology & Beauty Therapy", "Fashion & Garment Design"],
 	},
 	{
-		name: "Cardio Equipment",
-		items: ["Treadmills", "Rowing machines", "Bikes", "Ellipticals"],
+		name: "Modern learning facilities",
+		items: ["lecture rooms", "game grounds", "modern computers"],
 	},
 	{
-		name: "Recovery Tools",
-		items: ["Compression systems", "Massage tools", "Ice baths", "Stretching area"],
+		name: "Interactive Handas-on Training",
+		items: ["ICT", "Tailoring", "Garment Design"],
 	},
 	{
 		name: "Technology",
 		items: [
-			"Performance tracking",
-			"Video analysis",
-			"Biometric sensors",
+			"computer programming",
+			"Web Design",
+			"Graphics Design",
 			"Mobile app integration",
 		],
 	},

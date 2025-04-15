@@ -37,7 +37,7 @@ export function PDFVieweR({ title, pdfUrl }: PDFViewerProps) {
 				<div>
 					<h3 className="text-lg font-semibold">{title || "Company Profile"}</h3>
 				</div>
-				<Button
+				{/* <Button
 					variant="outline"
 					onClick={handleDownload}
 					disabled={isLoading}
@@ -45,7 +45,7 @@ export function PDFVieweR({ title, pdfUrl }: PDFViewerProps) {
 				>
 					<Download className="h-4 w-4" />
 					{isLoading ? "Downloading..." : "Download PDF"}
-				</Button>
+				</Button> */}
 			</div>
 
 			<div className="h-[600px] w-full">

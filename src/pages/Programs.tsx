@@ -54,7 +54,7 @@ const ProgramsPage = () => {
 					>
 						<h1 className="text-5xl font-bold mb-6">Our Programs</h1>
 						<p className="text-xl text-white/90">
-							Comprehensive programs focused on developing complete athletes while
+							Comprehensive programs focused on developing highly skilled individuals while
 							fostering personal growth
 						</p>
 					</motion.div>
@@ -73,7 +73,7 @@ const ProgramsPage = () => {
 					>
 						<h2 className="text-3xl font-bold">Core Programs</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Our flagship programs designed for comprehensive athlete development
+							Our flagship programs designed for comprehensive skill development
 						</p>
 					</motion.div>
 
@@ -125,9 +125,9 @@ const ProgramsPage = () => {
 						transition={{ duration: 0.6 }}
 						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold">Additional Services</h2>
+						<h2 className="text-3xl font-bold">Additional Activities</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Complementary programs to enhance your athletic journey
+							Complementary programs to enhance our students journey
 						</p>
 					</motion.div>
 
@@ -172,7 +172,7 @@ const ProgramsPage = () => {
 					>
 						<h2 className="text-3xl font-bold">Digital Skills Development</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Empowering athletes with essential digital skills
+							Empowering students with essential digital skills
 						</p>
 					</motion.div>
 
@@ -182,7 +182,7 @@ const ProgramsPage = () => {
 								<div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center mb-6">
 									<Laptop className="h-8 w-8" />
 								</div>
-								<h3 className="text-2xl font-bold mb-4">Mobile Computer Lab</h3>
+								<h3 className="text-2xl font-bold mb-4">Computer Skills</h3>
 								<ul className="space-y-3">
 									{computerLabFeatures.map((feature) => (
 										<li key={feature} className="flex items-center gap-2">
@@ -371,56 +371,56 @@ const ProgramsPage = () => {
 
 const corePrograms = [
 	{
-		title: "Youth Development",
+		title: "Diploma in Cosmetology & Beauty Therapy",
 		icon: <Users className="h-12 w-12 text-white" />,
 		features: [
-			"Ages: 6-8 years old",
-			"130+ junior players",
-			"Fundamental skills development",
-			"Focus on fun and learning",
-		],
+			"beauty treatments and therapies",
+			"makeup",
+			"hairdressing",
+			"skincare",
+		], 
 	},
 	{
-		title: "Girls Program",
+		title: "Diploma in Information Technology",
 		icon: <Target className="h-12 w-12 text-white" />,
 		features: [
-			"Ages: 10-18 years old",
-			"20+ female players",
-			"Professional coaching",
-			"Competitive matches",
+			"advanced programming",
+			"Artificial intelligence",
+			"Robotics",
+			"Cyber security",
 		],
 	},
 	{
-		title: "Senior Program",
+		title: "Diploma in Fashion & Garment Design",
 		icon: <Trophy className="h-12 w-12 text-white" />,
 		features: [
-			"Ages: 16-25 years old",
-			"40+ senior players",
-			"Advanced training",
-			"Professional development",
+			"Fashion Technology",
+			"Garment Design",
+			"Branding and promotion",
+			"Fashion forecasting",
 		],
 	},
 ];
 
 const additionalServices = [
 	{
-		title: "Euro Tours",
-		description: "Professional football tours in Europe for exposure and experience",
+		title: "Academic Tours",
+		description: "We organize tours for our students for exposure and experience.",
 		icon: <Globe className="h-6 w-6 text-primary-600" />,
 	},
 	{
-		title: "Player Agency",
-		description: "Professional representation and career management services",
+		title: "co-curricullum activities",
+		description: "football, netball, basketball etc",
 		icon: <Users className="h-6 w-6 text-primary-600" />,
 	},
 	{
-		title: "Event Management",
-		description: "Organization and management of sports events and tournaments",
+		title: "Events",
+		description: "We Organize events for student to interact and to promote talents.",
 		icon: <Trophy className="h-6 w-6 text-primary-600" />,
 	},
 	{
-		title: "School Programs",
-		description: "Free football training for infants through school administration",
+		title: "Farm Visits",
+		description: "We organise farm visits for our students which especially on weekends",
 		icon: <Target className="h-6 w-6 text-primary-600" />,
 	},
 ];

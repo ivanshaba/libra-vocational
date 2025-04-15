@@ -13,11 +13,11 @@ const links = [
 	{ href: "/about", label: "About" },
 	{ href: "/programs", label: "Programs" },
 	{ href: "/registration", label: "Registration" },
-	{ href: "/coaches", label: "Coaches" },
+	{ href: "/coaches", label: "Trainers" },
 	{ href: "/facilities", label: "Facilities" },
 	{ href: "/news", label: "News" },
 	{ href: "/gallery", label: "Gallery" },
-	{ href: "/alumni", label: "Alumni" },
+	// { href: "/alumni", label: "Alumni" },
 	{ href: "/contact", label: "Contact" },
 	{ href: "/faq", label: "FAQ" },
 	{ href: "/videos", label: "Videos" },
@@ -41,7 +41,7 @@ export function MainNav() {
 					{link.isLogo ? (
 						<>
 							<img
-								src="/images/logo.png"
+								src="/images/logo2.svg"
 								alt="Arena Sports Academy"
 								className="h-8 w-auto"
 							/>
@@ -53,12 +53,12 @@ export function MainNav() {
 				</Link>
 			))}
 			<div className="flex items-center gap-2">
-				<Link to="/donations">
+				{/* <Link to="/donations">
 					<Button variant="default" size="sm" className="gap-2">
 						<Heart className="h-4 w-4" />
 						Donate
 					</Button>
-				</Link>
+				</Link> */}
 				<Link to="/admin/login">
 					<Button variant="ghost" size="sm" className="gap-2">
 						<Lock className="h-4 w-4" />

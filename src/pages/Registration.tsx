@@ -149,7 +149,7 @@ export function Registration() {
 			>
 				<h1 className="text-4xl font-bold">Program Registration</h1>
 				<p className="mt-4 text-lg text-muted-foreground">
-					Complete the registration form to join our sports programs.
+					Complete the registration form to join Libra vocational.
 				</p>
 
 				{/* Progress Steps */}
@@ -453,7 +453,7 @@ function ReviewSubmit({
 							Consent and Authorization
 						</Label>
 						<p className="text-sm text-muted-foreground">
-							I hereby consent and authorize Arena Sports Academy to collect, process,
+							I hereby consent and authorizeLibra Vocational and Business Institute to collect, process,
 							and store the provided information for registration and program-related
 							purposes.
 						</p>

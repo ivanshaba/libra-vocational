@@ -38,15 +38,16 @@ export function About() {
 						transition={{ duration: 0.6 }}
 						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold">Company Profile</h2>
+						<h2 className="text-3xl font-bold">Vocational Profile</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
 							Download or read through our detailed company profile
 						</p>
 					</motion.div>
 
 					<PDFVieweR
-						title="Arena Sports Academy - Company Profile"
-						pdfUrl="/documents/company-profile.pdf"
+						title="Libra Vocational - Vocational Profile"
+						pdfUrl= ""
+						// "/documents/company-profile.pdf"
 					/>
 				</div>
 			</section>
@@ -69,15 +70,8 @@ export function About() {
 										<h2 className="text-2xl font-bold">Our Mission</h2>
 									</div>
 									<p className="text-muted-foreground leading-relaxed">
-										To develop complete soccer players and teams in a safe and
-										supportive environmental conservation and sustainable
-										social-economic Development through Climate Change
-										Mitigation and Adaptation Plan of Action, by excelling in
-										the Technical, Tactical, Physical and Psychological areas of
-										the Sports and Games, while simultaneously instilling among
-										our young players Positive Core Values for excellent Work
-										Ethics, Self-Discipline and Professionalism at a very young
-										age for career development and success in life.
+									To equip learners with practical skills and knowledge 
+									through quality education and hands-on training.
 									</p>
 								</CardContent>
 							</Card>
@@ -97,11 +91,9 @@ export function About() {
 										<h2 className="text-2xl font-bold">Our Vision</h2>
 									</div>
 									<p className="text-muted-foreground leading-relaxed">
-										To provide the best environment for elite soccer players in
-										Uganda and worldwide by providing the highest quality player
-										development programs, facilities, coaches, training,
-										competition and leadership.
-										<br />
+									 To be a leading institution that fosters innovation, entrepreneurship,
+									 and excellence in vocational and business education.
+										{/* <br />
 										<br />
 										To advance players on to all levels of college rosters,
 										Uganda National Teams, and to be recognized leader and
@@ -109,7 +101,7 @@ export function About() {
 										<br />
 										<br />
 										To be the number sports project in Africa on and off the
-										pitch.
+										pitch. */}
 									</p>
 								</CardContent>
 							</Card>
@@ -135,13 +127,10 @@ export function About() {
 									<h2 className="text-3xl font-bold">About us</h2>
 								</div>
 								<p className="text-lg text-muted-foreground leading-relaxed">
-									Arena Sports Academy was formed in 2014 with an initial
-									membership of 20 members. From our humble beginnings, we have
-									grown in membership, networks and credibility within the Sports
-									fraternity, especially in soccer games itself in Uganda. The
-									growth in the club's player membership has even accelerated over
-									the years, where membership has tripled from 100 in 2020 to over
-									350 members today and keeps on increasing.
+								At Libra Vocational & Business Institute, we are dedicated to 
+								providing top-tier vocational and business education. Our mission 
+								is to empower individuals with practical skills
+								and knowledge tailored to excel in today’s fast-paced and competitive job market.
 								</p>
 							</CardContent>
 						</Card>
@@ -234,39 +223,39 @@ export function About() {
 
 const coreValues = [
 	{
-		title: "Fair Play",
+		title: "Professionalism",
 		description: "Ensuring equity for all",
 	},
 	{
-		title: "Oneness",
+		title: "Trust",
 		description:
 			"Bringing everyone together irrespective of Social, Political, and Economic & cultural attributes",
 	},
 	{
-		title: "Openness",
+		title: "Integrity",
 		description: "Accepting positive criticism, being transparent and honest in all we do",
 	},
 	{
-		title: "Team Work",
+		title: "Excellence",
 		description:
 			"Cooperation in delivering of our targets with both internal and external stake holders",
 	},
-	{
-		title: "Belonging",
-		description: "Fulfilling obligations and enjoying rights of association",
-	},
-	{
-		title: "Accountability",
-		description: "Accounting for all decisions and activities performed",
-	},
-	{
-		title: "Loyalty",
-		description: "Offering committed service to the game",
-	},
-	{
-		title: "Leadership",
-		description: "Providing clear and exemplary management",
-	},
+	// {
+	// 	title: "Belonging",
+	// 	description: "Fulfilling obligations and enjoying rights of association",
+	// },
+	// {
+	// 	title: "Accountability",
+	// 	description: "Accounting for all decisions and activities performed",
+	// },
+	// {
+	// 	title: "Loyalty",
+	// 	description: "Offering committed service to the game",
+	// },
+	// {
+	// 	title: "Leadership",
+	// 	description: "Providing clear and exemplary management",
+	// },
 ];
 
 export default About;

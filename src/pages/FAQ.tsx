@@ -64,33 +64,33 @@ export function FAQ() {
 const faqItems: FAQItem[] = [
   {
     category: "Programs & Training",
-    question: "What age groups do you cater to?",
-    answer: "We offer programs for all age groups, from children as young as 5 years old to adults. Each program is specifically designed to meet the developmental needs of different age groups.",
+    question: "What programs do you offer ?",
+    answer: "We offer a variety of programs, including short courses, certificate programs, and diploma programs in areas such as ICT, nursing, catering, plumbing, and more, View all Our Programs Here.",
   },
   {
     category: "Programs & Training",
-    question: "How long are the training sessions?",
-    answer: "Training sessions typically last 1-2 hours, depending on the program and age group. Elite training programs may have longer sessions.",
+    question: "What are the requirements for enrollment ?",
+    answer: "Certificate Programs: Applicants must have completed S.4 or its equivalent. Diploma Programs: Applicants are required to have completed UACE or its equivalent. Short Courses: Applicants need to present a recognized certificate from any institution, or alternatively, S.4 or S.6 qualifications are also acceptable.",
   },
   {
     category: "Registration & Fees",
-    question: "How do I register for a program?",
-    answer: "You can register through our online registration system on the website. Navigate to the Registration page, select your desired program, and follow the steps to complete your registration.",
+    question: "What are the requirements for enrollment ?",
+    answer: "Certificate Programs: Applicants must have completed S.4 or its equivalent. Diploma Programs: Applicants are required to have completed UACE or its equivalent. Short Courses: Applicants need to present a recognized certificate from any institution, or alternatively, S.4 or S.6 qualifications are also acceptable.",
   },
   {
     category: "Registration & Fees",
-    question: "What is your refund policy?",
-    answer: "We offer full refunds up to 14 days before the program start date. Partial refunds are available up to 7 days before the start date. No refunds are given after the program has begun.",
+    question: "How do I enroll in a course ?",
+    answer: "Enrollment is simple! Visit our admissions page, fill out the online application form, and submit the required documents.",
   },
   {
     category: "Facilities",
-    question: "What facilities do you have?",
-    answer: "Our facilities include indoor and outdoor training areas, a fully-equipped gym, swimming pool, and specialized training zones for different sports.",
+    question: "Is there Wi-Fi access for students ?",
+    answer: "Yes, we provide Wi-Fi access for our students throughout the campus, available 24/7. This ensures that students can seamlessly access online resources, collaborate on projects, and stay connected for academic and personal use. Whether you're studying late into the night or working on assignments early in the morning, our reliable internet connection is always available to support your needs.",
   },
   {
     category: "Facilities",
-    question: "Are the facilities accessible year-round?",
-    answer: "Yes, our indoor facilities are available year-round. Outdoor facilities may have limited availability during inclement weather.",
+    question: "Are there sports fields and playgrounds",
+    answer: "At Libra, we go beyond academics as we promote students talents in football, MDD e.t.c. So, we have a football field and a basketball court.",
   },
 ]
 

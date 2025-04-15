@@ -23,10 +23,10 @@ export function Coaches() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
 			>
-				<h1 className="text-4xl font-bold">Our Coaching Staff</h1>
+				<h1 className="text-4xl font-bold">Our Training Staff</h1>
 				<p className="mt-4 text-lg text-muted-foreground">
-					Meet our team of experienced coaches dedicated to developing the next generation
-					of football talent.
+					Meet our team of experienced Trainers dedicated to developing the next generation
+					of skilled talents.
 				</p>
 
 				{/* Board of Management */}

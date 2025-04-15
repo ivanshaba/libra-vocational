@@ -119,7 +119,7 @@ export default function App() {
 					<div id="google_translate_element"></div>
 					<Toaster />
 					<RouterProvider router={router} />
-					<WhatsAppChat phoneNumber="256746971205" />
+					<WhatsAppChat phoneNumber="+256 393 247 785" />
 				</AppProvider>
 			</QueryClientProvider>
 		</AuthProvider>

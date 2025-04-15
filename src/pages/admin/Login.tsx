@@ -63,7 +63,7 @@ export function Login() {
 								</div>
 							</div>
 							<h1 className="text-2xl font-bold text-white mb-2 group-hover:text-white/90">
-								Arena Sports Academy
+							Libra Vocational and Business Institute
 							</h1>
 							<p className="text-white/60">Admin Dashboard Login</p>
 						</Link>
@@ -149,7 +149,7 @@ export function Login() {
 
 					{/* Footer */}
 					<p className="text-center text-white/40 text-sm mt-8">
-						© {new Date().getFullYear()} Arena Sports Academy. All rights reserved.
+						© {new Date().getFullYear()} Libra Vocational and Business Institute. All rights reserved.
 					</p>
 				</motion.div>
 			</div>

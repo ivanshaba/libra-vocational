@@ -56,8 +56,7 @@ export function Gallery() {
 			<div>
 				<h1 className="text-4xl font-bold">Gallery</h1>
 				<p className="mt-4 text-lg text-muted-foreground">
-					Explore our collection of photos showcasing our facilities, events, and athletes
-					in action.
+					Explore our collection of photos showcasing our facilities, events.
 				</p>
 
 				{/* Filter */}

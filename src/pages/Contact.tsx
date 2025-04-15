@@ -12,16 +12,16 @@ import { Loader2 } from "lucide-react";
 const departments = [
 	{
 		name: "General Inquiries",
-		email: "info@arenasportsacademyug.org",
-		phone: "+256 746 971 205",
+		email: "info@libravocational.com",
+		phone: "+256 772 434 509",
 		icon: Building2,
 	},
 	{
 		name: "Consultancy",
-		email: "consultancy@arenasportsacademyug.org",
-		phone: "+256 784839145",
+		email: "info@libravocational.com",
+		phone: "+256 393 247 785",
 		icon: Users,
-		contact: "Rev Phillips",
+		contact: "Director",
 	},
 ];
 
@@ -114,9 +114,9 @@ export function Contact() {
 										<div>
 											<h3 className="font-semibold">Our Location</h3>
 											<p className="mt-1 text-sm text-muted-foreground">
-												Arena Sports Academy, Bunamwaya, Ngobe
+											Libra Vocational and Business Institute Kampala, Uganda
 												<br />
-												Near Hass Petrol Station, Shop No:Doo3
+												{/* Near Hass Petrol Station, Shop No:Doo3 */}
 											</p>
 											<div className="mt-4">
 												<h4 className="font-semibold">Opening Hours</h4>

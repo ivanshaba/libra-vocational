@@ -157,7 +157,7 @@ const HomePage = () => {
 						<div className="flex flex-wrap gap-4">
 							<Button asChild size="lg" className="bg-primary hover:bg-primary/90">
 								<Link to="/registration">
-									Join Academy
+									Join Institute
 									<ArrowRight className="ml-2 h-4 w-4" />
 								</Link>
 							</Button>
@@ -193,7 +193,9 @@ const HomePage = () => {
 								{isLoading ? (
 									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
 								) : (
-									<p className="text-3xl font-bold">{registrations.length}+</p>
+									<p className="text-3xl font-bold">
+										{/* {registrations.length} */}
+										400+</p>
 								)}
 								<p className="text-sm text-white/80">Active Students</p>
 							</div>
@@ -212,7 +214,7 @@ const HomePage = () => {
 								) : (
 									<p className="text-3xl font-bold">{coaches.length}+</p>
 								)}
-								<p className="text-sm text-white/80">Expert Coaches</p>
+								<p className="text-sm text-white/80">Expert Trainers</p>
 							</div>
 						</motion.div>
 
@@ -244,7 +246,7 @@ const HomePage = () => {
 								{isLoading ? (
 									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
 								) : (
-									<p className="text-3xl font-bold">{facilities.length}+</p>
+									<p className="text-3xl font-bold">{facilities.length}12+</p>
 								)}
 								<p className="text-sm text-white/80">Training Facilities</p>
 							</div>
@@ -261,7 +263,7 @@ const HomePage = () => {
 								{isLoading ? (
 									<div className="h-8 w-16 mx-auto bg-white/20 animate-pulse rounded" />
 								) : (
-									<p className="text-3xl font-bold">{alumni.length}+</p>
+									<p className="text-3xl font-bold">{alumni.length}500+</p>
 								)}
 								<p className="text-sm text-white/80">Alumni Members</p>
 							</div>
@@ -276,7 +278,7 @@ const HomePage = () => {
 							<Star className="mx-auto h-8 w-8 text-primary-400" />
 							<div className="mt-4">
 								<p className="text-3xl font-bold">9+</p>
-								<p className="text-sm text-white/80">Years Experience</p>
+								<p className="text-sm text-white/80">Years of Existance</p>
 							</div>
 						</motion.div>
 					</div>
@@ -295,12 +297,13 @@ const HomePage = () => {
 					>
 						<div>
 							<h2 className="text-3xl font-bold lg:text-4xl">
-								About Arena Sports Academy
+								About  Libra
 							</h2>
 							<p className="mt-4 text-lg text-muted-foreground">
-								Founded in 2014, Arena Sports Academy has grown from 20 members to
-								over 350 active participants. We are dedicated to developing
-								complete soccer players while instilling positive core values.
+							Welcome to Libra Vocational and Business Institute, where we empower
+							individuals with practical skills and knowledge to excel in their chosen
+							fields. Our institute offers a diverse range of courses tailored to meet
+							the demands of today's job market.
 							</p>
 							<div className="mt-8 grid gap-6 sm:grid-cols-2">
 								{features.map((feature, index) => (
@@ -368,7 +371,7 @@ const HomePage = () => {
 					>
 						<h2 className="text-3xl font-bold">Our Programs</h2>
 						<p className="mt-4 text-lg text-muted-foreground">
-							Discover our comprehensive range of football development programs
+							Discover our comprehensive range of academic programs
 						</p>
 					</motion.div>
 
@@ -506,7 +509,7 @@ const HomePage = () => {
 					>
 						<h2 className="text-3xl font-bold lg:text-4xl">Get in Touch</h2>
 						<p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-							Join us in developing the next generation of football talent
+							Join us in developing the next generation of academic talent
 						</p>
 					</motion.div>
 
@@ -554,20 +557,20 @@ const contactInfo = [
 	},
 	{
 		title: "Email",
-		value: "info@arenasportsacademy.com",
+		value: "info@libravocational.com",
 		icon: <Mail className="h-5 w-5 text-primary-600" />,
 	},
 	{
 		title: "Phone",
-		value: "+256 746 971 205",
+		value: "+256 393 247 785",
 		icon: <Phone className="h-5 w-5 text-primary-600" />,
 	},
 ];
 
 const features = [
 	{
-		title: "Professional Coaching",
-		description: "Expert coaches with proven track records",
+		title: "Professional Trainers",
+		description: "Expert Trainers with proven track records",
 		icon: <Trophy className="h-5 w-5 text-primary-600" />,
 	},
 	{
@@ -582,14 +585,14 @@ const features = [
 	},
 	{
 		title: "Regular Events",
-		description: "Competitions and tournaments",
+		description: "Graduations",
 		icon: <Calendar className="h-5 w-5 text-primary-600" />,
 	},
 ];
 
 const values = [
 	{
-		title: "Fair Play",
+		title: "co-curricullum activities",
 		description: "Promoting sportsmanship and ethical conduct",
 		icon: <Trophy className="h-6 w-6" />,
 	},
@@ -613,58 +616,58 @@ const values = [
 const heroSlides = [
 	{
 		id: 1,
-		image: "/images/hero/1.jpg",
-		title: "Developing Complete Soccer Players Since 2014",
+		image: "/images/hero/10.JPG",
+		title: "Developing The Best Problem Solvers",
 		subtitle:
-			"Join Arena Sports Academy and excel in Technical, Tactical, Physical, and Psychological aspects of the game while building strong character and values.",
+			"Join Libra Vocational and Business Institute and excel in Technical, Practical and Psychological aspects of  skills while building strong character and values.",
 	},
 	{
 		id: 2,
-		image: "/images/hero/2.jpg",
+		image: "/images/hero/7.JPG",
 		title: "Professional Training Programs",
 		subtitle:
-			"Access world-class coaching and facilities designed to nurture talent and develop champions.",
+			"Access world-class training and facilities designed to nurture students and develop champions.",
 	},
 	{
 		id: 3,
-		image: "/images/hero/3.jpg",
+		image: "/images/hero/12.JPG",
 		title: "Building Future Champions",
 		subtitle:
-			"Join our comprehensive youth development program focused on both athletic excellence and personal growth.",
+			"Join our comprehensive skill development programs focused on both academic excellence and personal growth.",
 	},
 ];
 
 const partners = [
 	{
 		id: 1,
-		name: "Kings of Soccer Gala",
-		logo: "/images/partners/kings-soccer.jpg",
-		description: "Premier youth soccer tournament organizer",
+		name: "Uganda Business and Technical Examination Board",
+		logo: "/images/partners/ubteb.jpeg",
+		description: "Premier foundation  for vocational examination sytems",
 	},
 	{
 		id: 2,
-		name: "Kampala Junior Football Association",
-		logo: "/images/partners/kjfa.jpg",
-		description: "Developing youth football in Kampala",
+		name: "Uganda Vocational and Technical Assement Board",
+		logo: "/images/partners/uvtab.jpg",
+		description: "Developing skilled individuals",
 	},
-	{
-		id: 3,
-		name: "Uganda Youth Football Association",
-		logo: "/images/partners/uyfa.jpg",
-		description: "Affiliated to Federation of Uganda Football Association-FUFA",
-	},
+	// {
+	// 	id: 3,
+	// 	name: "Uganda Youth Football Association",
+	// 	logo: "/images/partners/uyfa.jpg",
+	// 	description: "Affiliated to Federation of Uganda Football Association-FUFA",
+	// },
 	{
 		id: 4,
 		name: "New Leaf Technologies Uganda Ltd",
 		logo: "/images/partners/new-leaf.jpg",
 		description: "Christian Mission in Holistic Transformational Development",
 	},
-	{
-		id: 5,
-		name: "FCV International Football Academy",
-		logo: "/images/partners/fcv.jpg",
-		description: "London, United Kingdom",
-	},
+	// {
+	// 	id: 5,
+	// 	name: "FCV International Football Academy",
+	// 	logo: "/images/partners/fcv.jpg",
+	// 	description: "London, United Kingdom",
+	// },
 ];
 
 export default HomePage;
